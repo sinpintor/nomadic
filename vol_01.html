@@ -9,14 +9,12 @@
         :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; }
         
-        /* 全域噪點效果 */
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
         .main-container {
             min-height: 100vh; display: flex; flex-direction: column; align-items: center;
             padding: calc(60px + env(safe-area-inset-top)) 30px 120px;
             box-sizing: border-box; text-align: center;
-            /* 同步 INDEX Vol. 01 的背景 */
             background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.9)), 
                         url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000') center/cover no-repeat fixed;
         }
@@ -31,13 +29,11 @@
 
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 45vh; margin: 40px 0; }
 
-        /* VOGUE 敘事扉頁 */
         #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
         .narrative-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 35px; letter-spacing: 0.1em; }
         .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.5; font-weight: 300; letter-spacing: 0.05em; text-align: justify; max-width: 280px; margin: 0 auto; border-left: 1px solid var(--gold); padding-left: 20px; }
         .story-text span { display: block; margin-bottom: 12px; }
 
-        /* 核心內容 */
         #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         #result { font-family: 'Noto Serif TC', serif; font-size: 2.6rem; font-weight: 500; margin-bottom: 15px; letter-spacing: 0.05em; }
         .mission-box { max-width: 280px; margin: 0 auto; }
@@ -47,16 +43,13 @@
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; }
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; transition: 0.3s; }
         .btn-main:active { background: rgba(255,255,255,0.1); }
-        
         #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; margin-bottom: 20px; }
 
-        /* 日誌紀錄 */
         .archive-section { width: 100%; max-width: 500px; margin-top: 80px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
         .journal-item { margin-bottom: 35px; border-left: 1px solid var(--gold); padding-left: 20px; }
         .journal-date { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0; font-weight: 500; }
         .journal-mission { font-size: 0.75rem; color: #888; font-weight: 300; line-height: 1.6; }
-        
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
@@ -109,21 +102,20 @@
     </div>
 
     <script>
-        // 台灣 368 鄉鎮數據庫
         const taiwanData = [
-            "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
             "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
             "新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區",
+            "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
             "桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區",
-            "新竹市 東區","新竹市 北區","新竹市 香山區",
             "新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉",
+            "新竹市 東區","新竹市 北區","新竹市 香山區",
             "苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉",
             "台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區",
             "彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉",
             "南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉",
             "雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉",
-            "嘉義市 東區","嘉義市 西區",
             "嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉",
+            "嘉義市 東區","嘉義市 西區",
             "台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區",
             "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
             "屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉",
@@ -131,23 +123,27 @@
             "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
             "台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉",
             "澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉",
-            "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉",
+            "金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣烈嶼鄉","金門縣 烏坵鄉",
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // VOGUE 風格任務組件
-        const subjects = ["紀錄", "捕捉", "觀察", "凝視", "標記", "感受", "留白"];
-        const modifiers = ["流動的", "靜止的", "被時間遺忘的", "公路質感的", "顆粒感的", "低調的", "屬於此刻的"];
-        const objects = ["光斑", "空氣濕度", "對方指尖", "後照鏡遠方", "公路灰調", "老店氣味", "地平線", "野草律動"];
-        
-        const photoChallenges = [
-            "Challenge: 捕捉靜謐的優雅瞬間。", "Challenge: 紀錄對方睡著的側臉。", "Challenge: 在後照鏡裡尋找兩人的合照。", 
-            "Challenge: 拍一張彼此影子重疊的照片。", "Challenge: 在目的地前拍一張只露出鞋子的背影。", "Challenge: 捕捉對方看著窗外發呆的神情。"
+        // 整合後的任務與挑戰清單 (方便以後增加)
+        const vogueMissions = [
+            { task: "拍下對方在車窗玻璃上的倒影，背景是移動的風景。", challenge: "拍一張兩人在公路旁影子正在接吻的照片。" },
+            { task: "尋找路邊一塊生鏽或斑駁的招牌，紀錄時間的顆粒感。", challenge: "利用車外後照鏡，拍下兩人在車內擠眉弄眼的合照。" },
+            { task: "在當地的便利商店，買一罐標誌最簡約的氣泡水。", challenge: "紀錄對方在副駕睡到流口水的側臉。" },
+            { task: "捕捉對方的指尖在方向盤或排檔桿上的隨性節奏。", challenge: "在路標前拍下一張腳尖對碰、只露出鞋子的照片。" },
+            { task: "尋找當地最有歷史感的公共建築，拍下它的幾何線條。", challenge: "找一棵奇怪的大樹，兩人在樹下擺出浮誇的 VOGUE 姿勢。" },
+            { task: "紀錄路邊一個有趣的店名，或是牆上隨性的塗鴉。", challenge: "捕捉對方餵你吃第一口當地小食時的表情。" },
+            { task: "在路邊攤點一份當地人才知道的小吃，拍下它最真實的樣子。", challenge: "拍一張充滿動態感的模糊合照：兩人在目的地原地跳起。" },
+            { task: "拍下車內後照鏡裡，那段正在被你們遺忘在後方的路。", challenge: "紀錄兩人對著目的地路牌，擺出最嫌棄的表情。" },
+            { task: "捕捉陽光穿過擋風玻璃，落在座椅或對方肩膀上的光斑。", challenge: "拍一張以對方眼睛為對焦點，眼底倒映出公路的照片。" },
+            { task: "尋找一條看起來沒有盡頭的小徑，紀錄那種消失感。", challenge: "找一面當地的老牆，兩人手牽手拍下充滿電影感的背影。" }
         ];
 
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_full_data')) || [];
         let currentResult = "";
-        let currentMission = "";
+        let currentLogEntry = "";
 
         window.onload = () => {
             document.getElementById('regions-count').innerText = visitedPlaces.length;
@@ -180,13 +176,12 @@
             resultEl.style.opacity = 0;
             setTimeout(() => {
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
-                const missionText = `${subjects[Math.floor(Math.random()*7)]}${modifiers[Math.floor(Math.random()*7)]}${objects[Math.floor(Math.random()*8)]}。`;
-                const challengeText = photoChallenges[Math.floor(Math.random() * photoChallenges.length)];
+                const pair = vogueMissions[Math.floor(Math.random() * vogueMissions.length)];
                 
-                currentMission = missionText + " / " + challengeText;
+                currentLogEntry = `${pair.task} / ${pair.challenge}`;
                 resultEl.innerText = currentResult;
-                taskEl.innerText = missionText;
-                challengeEl.innerText = challengeText;
+                taskEl.innerText = pair.task;
+                challengeEl.innerText = pair.challenge;
                 challengeEl.style.display = "block";
                 resultEl.style.opacity = 1;
                 checkInSection.style.display = "block";
@@ -194,7 +189,7 @@
         }
 
         function recordPlace() {
-            const newRecord = { name: currentResult, mission: currentMission, date: new Date().toLocaleDateString('en-GB').replace(/\//g, '.') };
+            const newRecord = { name: currentResult, mission: currentLogEntry, date: new Date().toLocaleDateString('en-GB').replace(/\//g, '.') };
             visitedPlaces.unshift(newRecord);
             localStorage.setItem('nomadic_full_data', JSON.stringify(visitedPlaces));
             location.reload();
@@ -212,7 +207,7 @@
         }
 
         function clearFootprints() {
-            if (confirm("這將會重置 368 鄉鎮的所有足跡，確定嗎？")) {
+            if (confirm("確定要永久重置 368 鄉鎮的所有足跡紀錄嗎？")) {
                 localStorage.removeItem('nomadic_full_data'); location.reload();
             }
         }

@@ -37,7 +37,6 @@
         #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
         .narrative-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: var(--gold); margin-bottom: 25px; letter-spacing: 0.1em; }
         
-        /* 故事文字修改為段落形式，並調整行距與間距 */
         .story-text { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: #eee; line-height: 2.2; font-weight: 300; letter-spacing: 0.05em; margin-bottom: 0; }
         
         #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
@@ -45,11 +44,12 @@
         
         .mission-box { display: flex; flex-direction: column; gap: 15px; }
         .mission-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; margin-bottom: 15px;}
-        .challenge-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; margin-bottom: 15px; transition: color 0.3s ease;}
+        .challenge-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; transition: color 0.3s ease; }
 
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; }
+        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; transition: background 0.3s ease;}
+        .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
         #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; margin-bottom: 20px; text-align: center;}
 
         .archive-section { width: 100%; max-width: 500px; margin-top: 80px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
@@ -81,7 +81,7 @@
             </div>
 
             <div id="map-core" class="content-block">
-                <div id="result">The Unknown</div>
+                <div id="result" style="color: var(--white);">The Unknown</div>
                 <div class="mission-box" id="mission-box">
                     </div>
             </div>
@@ -90,7 +90,7 @@
         <div class="action-group">
             <button id="unfold-btn" onclick="unfold()">UNFOLD THE PATH</button>
             <div id="action-btns" style="display:none; flex-direction: column; gap: 15px; width: 100%;">
-                <button class="btn-main" onclick="roll()">Seek Destination</button>
+                <button class="btn-main" id="roll-btn" onclick="roll()">Seek Destination</button>
                 <div id="check-in-section" style="display:none; width: 100%;">
                     <button class="btn-main" style="background:var(--gold); color:var(--black); border:none; font-weight:600; width: 100%;" onclick="recordPlace()">Mark as Explored</button>
                 </div>
@@ -130,9 +130,6 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // ==========================================
-        // 題庫區 1：TASKS (浪漫的觀察 / 紀錄細節)
-        // ==========================================
         const tasks = [
             "拍下對方在車窗玻璃上的倒影，背景是移動的風景。",
             "尋找路邊一塊生鏽或斑駁的招牌，紀錄時間的顆粒感。",
@@ -166,9 +163,6 @@
             "紀錄此刻車內音響正在播放的歌單名稱。"
         ];
 
-        // ==========================================
-        // 題庫區 2：CHALLENGES (搞怪的互動 / 雙人大冒險)
-        // ==========================================
         const challenges = [
             "拍一張兩人在公路旁影子正在接吻的照片。",
             "利用車外後照鏡，拍下兩人在車內擠眉弄眼的合照。",
@@ -205,6 +199,7 @@
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_full_data')) || [];
         let currentResult = "";
         let currentLogEntry = "";
+        let isRolling = false; // 新增：防止重複點擊的開關
 
         window.onload = () => {
             document.getElementById('regions-count').innerText = visitedPlaces.length;
@@ -226,25 +221,64 @@
         }
 
         function roll() {
+            if (isRolling) return; // 如果正在抽籤中，則不執行
+            isRolling = true;
+            
+            const btn = document.getElementById('roll-btn');
+            btn.disabled = true; // 鎖定按鈕
+            btn.innerText = "SEEKING..."; 
+
             const resultEl = document.getElementById('result');
             const missionBox = document.getElementById('mission-box');
             const checkInSection = document.getElementById('check-in-section');
             const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
-            if (pool.length === 0) { resultEl.innerText = "All Explored."; return; }
+            if (pool.length === 0) { 
+                resultEl.innerText = "All Explored."; 
+                btn.innerText = "SEEK DESTINATION";
+                btn.disabled = false;
+                isRolling = false;
+                return; 
+            }
 
-            resultEl.style.opacity = 0;
-            missionBox.style.opacity = 0;
+            checkInSection.style.display = "none"; // 隱藏打卡按鈕
+
+            // =====================================
+            // 動畫階段：快速洗牌效果 (持續 1.5 秒)
+            // =====================================
+            resultEl.style.color = "#888"; // 改變顏色營造掃描感
             
-            setTimeout(() => {
-                // 1. 抽取地點
-                currentResult = pool[Math.floor(Math.random() * pool.length)];
+            let rollInterval = setInterval(() => {
+                const tempPlace = pool[Math.floor(Math.random() * pool.length)];
+                const tempTask = tasks[Math.floor(Math.random() * tasks.length)];
+                const tempChallenge = challenges[Math.floor(Math.random() * challenges.length)];
                 
-                // 2. 分別獨立抽取 1 個 Task 與 1 個 Challenge
+                resultEl.innerText = tempPlace;
+                missionBox.innerHTML = `
+                    <div>
+                        <div class="mission-label">TASK</div>
+                        <div class="mission-text" style="color:#555;">${tempTask}</div>
+                    </div>
+                    <div>
+                        <div class="mission-label">CHALLENGE</div>
+                        <div class="challenge-text" style="color:#555;">${tempChallenge}</div>
+                    </div>
+                `;
+            }, 80); // 每 80 毫秒切換一次文字
+
+            // =====================================
+            // 揭曉階段：1.5 秒後停止動畫並顯示最終結果
+            // =====================================
+            setTimeout(() => {
+                clearInterval(rollInterval); // 停止洗牌
+                resultEl.style.color = "var(--white)"; // 恢復亮色
+                
+                // 1. 抽取最終確定的地點與任務
+                currentResult = pool[Math.floor(Math.random() * pool.length)];
                 const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
                 const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
                 
-                // 組合 HTML 畫面
+                // 2. 組合最終 HTML 畫面
                 missionBox.innerHTML = `
                     <div>
                         <div class="mission-label">TASK</div>
@@ -256,17 +290,20 @@
                     </div>
                 `;
                 
-                // 儲存紀錄用的文字 (統一標籤顏色與字重)
+                // 3. 儲存紀錄用的文字
                 currentLogEntry = `
                     <div style="margin-bottom: 4px;"><strong>[TASK]</strong> ${randomTask}</div>
                     <div><strong>[CHALLENGE]</strong> ${randomChallenge}</div>
                 `;
                 
                 resultEl.innerText = currentResult;
-                resultEl.style.opacity = 1;
-                missionBox.style.opacity = 1;
-                checkInSection.style.display = "block";
-            }, 300);
+                checkInSection.style.display = "block"; // 顯示打卡按鈕
+                
+                // 解除按鈕鎖定
+                btn.innerText = "Seek Destination";
+                btn.disabled = false;
+                isRolling = false;
+            }, 1500); // 動畫持續 1500 毫秒 (1.5秒)
         }
 
         function recordPlace() {

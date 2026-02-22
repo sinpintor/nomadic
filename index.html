@@ -8,7 +8,6 @@
     <style>
         :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #777777; }
 
-        /* 隱藏捲軸 */
         ::-webkit-scrollbar { display: none; }
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%;
@@ -17,40 +16,55 @@
             scroll-behavior: smooth;
         }
 
-        /* 底片噪點 */
         .noise {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9999;
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
         }
 
-        /* --- 第一頁：PREFACE 故事扉頁 --- */
+        /* --- 第一頁：PREFACE 故事扉頁（帶有底圖） --- */
         .preface-section {
             height: 100vh; width: 100%; display: flex; flex-direction: column;
             justify-content: center; align-items: center; padding: 40px;
             box-sizing: border-box; text-align: center; position: relative;
+            /* 這裡套用公路感底圖 */
+            background-image: url('http://googleusercontent.com/image_collection/image_retrieval/1030824389340101924_0');
+            background-size: cover; background-position: center;
         }
-        .preface-content { max-width: 600px; animation: fadeIn 2.5s ease; }
+
+        /* 深色遮罩：確保文字可讀性 */
+        .preface-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65); /* 65% 的黑影遮罩 */
+            z-index: 1;
+        }
+
+        .preface-content { max-width: 600px; z-index: 2; animation: fadeIn 3s ease; }
+        
         .preface-content h1 {
             font-family: 'Playfair Display', serif; font-size: 0.75rem;
             letter-spacing: 0.6em; text-transform: uppercase; color: var(--grey);
             margin-bottom: 50px; font-weight: 300;
         }
+
         .preface-text {
             font-family: 'Noto Serif TC', serif; font-size: 0.95rem;
-            line-height: 2.3; color: #bbb; font-weight: 200; letter-spacing: 0.05em;
+            line-height: 2.3; color: #eee; font-weight: 200; letter-spacing: 0.05em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* 增加文字陰影提升質感 */
         }
+
         .enter-archives-btn {
             margin-top: 60px; font-family: 'Montserrat', sans-serif;
             font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
             background: transparent; border: none; color: var(--white);
             cursor: pointer; border-bottom: 1px solid var(--white);
             padding-bottom: 8px; transition: 0.5s; text-decoration: none;
+            display: inline-block;
         }
-        .enter-archives-btn:hover { color: var(--grey); border-color: var(--grey); }
+        .enter-archives-btn:hover { color: var(--grey); border-color: var(--grey); transform: translateY(-3px); }
 
         /* --- 第二頁：THE ARCHIVES 藝廊書櫃 --- */
-        .archives-section { min-height: 100vh; width: 100%; background-color: var(--black); }
+        .archives-section { min-height: 100vh; width: 100%; background-color: var(--black); position: relative; z-index: 5; }
 
         .header {
             text-align: center; padding: 100px 20px 50px 20px;
@@ -93,7 +107,6 @@
         .title { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #bbb; margin-bottom: 8px; font-weight: 300; }
         .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; font-weight: 200; letter-spacing: 0.15em; }
 
-        /* 跑馬燈 */
         .footer-marquee {
             position: fixed; bottom: 0; left: 0; width: 100%;
             background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px);
@@ -105,7 +118,6 @@
             letter-spacing: 0.4em; color: var(--grey); text-transform: uppercase;
         }
 
-        /* 動畫 */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
@@ -113,7 +125,7 @@
             .gallery { grid-template-columns: 1fr; gap: 30px; }
             .card { max-width: 320px; margin: 0 auto; }
             .header strong { font-size: 1.8rem; }
-            .preface-text { font-size: 0.9rem; padding: 0 10px; }
+            .preface-text { font-size: 0.9rem; padding: 0 10px; line-height: 2.1; }
         }
     </style>
 </head>

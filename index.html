@@ -3,189 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WADE & CLOUDY - The Archives</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+TC:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <title>L'ÉVASION — The Archives</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --black: #0a0a0a;
-            --white: #fdfdfd;
-            --grey: #777777;
-        }
+        :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #777777; }
 
-        /* 隱藏捲軸魔法 (但保留滑動功能) */
-        ::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
-        }
-        body, html {
+        /* 隱藏捲軸但保持滑動 */
+        ::-webkit-scrollbar { display: none; }
+        body, html { 
             margin: 0; padding: 0; width: 100%; min-height: 100%;
             font-family: 'Montserrat', 'Noto Serif TC', sans-serif;
             background-color: var(--black); color: var(--white);
-            overflow-x: hidden;
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            overflow-x: hidden; scrollbar-width: none;
         }
 
-        /* 頂層底片顆粒質感 */
-        .noise-overlay {
+        /* 底片質感濾鏡 */
+        .noise {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9999;
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.06"/%3E%3C/svg%3E');
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
         }
 
-        /* 頂部 LOGO 區 (恢復纖細與超寬字距) */
+        /* 標題區：攝影師的構圖思維 */
         .header {
-            width: 100%; text-align: center; padding: 60px 20px 30px 20px;
-            box-sizing: border-box; z-index: 10; letter-spacing: 0.4em; 
-            font-size: 0.65rem; text-transform: uppercase; color: var(--grey);
-            font-weight: 300;
+            text-align: center; padding: 70px 20px 40px 20px;
+            letter-spacing: 0.5em; font-size: 0.65rem; text-transform: uppercase;
+            font-weight: 200; color: var(--grey);
         }
         .header strong {
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--white);
-            display: block; margin-bottom: 12px; font-weight: 700; letter-spacing: 0.15em;
+            font-family: 'Playfair Display', serif; font-size: 2rem;
+            color: var(--white); display: block; margin-bottom: 15px;
+            font-weight: 400; letter-spacing: 0.1em; font-style: italic;
         }
 
-        /* 畫廊排版 */
-        .gallery-container {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
-            padding: 20px 20px 100px 20px; max-width: 1000px; margin: 0 auto;
+        /* 3x2 藝廊網格 */
+        .gallery {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 20px; padding: 0 20px 120px 20px;
+            max-width: 900px; margin: 0 auto;
         }
 
-        /* 獨立雜誌封面卡片 */
-        .issue-card {
-            position: relative; width: 100%; max-width: 340px; aspect-ratio: 3 / 4.2;
-            overflow: hidden; text-decoration: none; color: var(--white);
+        .card {
+            position: relative; aspect-ratio: 3 / 4; overflow: hidden;
+            text-decoration: none; color: var(--white);
             display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 40px 30px; box-sizing: border-box; cursor: pointer;
+            padding: 20px; box-sizing: border-box;
         }
 
-        .issue-bg {
+        .card-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
-            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s ease;
-            z-index: 1; filter: brightness(0.55) grayscale(30%);
+            transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1), filter 1s ease;
+            z-index: 1; filter: brightness(0.5) grayscale(40%);
         }
         
-        .issue-card::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 75%;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index: 2;
+        .card:hover .card-bg { transform: scale(1.08); filter: brightness(0.7) grayscale(0%); }
+
+        .card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 2;
         }
 
-        .issue-card:hover .issue-bg {
-            transform: scale(1.05); filter: brightness(0.8) grayscale(0%);
-        }
+        .card-content { position: relative; z-index: 3; text-align: center; }
 
-        .issue-content {
-            position: relative; z-index: 3; text-align: center; /* 改為置中更優雅 */
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .issue-card:hover .issue-content { transform: translateY(-8px); }
+        .vol { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; margin-bottom: 8px; }
+        .title { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: #ccc; margin-bottom: 5px; font-weight: 300; }
+        .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; color: #999; font-weight: 200; letter-spacing: 0.1em; }
 
-        /* 期數標題 (精緻的襯線斜體) */
-        .issue-vol {
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(2.2rem, 8vw, 2.8rem);
-            font-weight: 700; font-style: italic; line-height: 1; margin-bottom: 15px;
-            color: var(--white);
-        }
-        /* 英文副標 (極細、超寬字距) */
-        .issue-title {
-            font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
-            color: #d4d4d4; margin-bottom: 12px; font-weight: 300;
-        }
-        /* 中文副標 (降低字重，增加留白) */
-        .issue-subtitle {
-            font-family: 'Noto Serif TC', serif; 
-            font-size: 0.85rem; font-weight: 200;
-            color: #aaaaaa; letter-spacing: 0.2em;
-        }
-
-        /* 底部跑馬燈 (極簡纖細化) */
-        .marquee-wrapper {
+        /* 底部金句跑馬燈 */
+        .footer-marquee {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background-color: transparent; color: var(--grey);
-            padding: 15px 0; overflow: hidden; white-space: nowrap; z-index: 20;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px); /* 加入微微的毛玻璃效果 */
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px);
+            padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.1); z-index: 100;
         }
-        .marquee-content {
-            display: inline-block; 
-            font-size: 0.6rem; letter-spacing: 0.3em;
-            text-transform: uppercase; font-weight: 300;
-            animation: marquee 45s linear infinite;
+        .marquee-inner {
+            display: inline-block; white-space: nowrap;
+            animation: move 40s linear infinite; font-size: 0.6rem;
+            letter-spacing: 0.3em; color: var(--grey); text-transform: uppercase;
         }
-        .marquee-content span.text { margin: 0 20px; }
-        .marquee-content span.star { margin: 0 20px; color: #555; font-size: 0.5rem; }
+        @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* 手機版排版微調 */
-        @media (max-width: 768px) {
-            .gallery-container { flex-direction: column; align-items: center; gap: 40px; padding: 10px 20px 100px 20px; }
-            .issue-card { aspect-ratio: 3 / 4; max-width: 320px; }
+        /* 手機版適配：單欄顯示增加精緻感 */
+        @media (max-width: 600px) {
+            .gallery { grid-template-columns: 1fr; gap: 30px; }
+            .card { max-width: 320px; margin: 0 auto; }
+            .header strong { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="noise-overlay"></div>
+    <div class="noise"></div>
 
     <div class="header">
-        <strong>WADE & CLOUDY</strong>
-        The Archives Collection
+        <strong>L'ÉVASION</strong>
+        The Ultimate Hexalogy
     </div>
 
-    <div class="gallery-container">
-        
-        <a href="vol_01.html" class="issue-card">
-            <div class="issue-bg" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop');"></div>
-            <div class="issue-content">
-                <div class="issue-vol">Vol. 01</div>
-                <div class="issue-title">The Travel Issue</div>
-                <div class="issue-subtitle">盲旅與空間的顯化</div>
+    <div class="gallery">
+        <a href="vol_01.html" class="card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000');"></div>
+            <div class="card-content">
+                <div class="vol">Vol. 01</div>
+                <div class="title">The Travel Issue</div>
+                <div class="subtitle">駛向未知的副駕視角</div>
             </div>
         </a>
 
-        <a href="vol_02.html" class="issue-card">
-            <div class="issue-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2000&auto=format&fit=crop');"></div>
-            <div class="issue-content">
-                <div class="issue-vol">Vol. 02</div>
-                <div class="issue-title">The Taste Issue</div>
-                <div class="issue-subtitle">味覺與臣服的藝術</div>
+        <a href="vol_02.html" class="card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000');"></div>
+            <div class="card-content">
+                <div class="vol">Vol. 02</div>
+                <div class="title">The Taste Issue</div>
+                <div class="subtitle">交付直覺的餐桌對白</div>
             </div>
         </a>
 
+        <a href="vol_03.html" class="card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000');"></div>
+            <div class="card-content">
+                <div class="vol">Vol. 03</div>
+                <div class="title">The Void Issue</div>
+                <div class="subtitle">遠離喧囂的靜謐留白</div>
+            </div>
+        </a>
+
+        <a href="vol_04.html" class="card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000');"></div>
+            <div class="card-content">
+                <div class="vol">Vol. 04</div>
+                <div class="title">The Sound Issue</div>
+                <div class="subtitle">共振靈魂的頻率紀錄</div>
+            </div>
+        </a>
+
+        <a href="vol_05.html" class="card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1518005020481-a68515605041?q=80&w=1000');"></div>
+            <div class="card-content">
+                <div class="vol">Vol. 05</div>
+                <div class="title">The Vision Issue</div>
+                <div class="subtitle">預演未來的顯化畫報</div>
+            </div>
+        </a>
+
+        <a href="vol_06.html" class="card">
+            <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514525253361-b83f859b71c0?q=80&w=1000');"></div>
+            <div class="card-content">
+                <div class="vol">Vol. 06</div>
+                <div class="title">The Night Issue</div>
+                <div class="subtitle">沉溺光影的午夜逃亡</div>
+            </div>
+        </a>
     </div>
 
-    <div class="marquee-wrapper">
-        <div class="marquee-content">
-            <span class="text">NOT ALL THOSE WHO WANDER ARE LOST</span>
-            <span class="star">✦</span>
-            <span class="text">THE JOURNEY NOT THE ARRIVAL MATTERS</span>
-            <span class="star">✦</span>
-            <span class="text">SURRENDER CONTROL TO THE UNIVERSE</span>
-            <span class="star">✦</span>
-            <span class="text">TO TRAVEL IS TO LIVE</span>
-            <span class="star">✦</span>
-            <span class="text">WANDERING WITHOUT AN ITINERARY IS AN ART</span>
-            <span class="star">✦</span>
-            <span class="text">LET INTUITION LEAD THE WAY</span>
-            <span class="star">✦</span>
-            <span class="text">NOT ALL THOSE WHO WANDER ARE LOST</span>
-            <span class="star">✦</span>
-            <span class="text">THE JOURNEY NOT THE ARRIVAL MATTERS</span>
-            <span class="star">✦</span>
-            <span class="text">SURRENDER CONTROL TO THE UNIVERSE</span>
-            <span class="star">✦</span>
-            <span class="text">TO TRAVEL IS TO LIVE</span>
-            <span class="star">✦</span>
-            <span class="text">WANDERING WITHOUT AN ITINERARY IS AN ART</span>
-            <span class="star">✦</span>
-            <span class="text">LET INTUITION LEAD THE WAY</span>
-            <span class="star">✦</span>
+    <div class="footer-marquee">
+        <div class="marquee-inner">
+            NOT ALL THOSE WHO WANDER ARE LOST ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE ART OF US ✦ NOT ALL THOSE WHO WANDER ARE LOST ✦ THE JOURNEY NOT THE ARRIVAL MATTERS ✦ SURRENDER CONTROL TO THE UNIVERSE ✦ THE ART OF US ✦
         </div>
     </div>
 

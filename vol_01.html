@@ -3,105 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>NOMADIC — Vol. 01</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500&display=swap" rel="stylesheet">
+    <title>NOMADIC — The Complete Map</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #bbbbbb; }
-        
+        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; }
         body, html { 
             margin: 0; padding: 0; background: var(--black); color: var(--white);
             font-family: 'Montserrat', 'Noto Serif TC', sans-serif;
-            height: 100%; overflow: hidden; -webkit-font-smoothing: antialiased;
+            min-height: 100%; -webkit-font-smoothing: antialiased;
         }
-
-        /* 背景微光效果 */
         .main-container {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: space-between; align-items: center;
-            padding: calc(85px + env(safe-area-inset-top)) 45px calc(75px + env(safe-area-inset-bottom));
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            padding: calc(60px + env(safe-area-inset-top)) 30px 100px;
             box-sizing: border-box; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
-                        url('https://images.unsplash.com/photo-1449156003053-c30205280592?q=80&w=2000') center/cover no-repeat;
-            position: relative; z-index: 2;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), 
+                        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000') center/cover no-repeat fixed;
         }
-
-        header h2 { font-family: 'Playfair Display', serif; font-size: 0.7rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 12px; }
-        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
-        
-        .footprint-stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.25em; color: var(--grey); text-transform: uppercase; cursor: pointer; }
-        #regions-count { color: var(--white); font-weight: 600; margin-left: 5px; }
-
-        .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
-
-        /* --- VOGUE 敘事扉頁 --- */
-        #prologue { transition: opacity 1.2s ease, transform 1.2s ease; }
-        .narrative-title { 
-            font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; 
-            color: var(--gold); margin-bottom: 35px; letter-spacing: 0.1em; 
-        }
-        .story-text { 
-            font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; 
-            line-height: 2.5; font-weight: 300; letter-spacing: 0.1em;
-            text-align: justify;
-        }
-        .story-text span { display: block; margin-bottom: 15px; }
-
-        /* --- 抽籤核心 --- */
-        #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        #result { font-family: 'Noto Serif TC', serif; font-size: 2.8rem; letter-spacing: 0.1em; margin-bottom: 15px; font-weight: 500; color: var(--white); }
-        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--gold); min-height: 4rem; font-style: italic; line-height: 1.6; max-width: 280px; margin: 0 auto; opacity: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
-
-        .action-group { width: 100%; display: flex; flex-direction: column; gap: 15px; }
-        .btn-main { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 22px; font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; -webkit-tap-highlight-color: transparent; }
-        
-        #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; }
-
-        .back-link { position: fixed; top: calc(25px + env(safe-area-inset-top)); left: 25px; text-decoration: none; color: #777; font-size: 0.65rem; letter-spacing: 0.3em; z-index: 10; }
+        header h2 { font-family: 'Playfair Display', serif; font-size: 0.6rem; letter-spacing: 0.6em; color: var(--gold); margin-bottom: 10px; }
+        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; margin: 0; }
+        .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); }
+        #regions-count { color: var(--gold); }
+        .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 40vh; margin: 40px 0; }
+        #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 10px; }
+        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: var(--gold); font-style: italic; line-height: 1.6; max-width: 280px; margin: 0 auto; opacity: 0.8; }
+        .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; }
+        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 18px; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; }
+        .btn-main:active { background: rgba(255,255,255,0.1); }
+        .archive-section { width: 100%; max-width: 500px; margin-top: 60px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
+        .journal-item { margin-bottom: 30px; border-left: 1px solid var(--gold); padding-left: 20px; }
+        .journal-date { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.2em; }
+        .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1rem; margin: 5px 0; }
+        .journal-mission { font-size: 0.7rem; color: #888; font-weight: 300; }
+        .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="main-container">
-        <a href="index.html" class="back-link">← ARCHIVES</a>
-
         <header>
-            <h2>VOLUME 01</h2>
-            <h1>The Travel Issue</h1>
-            <div class="footprint-stats" onclick="clearFootprints()">
-                Footprints: <span id="regions-count">0</span> Regions
-            </div>
+            <h2>VOL. 01 — FULL ARCHIVE</h2>
+            <h1>The Nomadic Soul</h1>
+            <div class="stats"><span id="regions-count">0</span> / 368 REGIONS EXPLORED</div>
         </header>
 
         <div class="display-area">
-            <div id="prologue">
-                <div class="narrative-title">The Romantic Nomadic.</div>
-                <div class="story-text">
-                    <span>有些靈魂註定無法被標記在靜止的座標上。</span>
-                    <span>移動不是為了抵達，而是一種有意識的流浪——在每一場駛向未知的副駕視角裡，將生活的瑣碎揉進公路的風。</span>
-                    <span>聽起來像羅曼蒂克，過起來是遊牧生活。</span>
-                    <span>最遠的旅行，終點永遠是彼此的側臉。</span>
-                </div>
-            </div>
-
             <div id="map-core">
-                <div id="result">The Unknown</div>
-                <div id="mission-task">Seek your destination.</div>
+                <div id="result">Ready to Wander?</div>
+                <div id="mission-task">點擊下方按鈕，開啟下一個座標。</div>
             </div>
         </div>
 
         <div class="action-group">
-            <button id="unfold-btn" onclick="unfold()">UNFOLD THE PATH</button>
-            <div id="action-btns" style="display:none; flex-direction: column; gap: 15px; width: 100%;">
-                <button class="btn-main" onclick="roll()">Seek Destination</button>
-                <div id="check-in-section" style="display:none;">
-                    <button class="btn-main" style="background:var(--gold); color:var(--black); border:none; font-weight:600;" onclick="recordPlace()">Mark as Explored</button>
-                </div>
+            <button class="btn-main" onclick="roll()">Seek Destination</button>
+            <div id="check-in-section" style="display:none; width: 100%;">
+                <button class="btn-main" style="background:var(--gold); color:var(--black); border:none; font-weight:600; width: 100%; margin-top:10px;" onclick="recordPlace()">Mark as Explored</button>
             </div>
+        </div>
+
+        <div class="archive-section" id="archive-section" style="display:none;">
+            <div style="font-family:'Playfair Display'; font-style:italic; color:var(--gold); margin-bottom:20px; font-size:0.9rem;">The Travel Journal</div>
+            <div id="journal-list"></div>
+            <button class="clear-btn" onclick="clearFootprints()">RESET ALL DATA</button>
         </div>
     </div>
 
     <script>
-        // 台灣 368 鄉鎮完整數據
         const taiwanData = [
             "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
             "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
@@ -117,7 +83,7 @@
             "嘉義市 東區","嘉義市 西區",
             "嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉",
             "台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區",
-            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
+            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","燕巢區","橋頭區","梓官區","彌陀區","永安區","湖內區","旗山區","美濃區","六龜區","內門區","杉林區","甲仙區","桃源區","那瑪夏區","茂林區",
             "屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉",
             "宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉",
             "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
@@ -127,83 +93,80 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // VOGUE 風格任務生成器
-        const subjects = ["紀錄", "捕捉", "觀察", "凝視", "帶走", "留白", "感受", "標記"];
-        const modifiers = ["靜止的", "流動的", "被時間遺忘的", "帶有顆粒感的", "低調且奢華的", "公路質感的", "屬於此刻的", "帶有情緒的"];
-        const objects = ["空氣裡的濕度", "擋風玻璃上的光斑", "對方指尖的節奏", "後照鏡裡的遠方", "公路盡頭的灰調", "在地建築的質地", "老雜貨店的氣味", "一抹意外的色彩", "路標與天空的交會", "便利商店的冷冽", "路邊野草的律動", "車窗外的地平線"];
+        const inspirations = [
+            "紀錄擋風玻璃上的光斑。","捕捉空氣裡的濕度。","觀察路人指尖的節奏。","帶走公路盡頭的一抹灰。","留白一段只有引擎聲的時光。","感受在地建築的粗糙質地。","標記這座城鎮獨有的氣味。","凝視後照鏡裡的遠方。","尋找路邊野草的律動。","捕捉屬於此刻的低調光影。"
+        ];
 
-        function generateVogueMissions(count) {
-            let m = [];
-            for(let i=0; i<count; i++) {
-                const s = subjects[Math.floor(Math.random()*subjects.length)];
-                const mod = modifiers[Math.floor(Math.random()*modifiers.length)];
-                const o = objects[Math.floor(Math.random()*objects.length)];
-                m.push(`${s}${mod}${o}。`);
-            }
-            return m;
-        }
-
-        const vMissions = generateVogueMissions(500);
-
-        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_footprints')) || [];
+        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_full_data')) || [];
         let currentResult = "";
-        document.getElementById('regions-count').innerText = visitedPlaces.length;
+        let currentMission = "";
 
-        function unfold() {
-            const prologue = document.getElementById('prologue');
-            const unfoldBtn = document.getElementById('unfold-btn');
-            const mapCore = document.getElementById('map-core');
-            const actionBtns = document.getElementById('action-btns');
+        window.onload = () => {
+            updateUI();
+            if (visitedPlaces.length > 0) {
+                document.getElementById('archive-section').style.display = 'block';
+                renderJournal();
+            }
+        };
 
-            prologue.style.opacity = '0';
-            prologue.style.transform = 'translateY(-15px)';
-            unfoldBtn.style.opacity = '0';
-
-            setTimeout(() => {
-                prologue.style.display = 'none';
-                unfoldBtn.style.display = 'none';
-                mapCore.style.display = 'block';
-                actionBtns.style.display = 'flex';
-                setTimeout(() => {
-                    mapCore.style.opacity = '1';
-                    mapCore.style.transform = 'translateY(0)';
-                }, 50);
-            }, 1200);
+        function updateUI() {
+            document.getElementById('regions-count').innerText = visitedPlaces.length;
         }
 
         function roll() {
             const resultEl = document.getElementById('result');
             const taskEl = document.getElementById('mission-task');
             const checkInSection = document.getElementById('check-in-section');
-            const pool = taiwanData.filter(place => !visitedPlaces.includes(place));
+            const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
-            if (pool.length === 0) { resultEl.innerText = "All Explored."; taskEl.innerText = ""; return; }
+            if (pool.length === 0) { 
+                resultEl.innerText = "The World is Yours."; 
+                taskEl.innerText = "你已走遍這座島嶼的所有角落。"; 
+                return; 
+            }
 
             resultEl.style.opacity = 0;
-            taskEl.style.opacity = 0;
-            checkInSection.style.display = "none";
-
             setTimeout(() => {
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
+                currentMission = inspirations[Math.floor(Math.random() * inspirations.length)];
                 resultEl.innerText = currentResult;
-                taskEl.innerText = vMissions[Math.floor(Math.random() * vMissions.length)];
+                taskEl.innerText = currentMission;
                 resultEl.style.opacity = 1;
-                taskEl.style.opacity = 0.95;
                 checkInSection.style.display = "block";
-            }, 600);
+            }, 300);
         }
 
         function recordPlace() {
-            if (!currentResult || visitedPlaces.includes(currentResult)) return;
-            visitedPlaces.push(currentResult);
-            localStorage.setItem('nomadic_footprints', JSON.stringify(visitedPlaces));
-            document.getElementById('regions-count').innerText = visitedPlaces.length;
+            if (!currentResult || visitedPlaces.some(v => v.name === currentResult)) return;
+            const newRecord = {
+                name: currentResult,
+                mission: currentMission,
+                date: new Date().toLocaleDateString('en-GB').replace(/\//g, '.')
+            };
+            visitedPlaces.unshift(newRecord);
+            localStorage.setItem('nomadic_full_data', JSON.stringify(visitedPlaces));
             document.getElementById('check-in-section').style.display = "none";
+            document.getElementById('archive-section').style.display = 'block';
+            updateUI();
+            renderJournal();
+        }
+
+        function renderJournal() {
+            const listEl = document.getElementById('journal-list');
+            listEl.innerHTML = visitedPlaces.map(item => `
+                <div class="journal-item">
+                    <div class="journal-date">${item.date}</div>
+                    <div class="journal-place">${item.name}</div>
+                    <div class="journal-mission">${item.mission}</div>
+                </div>
+            `).join('');
         }
 
         function clearFootprints() {
-            if (confirm("確定要將所有足跡歸零嗎？")) {
-                visitedPlaces = []; localStorage.removeItem('nomadic_footprints'); location.reload();
+            if (confirm("這將會永久刪除 368 鄉鎮的所有足跡紀錄，確定嗎？")) {
+                visitedPlaces = [];
+                localStorage.removeItem('nomadic_full_data');
+                location.reload();
             }
         }
     </script>

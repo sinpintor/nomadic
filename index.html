@@ -15,53 +15,48 @@
         .nav-link { font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); text-decoration: none; text-transform: uppercase; cursor: pointer; transition: 0.3s; opacity: 0.6; }
         .nav-link.active { color: var(--white); border-bottom: 1px solid var(--white); padding-bottom: 5px; opacity: 1; }
 
-        .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 120px 25px 100px; box-sizing: border-box; text-align: center; }
+        .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 110px 20px 100px; box-sizing: border-box; text-align: center; }
         .page.active { display: flex; animation: fadeIn 0.8s ease forwards; }
 
         .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; color: var(--active-color); letter-spacing: 0.25em; }
         .vogue-subtitle { font-size: 0.5rem; letter-spacing: 0.5em; color: var(--grey); margin-bottom: 35px; text-transform: uppercase; }
         
-        /* 氣溫切換 */
         .temp-selector { display: flex; gap: 10px; margin-bottom: 30px; }
-        .temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 12px 18px; font-size: 0.45rem; letter-spacing: 0.2em; cursor: pointer; text-transform: uppercase; }
+        .temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 12px 18px; font-size: 0.45rem; letter-spacing: 0.1em; cursor: pointer; }
         .temp-btn.active { border-color: var(--active-color); color: var(--active-color); background: rgba(212, 180, 131, 0.03); }
 
         .display-stage { width: 100%; max-width: 500px; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 40px; }
         .loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.1rem; font-weight: 600; margin-bottom: 25px; white-space: nowrap; overflow: hidden; letter-spacing: 0.1em; }
-        .tag-pill { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--active-color); border: 1px solid rgba(212, 180, 131, 0.3); padding: 6px 14px; margin: 0 5px; text-transform: uppercase; }
+        .tag-pill { font-family: 'Noto Serif TC', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--active-color); border: 1px solid rgba(212, 180, 131, 0.3); padding: 6px 14px; margin: 0 5px; }
 
         .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px 60px; font-size: 0.6rem; letter-spacing: 0.6em; text-transform: uppercase; cursor: pointer; transition: 0.5s; }
         .btn-vogue:hover { background: var(--white); color: var(--black); }
 
-        /* 任務面板 */
         .mission-panel { display: none; width: 100%; max-width: 440px; text-align: left; margin-top: 50px; }
         .mission-item { margin-bottom: 40px; }
-        .m-header { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; letter-spacing: 0.3em; color: var(--grey); display: block; margin-bottom: 12px; border-bottom: 1px solid #1a1a1a; padding-bottom: 8px; }
-        .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; }
+        .m-header { font-family: 'Noto Serif TC', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--grey); display: block; margin-bottom: 12px; border-bottom: 1px solid #1a1a1a; padding-bottom: 8px; font-weight: 500; }
+        .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1.15rem; line-height: 2; color: #eee; }
 
-        /* 檔案館點亮系統 */
         .light-grid { display: grid; grid-template-columns: repeat(23, 1fr); gap: 4px; padding: 25px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 50px; }
         .dot { width: 5px; height: 5px; background: #151515; border-radius: 50%; }
         .dot.active { transform: scale(1.3); box-shadow: 0 0 10px var(--active-color); }
 
         .journal-list { width: 100%; max-width: 440px; text-align: left; }
         .journal-item { padding: 50px 0; border-bottom: 1px solid #111; }
-        .j-meta { font-size: 0.4rem; letter-spacing: 0.3em; color: var(--grey); margin-bottom: 15px; text-transform: uppercase; }
+        .j-meta { font-size: 0.4rem; letter-spacing: 0.3em; color: var(--grey); margin-bottom: 15px; }
         .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.8rem; font-weight: 500; margin-bottom: 25px; }
         .j-bar { width: 100%; height: 1px; margin-bottom: 30px; background: #1a1a1a; position: relative; }
         .j-bar::after { content: ''; position: absolute; left: 0; top: -1px; width: 45px; height: 3px; background: var(--active-color); }
         .j-row { margin-bottom: 20px; font-size: 0.9rem; color: #999; line-height: 1.8; }
-        .j-row strong { font-family: 'Montserrat'; font-size: 0.45rem; letter-spacing: 0.2em; color: var(--grey); margin-right: 15px; font-weight: 600; display: block; margin-bottom: 5px; text-transform: uppercase; }
+        .j-row strong { font-family: 'Noto Serif TC', serif; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--grey); margin-right: 15px; font-weight: 600; display: block; margin-bottom: 5px; }
 
-        /* Editorial */
-        .editorial-container { width: 100%; max-width: 600px; text-align: left; margin-top: 20px; }
         .chapter-block { margin-bottom: 80px; }
         .chapter-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.7rem; color: var(--active-color); margin-bottom: 10px; display: block; letter-spacing: 0.2em; }
         .chapter-title { font-family: 'Noto Serif TC', serif; font-size: 2.4rem; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 30px; color: var(--white); border-bottom: 1px solid #111; padding-bottom: 15px; }
-        .shot-item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; padding-bottom: 10px; }
+        .shot-item { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
         .shot-name { font-family: 'Noto Serif TC', serif; font-size: 1.2rem; color: #eee; }
-        .shot-tag { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; letter-spacing: 0.2em; color: var(--grey); text-transform: uppercase; }
+        .shot-tag { font-family: 'Noto Serif TC', serif; font-size: 0.55rem; letter-spacing: 0.1em; color: var(--grey); }
         .shot-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 15px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -72,52 +67,52 @@
     <div class="bg-text" id="bg-text">ROUTE 19</div>
 
     <nav>
-        <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">The Oracle</div>
-        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">The Archive</div>
-        <div class="nav-link" id="nav-editorial" onclick="showPage('editorial')">Editorial</div>
+        <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">啟示集</div>
+        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">座標誌</div>
+        <div class="nav-link" id="nav-editorial" onclick="showPage('editorial')">雜誌章節</div>
     </nav>
 
     <div id="oracle" class="page active">
         <h1 class="vogue-title">WADE & CLOUDY</h1>
-        <p class="vogue-subtitle">A Visual Narrative of Route 19</p>
+        <p class="vogue-subtitle">第十九號航線：公路影像敘事</p>
         
         <div class="temp-selector">
-            <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">Below 15°C</button>
-            <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">Stay Mild</button>
-            <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">Above 25°C</button>
+            <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">15°C 以下</button>
+            <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">15-25°C 舒適</button>
+            <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">25°C 以上</button>
         </div>
 
         <div class="display-stage">
-            <div class="loc-display" id="loc-result">PENDING</div>
+            <div class="loc-display" id="loc-result">尚未入鏡</div>
             <div id="combo-display" style="visibility: hidden;">
-                <span class="tag-pill" id="tag-1">SUBJECT</span>
-                <span class="tag-pill" id="tag-2">TRAIT</span>
-                <span class="tag-pill" id="tag-temp" style="color:var(--white); border-color:var(--white);">CLIMATE</span>
+                <span class="tag-pill" id="tag-1">主體</span>
+                <span class="tag-pill" id="tag-2">特質</span>
+                <span class="tag-pill" id="tag-temp" style="color:var(--white); border-color:var(--white);">氣候</span>
             </div>
         </div>
         
-        <button class="btn-vogue" onclick="drawFate()">啟動聯覺觀影 — Initiate Hunt</button>
+        <button class="btn-vogue" onclick="drawFate()">啟動聯覺觀影</button>
 
         <div id="mission-panel" class="mission-panel">
             <div class="mission-item">
-                <span class="m-header"><strong>01</strong> THE HUNTING — 空間座標</span>
+                <span class="m-header"><strong>01</strong> 空間座標 — 狩獵標的</span>
                 <div class="m-content" id="m-action">...</div>
             </div>
             <div class="mission-item">
-                <span class="m-header"><strong>02</strong> THE TASTE — 味覺導引</span>
+                <span class="m-header"><strong>02</strong> 味覺導引 — 靈感食肆</span>
                 <div class="m-content" id="m-food">...</div>
             </div>
             <div class="mission-item">
-                <span class="m-header"><strong>03</strong> THE STYLING — 視覺裝幀</span>
+                <span class="m-header"><strong>03</strong> 視覺裝幀 — 風格物件</span>
                 <div class="m-content" id="m-style" style="color:var(--active-color);">...</div>
             </div>
-            <button class="btn-vogue" style="width:100%; background:var(--active-color); color:black; border:none; margin-top:10px;" onclick="manualSave()">封存啟示 — Mint This Moment</button>
+            <button class="btn-vogue" style="width:100%; background:var(--active-color); color:black; border:none; margin-top:10px;" onclick="manualSave()">封存此瞬間，點亮地圖座標</button>
         </div>
     </div>
 
     <div id="archive" class="page">
-        <h1 class="vogue-title">THE ARCHIVE</h1>
-        <p class="vogue-subtitle">Chronicles of 368 Coordinates</p>
+        <h1 class="vogue-title">座標誌</h1>
+        <p class="vogue-subtitle">台灣 368 鄉鎮獵捕進度</p>
         <div class="map-section">
             <div class="light-grid" id="light-grid"></div>
         </div>
@@ -125,8 +120,8 @@
     </div>
 
     <div id="editorial" class="page">
-        <h1 class="vogue-title">EDITORIAL</h1>
-        <p class="vogue-subtitle">County Chapters Portfolio</p>
+        <h1 class="vogue-title">雜誌章節</h1>
+        <p class="vogue-subtitle">依縣市分類的影像作品集</p>
         <div class="editorial-container" id="editorial-list"></div>
     </div>
 
@@ -134,56 +129,56 @@
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
 
         const subjects = {
-            1: { n: "RIDER 騎士", loc: "交通遺址或流速節點", color: "#4a90e2" },
-            2: { n: "CLOVER 幸運草", loc: "微型公園或私有綠地", color: "#6fcf97" },
-            3: { n: "SHIP 船", loc: "碼頭、橋樑或視線極點", color: "#2d9cdb" },
-            4: { n: "HOUSE 房子", loc: "私人寓所或老街深處", color: "#8b5a2b" },
-            5: { n: "TREE 樹", loc: "靜謐林道或百年老樹", color: "#2d5a4c" },
-            6: { n: "CLOUDS 雲", loc: "高緯度稜線或迷霧山區", color: "#828282" },
-            7: { n: "SNAKE 蛇", loc: "曲折窄徑或神祕巷弄", color: "#273321" },
-            8: { n: "COFFIN 棺材", loc: "靜止廢墟或時間凝結處", color: "#1a1a1a" },
-            9: { n: "BOUQUET 花束", loc: "藝文空間或精選植栽舖", color: "#bb6bd9" },
-            10: { n: "SCYTHE 鐮刀", loc: "冷峻鋼構或金屬地標", color: "#eb5757" },
-            11: { n: "WHIP 鞭子", loc: "具備節奏感的運動場域", color: "#b83b3b" },
-            12: { n: "BIRDS 鳥", loc: "喧囂市場或交流密集處", color: "#f2994a" },
-            13: { n: "CHILD 小孩", loc: "超現實滑梯或創意地景", color: "#56ccf2" },
-            14: { n: "FOX 狐狸", loc: "前衛設計或精選獵買店", color: "#e67e22" },
-            15: { n: "BEAR 熊", loc: "厚重石牆或古老官方建築", color: "#4f2f16" },
-            16: { n: "STARS 星辰", loc: "極致夜景或燈火匯聚處", color: "#85c1e9" },
-            17: { n: "STORK 鸛鳥", loc: "正在蜕變中或具新意地標", color: "#f7f9f9" },
-            18: { n: "DOG 狗", loc: "守候感強烈的老舖或雜貨", color: "#d4b483" },
-            19: { n: "TOWER 高塔", loc: "孤傲的高度或權力座標點", color: "#333333" },
-            20: { n: "GARDEN 公園", loc: "城鎮核心廣場或公共綠帶", color: "#a2d149" },
-            21: { n: "MOUNTAIN 山", loc: "險峻斜坡或具阻礙感步道", color: "#4f4f4f" },
-            22: { n: "WAYS 路徑", loc: "對稱路徑或命運分岔點", color: "#828282" },
-            23: { n: "MICE 老鼠", loc: "斑駁剝落的舊物聚落", color: "#3c3c3c" },
-            24: { n: "HEART 心", loc: "感性滿格的景觀或愛心符號", color: "#eb5757" },
-            25: { n: "RING 戒指", loc: "循環結構或圓形幾何地標", color: "#f2c94c" },
-            26: { n: "BOOK 書本", loc: "靜謐圖書館或學術隅點", color: "#6fcf97" },
-            27: { n: "LETTER 信件", loc: "舊郵筒旁或適合書寫的小巷", color: "#e0e0e0" },
-            28: { n: "MAN 男人", loc: "剛性鋼筋或工業結構地帶", color: "#2f80ed" },
-            29: { n: "WOMAN 女人", loc: "柔性弧度或自然波紋場景", color: "#f2994a" },
-            30: { n: "LILY 百合", loc: "聖潔寺廟或純白極簡藝廊", color: "#ffffff" },
-            31: { n: "SUN 太陽", loc: "陽光直射的開闊廣場或荒野", color: "#f2994a" },
-            32: { n: "MOON 月亮", loc: "神祕曖昧的微光或陰影角落", color: "#4f46e5" },
-            33: { n: "KEY 鑰匙", loc: "隱匿門口或具啟發感出口", color: "#f2c94c" },
-            34: { n: "FISH 魚", loc: "流動市場或豐饒的奢侈商圈", color: "#273321" },
-            35: { n: "ANCHOR 錨", loc: "重型機具或安全感護壁", color: "#4f4f4f" },
-            36: { n: "CROSS 十字架", loc: "歷史紀念誌或具儀式感角落", color: "#333333" }
+            1: { n: "騎士", loc: "交通遺址或流速節點", color: "#4a90e2" },
+            2: { n: "幸運草", loc: "微型公園或私有綠地", color: "#6fcf97" },
+            3: { n: "船", loc: "碼頭、橋樑或視線極點", color: "#2d9cdb" },
+            4: { n: "房子", loc: "私人寓所或老街深處", color: "#8b5a2b" },
+            5: { n: "樹", loc: "靜謐林道或百年老樹", color: "#2d5a4c" },
+            6: { n: "雲", loc: "高緯度稜線或迷霧山區", color: "#828282" },
+            7: { n: "蛇", loc: "曲折窄徑或神祕巷弄", color: "#273321" },
+            8: { n: "棺材", loc: "靜止廢墟或時間凝結處", color: "#1a1a1a" },
+            9: { n: "花束", loc: "藝文空間或精選植栽舖", color: "#bb6bd9" },
+            10: { n: "鐮刀", loc: "冷峻鋼構或金屬地標", color: "#eb5757" },
+            11: { n: "鞭子", loc: "具備節奏感的運動場域", color: "#b83b3b" },
+            12: { n: "鳥", loc: "喧囂市場或交流密集處", color: "#f2994a" },
+            13: { n: "小孩", loc: "超現實滑梯或創意地景", color: "#56ccf2" },
+            14: { n: "狐狸", loc: "前衛設計或精選獵買店", color: "#e67e22" },
+            15: { n: "熊", loc: "厚重石牆或古老官方建築", color: "#4f2f16" },
+            16: { n: "星辰", loc: "極致夜景或燈火匯聚處", color: "#85c1e9" },
+            17: { n: "鸛鳥", loc: "正在蜕變中或具新意地標", color: "#f7f9f9" },
+            18: { n: "狗", loc: "守候感強烈的老舖或雜貨", color: "#d4b483" },
+            19: { n: "高塔", loc: "孤傲的高度或權力座標點", color: "#333333" },
+            20: { n: "公園", loc: "城鎮核心廣場或公共綠帶", color: "#a2d149" },
+            21: { n: "山", loc: "險峻斜坡或具阻礙感步道", color: "#4f4f4f" },
+            22: { n: "路徑", loc: "對稱路徑或命運分岔點", color: "#828282" },
+            23: { n: "老鼠", loc: "斑駁剝落的舊物聚落", color: "#3c3c3c" },
+            24: { n: "心", loc: "感性滿格的景觀或愛心符號", color: "#eb5757" },
+            25: { n: "戒指", loc: "循環結構或圓形幾何地標", color: "#f2c94c" },
+            26: { n: "書本", loc: "靜謐圖書館或學術隅點", color: "#6fcf97" },
+            27: { n: "信件", loc: "舊郵筒旁或適合書寫的小巷", color: "#e0e0e0" },
+            28: { n: "男人", loc: "剛性鋼筋或工業結構地帶", color: "#2f80ed" },
+            29: { n: "女人", loc: "柔性弧度或自然波紋場景", color: "#f2994a" },
+            30: { n: "百合", loc: "聖潔寺廟或純白極簡藝廊", color: "#ffffff" },
+            31: { n: "太陽", loc: "陽光直射的開闊廣場或荒野", color: "#f2994a" },
+            32: { n: "月亮", loc: "神祕曖昧的微光或陰影角落", color: "#4f46e5" },
+            33: { n: "鑰匙", loc: "隱匿門口或具啟發感出口", color: "#f2c94c" },
+            34: { n: "魚", loc: "流動市場或豐饒的奢侈商圈", color: "#273321" },
+            35: { n: "錨", loc: "重型機具或安全感護壁", color: "#4f4f4f" },
+            36: { n: "十字架", loc: "歷史紀念誌或具儀式感角落", color: "#333333" }
         };
 
         const traits = {
-            1: "流動的 FLUID", 2: "驚喜的 SURPRISING", 3: "渴望的 LONGING", 4: "安穩的 STABLE", 5: "生長的 GROWING", 6: "迷幻的 PSYCHEDELIC", 7: "曲折的 TWISTED", 8: "終結的 FINAL", 9: "盛放的 BLOOMING", 10: "銳利的 SHARP", 11: "重複的 REPETITIVE", 12: "喧鬧的 NOISY", 13: "原始的 PRIMITIVE", 14: "專業的 EXPERT", 15: "強大的 POWERFUL", 16: "閃耀的 GLITTER", 17: "新穎的 NOVEL", 18: "溫暖的 WARM", 19: "崇高的 SUBLIME", 20: "大眾的 SOCIAL", 21: "險峻的 STEEP", 22: "游移的 WAVERING", 23: "細碎的 FRAGMENTED", 24: "濃烈的 INTENSE", 25: "永恆的 ETERNAL", 26: "未知的 UNKNOWN", 27: "紀錄的 ARCHIVAL", 28: "結構的 STRUCTURAL", 29: "直覺的 INTUITIVE", 30: "純粹的 PURE", 31: "燦爛的 RADIANT", 32: "詩意的 POETIC", 33: "啟發的 INSPIRED", 34: "豐饒的 LUXURY", 35: "恆定的 CONSTANT", 36: "宿命的 FATAL"
+            1: "流動的", 2: "驚喜的", 3: "渴望的", 4: "安穩的", 5: "生長的", 6: "迷幻的", 7: "曲折的", 8: "終結的", 9: "盛放的", 10: "銳利的", 11: "重複的", 12: "喧鬧的", 13: "原始的", 14: "專業的", 15: "強大的", 16: "閃耀的", 17: "新穎的", 18: "溫暖的", 19: "崇高的", 20: "大眾的", 21: "險峻的", 22: "游移的", 23: "細碎的", 24: "濃烈的", 25: "永恆的", 26: "未知的", 27: "紀錄的", 28: "結構的", 29: "直覺的", 30: "純粹的", 31: "燦爛的", 32: "詩意的", 33: "啟發的", 34: "奢華的", 35: "恆定的", 36: "宿命的"
         };
 
         const outfitsByTemp = {
-            "COLD": ["羊毛廓形大衣搭配羊絨圍巾 — Oversized Wool Coat with Cashmere Scarf", "高領衫搭配結構感皮革單品 — Turtleneck with Structural Leather", "挺括燈芯絨套裝搭配短靴 — Corduroy Suit with Ankle Boots", "絲絨質感禮服與銀飾點綴 — Velvet Gown with Silver Accents"],
-            "MILD": ["剪裁西裝套裝配復古墨鏡 — Tailored Suit with Vintage Shades", "輕薄風衣與莫蘭迪色系內搭 — Lightweight Trench with Morandi Tones", "成套深色單寧與質感皮鞋 — Dark Denim Set with Polished Leather", "廓形襯衫與高腰西裝褲 — Oversized Shirt with High-waist Trousers"],
-            "HOT": ["質感絲緞單品與微光首飾 — Silk Textures with Glimmering Jewelry", "涼感綢緞裝束與細帶涼鞋 — Cooling Satin Outfit with Strappy Sandals", "亞麻無袖套裝配金屬頸鍊 — Linen Sleeveless Set with Metal Choker", "不對稱剪裁白色棉質設計 — Asymmetric White Cotton Design"]
+            "COLD": ["經典羊毛廓形大衣搭配質感羊絨圍巾", "層次感豐富的高領衫與建築感結構長褲", "挺括燈芯絨西裝套裝搭配切爾西靴", "深色系絲絨質感單品與極簡銀飾"],
+            "MILD": ["精密剪裁西裝套裝配復古墨鏡", "輕薄風衣外套與莫蘭迪色系內搭", "成套深色單寧裝扮與質感皮鞋", "廓形襯衫搭配高腰寬版西裝褲"],
+            "HOT": ["絲緞質感單品與微光首飾點綴", "露背設計涼感綢緞裝束與細帶涼鞋", "亞麻無袖結構套裝配金屬頸鍊", "鏤空編織工藝單品與極簡棉質寬褲"]
         };
 
         let currentTemp = 'MILD';
-        let masterJournal = JSON.parse(localStorage.getItem('nomadic_route19_v3')) || [];
+        let masterJournal = JSON.parse(localStorage.getItem('route19_vogue_final')) || [];
         let currentRecord = null;
 
         window.onload = () => { initLights(); renderAll(); };
@@ -223,21 +218,21 @@
             });
 
             const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; text-align:center; padding:40px 0;">NO MEMORIES ARCHIVED</div>' :
+            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; text-align:center; padding:40px 0;">命運紀錄待啟動</div>' :
                 [...masterJournal].reverse().map(log => `
                     <div class="journal-item">
-                        <div class="j-meta">${log.date} / ${log.tempLabel} / ${log.combo}</div>
+                        <div class="j-meta">${log.date} / ${log.combo}</div>
                         <div class="j-name">${log.name}</div>
                         <div class="j-color-line" style="--active-color:${log.color}"></div>
-                        <div class="j-row"><strong>THE HUNTING</strong> ${log.m_action}</div>
-                        <div class="j-row"><strong>THE TASTE</strong> ${log.m_food}</div>
-                        <div class="j-row"><strong style="color:${log.color}">THE STYLING</strong> ${log.m_style}</div>
+                        <div class="j-row"><strong>狩獵標的</strong> ${log.m_action}</div>
+                        <div class="j-row"><strong>味覺導引</strong> ${log.m_food}</div>
+                        <div class="j-row"><strong style="color:${log.color}">視覺裝幀</strong> ${log.m_style}</div>
                     </div>
                 `).join('');
 
             const editEl = document.getElementById('editorial-list');
             if(masterJournal.length === 0) {
-                editEl.innerHTML = '<div style="color:#222; text-align:center; padding:40px 0;">AWAITING FIRST CHAPTER</div>';
+                editEl.innerHTML = '<div style="color:#222; text-align:center; padding:40px 0;">尚無刊登章節</div>';
                 return;
             }
             const grouped = {};
@@ -253,7 +248,7 @@
                     ${grouped[county].map(log => `
                         <div class="shot-item">
                             <span class="shot-name"><span class="shot-dot" style="background:${log.color}"></span>${log.name.split(' ')[1]}</span>
-                            <span class="shot-tag">${log.combo.split(' / ')[0]}</span>
+                            <span class="shot-tag">${log.combo}</span>
                         </div>
                     `).join('')}
                 </div>
@@ -279,27 +274,26 @@
                     while(id1 === id2) id2 = Math.floor(Math.random() * 36) + 1;
                     
                     const pool = outfitsByTemp[currentTemp];
-                    const finalStyle = pool[Math.floor(Math.random() * pool.length)];
                     const s = subjects[id1];
                     const tName = subjects[id2].n;
                     const trait = traits[id2];
 
-                    const m_a = `獵捕捕這區的「${s.loc}」，捕捉一段具備「${trait}」張力的定格畫面。`;
-                    const m_f = `探索這區體現「${id1 > 18 ? '層次美學' : '質樸純粹'}」的老店，紀錄專屬味覺啟示。`;
-                    const m_s = `換上具備「${finalStyle}」張力的裝束，在此座標完成最終視覺裝幀。`;
+                    const m_a = `獵捕「${s.loc}」，捕捉一段具備「${trait}」張力的定格影像。`;
+                    const m_f = `探索體現「${id1 > 18 ? '層次美學' : '質樸純粹'}」的老店，紀錄專屬味覺啟示。`;
+                    const m_s = `換上具備「${pool[Math.floor(Math.random() * pool.length)]}」張力的裝束，完成最終視覺裝幀。`;
 
                     locEl.innerText = finalLoc;
-                    document.getElementById('tag-1').innerText = s.n.split(' ')[0];
-                    document.getElementById('tag-2').innerText = tName.split(' ')[0];
-                    document.getElementById('tag-temp').innerText = currentTemp;
+                    document.getElementById('tag-1').innerText = s.n;
+                    document.getElementById('tag-2').innerText = traits[id2];
+                    document.getElementById('tag-temp').innerText = document.getElementById(`btn-${currentTemp}`).innerText;
                     comboEl.style.visibility = 'visible';
                     document.getElementById('m-action').innerText = m_a;
                     document.getElementById('m-food').innerText = m_f;
                     document.getElementById('m-style').innerText = m_s;
                     document.body.style.setProperty('--active-color', s.color);
-                    document.getElementById('bg-text').innerText = s.n.split(' ')[0];
+                    document.getElementById('bg-text').innerText = s.n;
                     panel.style.display = 'block';
-                    currentRecord = { name: finalLoc, combo: `${s.n} / ${tName}`, m_action: m_a, m_food: m_f, m_style: m_s, color: s.color, tempLabel: currentTemp };
+                    currentRecord = { name: finalLoc, combo: `${s.n} ＋ ${traits[id2]}`, m_action: m_a, m_food: m_f, m_style: m_s, color: s.color, tempLabel: currentTemp };
                 }
             }, 55);
         }
@@ -307,12 +301,12 @@
         function manualSave() {
             if (!currentRecord) return;
             masterJournal.push({ ...currentRecord, date: new Date().toLocaleDateString() });
-            localStorage.setItem('nomadic_route19_v3', JSON.stringify(masterJournal));
-            alert("已刊登至 Route 19 雜誌章節。");
+            localStorage.setItem('route19_vogue_final', JSON.stringify(masterJournal));
+            alert("已刊登至雜誌章節。");
             renderAll();
         }
 
-        function clearData() { if(confirm("ERASE ALL MEMORIES?")) { localStorage.removeItem('nomadic_route19_v3'); location.reload(); } }
+        function clearData() { if(confirm("確定刪除所有紀錄？")) { localStorage.removeItem('route19_vogue_final'); location.reload(); } }
     </script>
 </body>
 </html>

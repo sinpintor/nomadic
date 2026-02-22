@@ -15,12 +15,12 @@
             min-height: 100vh; display: flex; flex-direction: column; align-items: center;
             padding: calc(60px + env(safe-area-inset-top)) 30px 120px;
             box-sizing: border-box; text-align: center;
-            /* 背景換了一張帶有深夜食堂/暖色微光感覺的圖 */
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), 
                         url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1000') center/cover no-repeat fixed;
         }
         
         .back-nav { position: fixed; top: calc(20px + env(safe-area-inset-top)); left: 25px; z-index: 100; text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.3em; transition: 0.3s; }
+        .back-nav:hover { color: var(--gold); }
 
         header h2 { font-family: 'Playfair Display', serif; font-size: 0.6rem; letter-spacing: 0.6em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
         header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
@@ -48,6 +48,11 @@
         .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; transition: color 0.1s;}
 
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        
+        .location-input { background: transparent; border: none; border-bottom: 1px solid rgba(212, 180, 131, 0.5); color: var(--white); font-family: 'Noto Serif TC', serif; font-size: 1rem; padding: 10px 5px; text-align: center; letter-spacing: 0.1em; outline: none; transition: border-color 0.3s; width: 100%; box-sizing: border-box; margin-bottom: 5px; }
+        .location-input::placeholder { color: #555; font-size: 0.8rem; letter-spacing: 0.05em; }
+        .location-input:focus { border-bottom: 1px solid var(--gold); }
+
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; transition: background 0.3s ease;}
         .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
         #unfold-btn { border: none; border-bottom: 1px solid var(--gold); padding: 10px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.65rem; transition: 0.5s; cursor: pointer; margin-bottom: 20px; text-align: center;}
@@ -57,13 +62,14 @@
         .journal-date { font-size: 0.6rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0 12px 0; font-weight: 500; color: var(--gold); }
         .journal-mission { font-size: 0.85rem; color: #ccc; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; gap: 8px; }
+        .vol-badge { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; color: var(--gold); border: 1px solid var(--gold); padding: 2px 6px; border-radius: 2px; letter-spacing: 0.1em;}
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #444; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="noise"></div>
-    <a href="index.html" class="back-nav">← BACK TO HOME</a>
+    <a href="index.html" class="back-nav">← COMPASS</a>
 
     <div class="main-container">
         <header>
@@ -82,14 +88,16 @@
 
             <div id="map-core" class="content-block">
                 <div id="result">The Unknown</div>
-                <div class="mission-box" id="mission-box">
-                    </div>
+                <div class="mission-box" id="mission-box"></div>
             </div>
         </div>
 
         <div class="action-group">
             <button id="unfold-btn" onclick="unfold()">REVEAL THE MENU</button>
             <div id="action-btns" style="display:none; flex-direction: column; gap: 15px; width: 100%;">
+                
+                <input type="text" id="custom-location" class="location-input" placeholder="已決定去哪？請輸入地點 (留白則盲抽)">
+                
                 <button class="btn-main" id="roll-btn" onclick="roll()">Draw Intuition</button>
                 <div id="check-in-section" style="display:none; width: 100%;">
                     <button class="btn-main" style="background:var(--gold); color:var(--black); border:none; font-weight:600; width: 100%;" onclick="recordPlace()">Mark as Tasted</button>
@@ -98,9 +106,9 @@
         </div>
 
         <div class="archive-section" id="archive-section" style="display:none;">
-            <div style="font-family:'Playfair Display'; font-style:italic; color:var(--gold); margin-bottom:25px; font-size:1rem;">The Dining Journal</div>
+            <div style="font-family:'Playfair Display'; font-style:italic; color:var(--gold); margin-bottom:25px; font-size:1rem;">The Master Journal</div>
             <div id="journal-list"></div>
-            <button class="clear-btn" onclick="clearFootprints()">RESET ALL DATA</button>
+            <button class="clear-btn" onclick="clearFootprints()">RESET MASTER JOURNAL</button>
         </div>
     </div>
 
@@ -130,7 +138,6 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // 題庫 1：[CUISINE] 吃什麼 (餐廳類型/氛圍)
         const cuisines = [
             "Google Map 上隨機找一間名字有『老』字的小吃店。",
             "在地經營超過十年、看起來很有故事的麵店。",
@@ -144,7 +151,6 @@
             "找一家『沒有冷氣，只有電風扇在轉』的硬核小吃店。"
         ];
 
-        // 題庫 2：[ORDER] 怎麼點 (點餐大冒險)
         const orderings = [
             "請老闆推薦他最驕傲、最拿手的一道菜。",
             "閉上眼睛，手指在菜單上盲點一道菜。",
@@ -158,7 +164,6 @@
             "給對方 200 元預算，讓他去自由發揮亂點一通。"
         ];
 
-        // 題庫 3：[CHALLENGE] 攝影與互動任務
         const challenges = [
             "開啟閃光燈，近距離盲拍食物的油亮肌理與熱氣。",
             "拍一張對方吃到滿嘴都是醬汁、最不顧形象的真實醜照。",
@@ -172,7 +177,6 @@
             "用微距鏡頭（或拉近焦距）拍下食物被筷子夾起、拉絲的瞬間。"
         ];
 
-        // 題庫 4：[DIALOGUE] 餐桌對話 (靈魂拷問)
         const dialogues = [
             "如果這頓飯是宇宙給我們的一個隱喻，你覺得它在暗示現階段的什麼？",
             "說出一個你最近心裡突然冒出來，但還沒跟我分享過的『瘋狂小念頭』。",
@@ -186,17 +190,27 @@
             "說一件今天出門到現在，你覺得我特別可愛或迷人的一個瞬間。"
         ];
 
-        // ★ 注意：這裡改用 'nomadic_vol02_data'，避免覆蓋 Vol.01 的紀錄
-        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_vol02_data')) || [];
+        // 讀取全域旅行日記
+        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let currentResult = "";
         let currentLogEntry = "";
         let isRolling = false; 
 
         window.onload = () => {
-            document.getElementById('regions-count').innerText = visitedPlaces.length;
+            const uniquePlaces = new Set(visitedPlaces.map(item => item.name));
+            document.getElementById('regions-count').innerText = uniquePlaces.size;
+
             if (visitedPlaces.length > 0) {
                 document.getElementById('archive-section').style.display = 'block';
                 renderJournal();
+            }
+
+            // 讀取從 index.html 傳遞過來的地點參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const loc = urlParams.get('loc');
+            if (loc) {
+                document.getElementById('custom-location').value = loc;
+                setTimeout(unfold, 500); 
             }
         };
 
@@ -216,25 +230,29 @@
             isRolling = true;
             
             const btn = document.getElementById('roll-btn');
-            btn.disabled = true; 
-            btn.innerText = "CONSULTING THE UNIVERSE..."; 
-
+            const locationInput = document.getElementById('custom-location').value.trim();
             const resultEl = document.getElementById('result');
             const missionBox = document.getElementById('mission-box');
             const checkInSection = document.getElementById('check-in-section');
-            const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
-            if (pool.length === 0) { 
-                resultEl.innerText = "All Tasted."; 
-                btn.innerText = "DRAW INTUITION";
-                btn.disabled = false;
-                isRolling = false;
-                return; 
+            // 決定目的地池
+            let pool = [];
+            if (locationInput !== "") {
+                pool = [locationInput];
+            } else {
+                pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
+                if (pool.length === 0) { 
+                    resultEl.innerText = "All Tasted."; 
+                    isRolling = false;
+                    return; 
+                }
             }
 
+            btn.disabled = true; 
+            btn.innerText = "CONSULTING THE UNIVERSE..."; 
             checkInSection.style.display = "none";
 
-            // 動畫階段：快速洗牌 5 個元素
+            // 動畫階段
             resultEl.style.color = "#888"; 
             
             let rollInterval = setInterval(() => {
@@ -242,19 +260,19 @@
                 
                 missionBox.innerHTML = `
                     <div class="mission-item">
-                        <div class="mission-label">CUISINE / 吃什麼</div>
+                        <div class="mission-label">CUISINE</div>
                         <div class="mission-text" style="color:#666;">${cuisines[Math.floor(Math.random() * cuisines.length)]}</div>
                     </div>
                     <div class="mission-item">
-                        <div class="mission-label">ORDER / 怎麼點</div>
+                        <div class="mission-label">ORDER</div>
                         <div class="mission-text" style="color:#666;">${orderings[Math.floor(Math.random() * orderings.length)]}</div>
                     </div>
                     <div class="mission-item">
-                        <div class="mission-label">CHALLENGE / 互動任務</div>
+                        <div class="mission-label">CHALLENGE</div>
                         <div class="mission-text" style="color:#666;">${challenges[Math.floor(Math.random() * challenges.length)]}</div>
                     </div>
                     <div class="mission-item">
-                        <div class="mission-label">DIALOGUE / 餐桌對話</div>
+                        <div class="mission-label">DIALOGUE</div>
                         <div class="mission-text" style="color:#666;">${dialogues[Math.floor(Math.random() * dialogues.length)]}</div>
                     </div>
                 `;
@@ -273,24 +291,23 @@
                 
                 missionBox.innerHTML = `
                     <div class="mission-item">
-                        <div class="mission-label">CUISINE / 吃什麼</div>
+                        <div class="mission-label">CUISINE</div>
                         <div class="mission-text">${rCuisine}</div>
                     </div>
                     <div class="mission-item">
-                        <div class="mission-label">ORDER / 怎麼點</div>
+                        <div class="mission-label">ORDER</div>
                         <div class="mission-text">${rOrder}</div>
                     </div>
                     <div class="mission-item">
-                        <div class="mission-label">CHALLENGE / 互動任務</div>
+                        <div class="mission-label">CHALLENGE</div>
                         <div class="mission-text">${rChallenge}</div>
                     </div>
                     <div class="mission-item">
-                        <div class="mission-label">DIALOGUE / 餐桌對話</div>
+                        <div class="mission-label">DIALOGUE</div>
                         <div class="mission-text" style="color:var(--gold); font-style:italic;">"${rDialogue}"</div>
                     </div>
                 `;
                 
-                // 儲存紀錄用的文字排版
                 currentLogEntry = `
                     <div><span style="color:#888;">[CUISINE]</span> ${rCuisine}</div>
                     <div><span style="color:#888;">[ORDER]</span> ${rOrder}</div>
@@ -314,9 +331,10 @@
             const dd = String(d.getDate()).padStart(2, '0');
             const formattedDate = `${yyyy}.${mm}.${dd}`;
 
-            const newRecord = { name: currentResult, mission: currentLogEntry, date: formattedDate };
+            // 加入 vol 標籤區分是哪本雜誌的紀錄
+            const newRecord = { name: currentResult, mission: currentLogEntry, date: formattedDate, vol: 'VOL. 02' };
             visitedPlaces.unshift(newRecord);
-            localStorage.setItem('nomadic_vol02_data', JSON.stringify(visitedPlaces));
+            localStorage.setItem('nomadic_master_journal', JSON.stringify(visitedPlaces));
             location.reload();
         }
 
@@ -324,7 +342,10 @@
             const listEl = document.getElementById('journal-list');
             listEl.innerHTML = visitedPlaces.map(item => `
                 <div class="journal-item">
-                    <div class="journal-date">${item.date}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <div class="journal-date">${item.date}</div>
+                        <div class="vol-badge">${item.vol || 'VOL. 02'}</div>
+                    </div>
                     <div class="journal-place">${item.name}</div>
                     <div class="journal-mission">${item.mission}</div>
                 </div>
@@ -332,8 +353,8 @@
         }
 
         function clearFootprints() {
-            if (confirm("確定要永久重置 Vol. 02 的所有餐桌紀錄嗎？")) {
-                localStorage.removeItem('nomadic_vol02_data'); location.reload();
+            if (confirm("警告：這將會清除全域旅遊紀錄（包含 Vol 01 與 Vol 02），確定重置嗎？")) {
+                localStorage.removeItem('nomadic_master_journal'); location.reload();
             }
         }
     </script>

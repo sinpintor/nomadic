@@ -28,7 +28,6 @@
 
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 45vh; margin: 40px 0; }
 
-        /* 統一中文敘述區塊：加左邊框並置左對齊 */
         .content-block {
             width: 100%; max-width: 320px; margin: 0 auto;
             border-left: 1px solid var(--gold); padding-left: 20px;
@@ -43,10 +42,10 @@
         #map-core { display: none; opacity: 0; transform: translateY(15px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
         #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 25px; letter-spacing: 0.05em; }
         
-        .mission-box { display: flex; flex-direction: column; gap: 20px; }
-        .mission-item { display: flex; flex-direction: column; gap: 8px; }
-        .mission-task { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: var(--gold); line-height: 1.6; opacity: 0.9; font-weight: 500;}
-        .photo-challenge { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: var(--grey); letter-spacing: 0.1em; line-height: 1.6; }
+        .mission-box { display: flex; flex-direction: column; gap: 15px; }
+        .mission-label { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #eee; line-height: 1.6; font-weight: 300; margin-bottom: 15px;}
+        .challenge-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: var(--grey); line-height: 1.6; font-weight: 300; }
 
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; }
@@ -56,7 +55,7 @@
         .journal-item { margin-bottom: 35px; border-left: 1px solid var(--gold); padding-left: 20px; }
         .journal-date { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0; font-weight: 500; }
-        .journal-mission { font-size: 0.75rem; color: #aaa; font-weight: 300; line-height: 1.6; }
+        .journal-mission { font-size: 0.8rem; color: #aaa; font-weight: 300; line-height: 1.6; }
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
@@ -86,10 +85,7 @@
             <div id="map-core" class="content-block">
                 <div id="result">The Unknown</div>
                 <div class="mission-box" id="mission-box">
-                    <div class="mission-item">
-                        <div class="mission-task">Seek your destination.</div>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -136,107 +132,78 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // 100 組 VOGUE 任務與搞怪浪漫挑戰
-        const vogueMissions = [
-            { task: "拍下對方在車窗玻璃上的倒影，背景是移動的風景。", challenge: "拍一張兩人在公路旁影子正在接吻的照片。" },
-            { task: "尋找路邊一塊生鏽或斑駁的招牌，紀錄時間的顆粒感。", challenge: "利用車外後照鏡，拍下兩人在車內擠眉弄眼的合照。" },
-            { task: "在當地的便利商店，買一罐標誌最簡約的氣泡水。", challenge: "紀錄對方在副駕睡到流口水的側臉。" },
-            { task: "捕捉對方的指尖在方向盤或排檔桿上的隨性節奏。", challenge: "在路標前拍下一張腳尖對碰、只露出鞋子的照片。" },
-            { task: "尋找當地最有歷史感的公共建築，拍下它的幾何線條。", challenge: "找一棵奇怪的大樹，兩人在樹下擺出浮誇的 VOGUE 姿勢。" },
-            { task: "紀錄路邊一個有趣的店名，或是牆上隨性的塗鴉。", challenge: "捕捉對方餵你吃第一口當地小食時的表情。" },
-            { task: "在路邊攤點一份當地人才知道的小吃，拍下它最真實的樣子。", challenge: "拍一張充滿動態感的模糊合照：兩人在目的地原地跳起。" },
-            { task: "拍下車內後照鏡裡，那段正在被你們遺忘在後方的路。", challenge: "紀錄兩人對著目的地路牌，擺出最嫌棄的表情。" },
-            { task: "捕捉陽光穿過擋風玻璃，落在座椅或對方肩膀上的光斑。", challenge: "拍一張以對方眼睛為對焦點，眼底倒映出公路的照片。" },
-            { task: "尋找一條看起來沒有盡頭的小徑，紀錄那種消失感。", challenge: "找一面當地的老牆，兩人手牽手拍下充滿電影感的背影。" },
-            { task: "在便利商店買一個包裝最醜但看起來很好吃的零食。", challenge: "挑戰在目的地路牌下跳一段不超過 5 秒的奇怪舞蹈。" },
-            { task: "紀錄路邊一隻正在看你們的貓、狗或任何動物。", challenge: "拍一張兩人在路邊一人蹲著、一人站著的時尚雜誌感合照。" },
-            { task: "尋找當地市場裡最繽紛的一個蔬果攤位，捕捉色彩。", challenge: "紀錄對方幫你拿包包、提重物時那種『被強迫』的有趣神情。" },
-            { task: "捕捉對方正在喝飲料或喝咖啡時，視線放空的瞬間。", challenge: "找一個大面鏡子或落地窗，拍下兩人全身的 OOTD。" },
-            { task: "紀錄此刻儀表板上的里程數，這是一個幸運數字嗎？", challenge: "兩人在路標前背對背，拍下一張特務特務感的照片。" },
-            { task: "尋找路邊一個帶有數字的電線桿，拍下它的幾何美。", challenge: "捕捉對方在你手機鏡頭前故意遮擋、不想被拍的瞬間。" },
-            { task: "在當地雜貨店買一支最傳統的冰棒，拍下融化的樣子。", challenge: "拍一張兩人同時對著鏡頭做出『厭世臉』的黑白照。" },
-            { task: "捕捉擋風玻璃上乾枯的樹影或雨滴留下的痕跡。", challenge: "紀錄兩人在副駕共同分享一份食物的殘缺美感。" },
-            { task: "尋找這座城鎮最高的一棵樹，從底部往上拍出壯闊感。", challenge: "挑戰在路人經過時，依然面不改色地擺出搞怪姿勢合照。" },
-            { task: "捕捉對方的頭髮被公路上的風吹得亂七八糟的瞬間。", challenge: "拍下一張彼此的手在換檔桿旁交疊的特寫。" },
-            { task: "紀錄這條路上最奇怪的一個交通指示牌內容。", challenge: "挑戰一人在車內、一人在車外，隔著車窗玻璃擊掌合照。" },
-            { task: "在便利商店買一瓶奇怪顏色的運動飲料。", challenge: "紀錄對方看到美景時，嘴巴張得大大的震撼表情。" },
-            { task: "捕捉後座亂中有序的旅行行李堆疊出的生活感。", challenge: "兩人在路邊練習一次擊掌動作，並錄下聲音或照片。" },
-            { task: "紀錄目的地最老的一間店鋪門面，捕捉那種鏽色。", challenge: "拍一張兩人在後座（停妥時）窩在一起的慵懶感照片。" },
-            { task: "尋找路邊開得正盛的一朵無名野花，紀錄它的姿態。", challenge: "挑戰兩人在太陽直射下，拍一張完全不眨眼的特寫。" },
-            { task: "紀錄車窗外遠方山脈或海平線的漸層藍色。", challenge: "捕捉對方幫你整理頭髮或領口時的專注眼神。" },
-            { task: "捕捉陽光在水瓶裡折射出的彩虹光影。", challenge: "在路牌前兩人手比愛心，但故意比得很爛或對不齊。" },
-            { task: "紀錄路邊攤老闆動作流利的雙手特寫。", challenge: "拍一張兩人正在為了地圖導航吵架（模擬）的有趣照片。" },
-            { task: "尋找當地非常有特色的郵筒或公車站牌。", challenge: "挑戰兩人在公車站牌下，模仿等待者的寂寞感寫真。" },
-            { task: "紀錄此刻車內音響正在播放的歌單名稱。", challenge: "拍一張兩人對著鏡子刷牙、洗臉或整理儀容的日常合照。" },
-            { task: "捕捉路邊老舊長椅上斑駁的油漆紋路。", challenge: "紀錄對方正在翻找包包、找鑰匙或找錢的焦慮可愛感。" },
-            { task: "尋找路面上的幾何陰影，拍下一張帶有情緒的風景。", challenge: "捕捉兩人在目的地門口，一人向左走一人向右走的動感。" },
-            { task: "紀錄一張帶有公路反光條（貓眼）的長焦壓縮感照片。", challenge: "拍下一張對方在吃東西，嘴邊沾到醬料的滑稽照片。" },
-            { task: "捕捉公路兩旁大樹交織成的綠色隧道盡頭的光。", challenge: "紀錄兩人一起看著地圖，露出困惑表情的合照。" },
-            { task: "紀錄一張對方在目的地買到的第一樣戰利品特寫。", challenge: "挑戰在目的地跳起來，並在空中拍下彼此擊掌的瞬間。" },
-            { task: "尋找路邊一片帶有秋意或特殊顏色的葉子。", challenge: "捕捉對方正在幫你拍這部雜誌挑戰時的認真背影。" },
-            { task: "紀錄這座城鎮最有代表性的農產品招牌看板。", challenge: "拍一張兩人在車窗玻璃兩側，手心相對的照片。" },
-            { task: "捕捉公路旁電線桿上成排休息的小鳥群。", challenge: "紀錄對方正在為了點餐而陷入選擇困難的可愛表情。" },
-            { task: "尋找路邊一個生鏽的消防栓，拍下它寂寞的樣子。", challenge: "挑戰兩人在目的地大門前，做出最不時尚的旅遊照姿勢。" },
-            { task: "紀錄一張帶有強烈對比色调的在地牆面。", challenge: "捕捉兩人分享同一根吸管喝飲料的親密瞬間。" },
-            { task: "捕捉陽光落在對方手錶或首飾上的高光亮點。", challenge: "兩人在公路盡頭，拍下一張只有兩對長影子的照片。" },
-            { task: "紀錄這條公路上，你們遇到的第一台特殊型號重機或車輛。", challenge: "捕捉對方在大笑時，眼睛瞇成一條線的最真實樣子。" },
-            { task: "尋找路邊一個看起來很有故事的破舊穀倉或倉庫。", challenge: "挑戰兩人在目的地拍一張表情完全同步的『呆滯美學』照片。" },
-            { task: "紀錄此刻路邊吹過的風在野草上留下的波動感。", challenge: "捕捉兩人在車內後視鏡裡，一人看鏡頭一人看前方的層次感。" },
-            { task: "尋找當地老廟的屋頂線條，拍下它跟藍天的交界。", challenge: "拍一張兩人在目的地，手裡各拿著一塊在地點心的合照。" },
-            { task: "紀錄一張帶有『駛向遠方』構圖的直線道路照片。", challenge: "捕捉對方正在幫你繫安全帶或調整椅背的細微動作。" },
-            { task: "捕捉路邊攤冒出的熱氣，在陽光下閃閃發光的質地。", challenge: "兩人在路標前拍下一張互相指著對方鼻子的可愛照片。" },
-            { task: "紀錄這座城鎮裡，你們看到的第一張在地廣告傳單。", challenge: "挑戰在空曠處，拍一張兩人手牽手奔跑的動態背影。" },
-            { task: "尋找公路旁一處開闊的農田，捕捉那種整齊的線條美。", challenge: "紀錄對方正在玩手機、或是看著窗外放空的安靜側面。" },
-            { task: "捕捉對方指尖夾著收據或車票的隨性瞬間。", challenge: "拍一張兩人在後座，故意露出驚恐表情的惡搞合照。" },
-            { task: "紀錄一張帶有強烈電影藍調色感的傍晚公路。", challenge: "捕捉兩人在目的地前，一人背對鏡頭一人面對鏡頭的對比。" },
-            { task: "尋找路邊一個被遺忘的舊式販賣機或電話亭。", challenge: "挑戰兩人在電話亭或販賣機旁，拍一組時尚大片感照片。" },
-            { task: "紀錄一張對方的太陽眼鏡上，倒映出此刻風景的照片。", challenge: "捕捉兩人在喝完飲料後，展示空杯的有趣完食照。" },
-            { task: "捕捉路邊一片開滿白花的小路，紀錄那種清新感。", challenge: "兩人在路邊手比大拇指，拍下一張充滿活力的合照。" },
-            { task: "紀錄這座城鎮裡，看起來開最久的那間診所或藥局看板。", challenge: "捕捉對方正在幫你錄影、而你正在對鏡頭耍帥的畫面。" },
-            { task: "尋找公路旁一處廢棄的舊路標，紀錄被自然佔領的模樣。", challenge: "拍一張兩人在公路護欄旁，互相靠著肩膀的溫暖合照。" },
-            { task: "紀錄一張從低角度拍攝的、帶有顆粒感的路面質感。", challenge: "捕捉兩人在吃當地小食時，一人張嘴餵另一人的搞怪瞬間。" },
-            { task: "捕捉對方在公路旅行中，最放鬆的那一個坐姿。", challenge: "挑戰在空無一人的公路上，拍一張兩人並肩坐著的背影。" },
-            { task: "紀錄路邊一個有趣的、讓你聯想到對方的視覺符號。", challenge: "拍一張兩人在目的地前，手裡各拿一張衛生紙擦汗的寫實感。" },
-            { task: "尋找當地非常有特色的鐵窗花或老磁磚圖案。", challenge: "捕捉對方在目的地門口，模仿當地地標姿勢的有趣樣子。" },
-            { task: "紀錄此刻車窗玻璃上反射出的、這座城鎮的天際線。", challenge: "捕捉兩人在車內後照鏡裡，同時戴著太陽眼鏡的酷帥模樣。" },
-            { task: "捕捉陽光穿過樹葉，在公路上留下的跳動陰影。", challenge: "兩人在路邊一人抱著一瓶大瓶礦泉水，拍下一張豪邁感照片。" },
-            { task: "紀錄這座城鎮裡，看起來最有生命力的綠色植被。", challenge: "拍一張兩人對著鏡頭做出『噓』手勢的黑白私語照。" },
-            { task: "尋找路邊一個色彩極其鮮豔、與周圍格格不入的物件。", challenge: "捕捉對方正在翻閱旅遊清單、認真計畫下一站的樣子。" },
-            { task: "紀錄一張帶有強烈『對稱感』的公路建築照片。", challenge: "拍一張兩人在目的地路標下，做出『超人起飛』姿勢的合照。" },
-            { task: "捕捉此刻車內空間裡，光與影最和諧的一個角落。", challenge: "捕捉兩人分享同一支手機看地圖、頭靠在一起的瞬間。" },
-            { task: "紀錄路邊一處老式鐵皮屋屋頂的鏽蝕色澤。", challenge: "挑戰兩人在目的地前，背對鏡頭用力揮手的熱血背影。" },
-            { task: "尋找公路旁一個安靜的公車亭，紀錄那種空靈感。", challenge: "拍一張兩人在車窗內外，手隔著玻璃對比大小的照片。" },
-            { task: "紀錄一張對方指尖輕觸車內按鍵或旋鈕的微距感。", challenge: "捕捉對方正在為你遮擋陽光、或是幫你拿遮陽傘的溫柔。" },
-            { task: "捕捉公路盡頭即將消失的一抹晚霞或是晨霧。", challenge: "挑戰兩人在目的地門口拍一張全素顏、最真實的生活合照。" },
-            { task: "紀錄這條公路上最特別的一個地標或是橋樑設計。", challenge: "拍一張兩人在車內吃零食，嘴巴塞得滿滿的有趣照片。" },
-            { task: "捕捉路邊攤販剛起鍋的熱氣，帶走那種飽足感。", challenge: "挑戰兩人在目的地，做出時尚雜誌封面的那種冷酷對望。" },
-            { task: "紀錄一張對方的側臉，背景是這座城鎮的老舊街道。", challenge: "捕捉兩人在目的地前，手牽手轉圈圈的模糊浪漫感。" },
-            { task: "尋找路邊一個看起來非常有特色的招牌字體。", challenge: "拍一張兩人同時做出『思考者』姿勢的合照。" },
-            { task: "紀錄此刻車內音響正在播放的那首歌的當下心情。", challenge: "捕捉對方在你手機鏡頭前故意扮鬼臉、想逗你笑的瞬間。" },
-            { task: "捕捉公路兩旁大面積色彩（如黃花、紅葉、綠田）的延伸。", challenge: "兩人在路邊各拿一個有趣的戰利品，拍一張充滿成就感的照片。" },
-            { task: "紀錄一張帶有強烈『工業感』的路邊機械或管線照片。", challenge: "捕捉兩人在車內休息，一人靠著另一人肩膀小睡的安靜。" },
-            { task: "尋找路邊一處有強烈光影對比的轉角空間。", challenge: "挑戰兩人在目的地前，拍一張表情最浮誇、最驚喜的合照。" },
-            { task: "紀錄一張帶有『正在移動中』速度感的路景模糊照片。", challenge: "捕捉對方正在調整攝影器材、想要把你拍美的背影。" },
-            { task: "捕捉此刻天空中最像某種形狀的一朵雲。", challenge: "兩人在目的地門口背對背站立，拍一張特務電影風格的照片。" },
-            { task: "紀錄路邊攤點的一碗麵或一份點心，帶走這份熱氣騰騰。", challenge: "拍一張兩人正在搶食最後一口當地名產的有趣照片。" },
-            { task: "尋找路邊一處有層次感的農田，捕捉色彩變化。", challenge: "捕捉兩人在車窗倒影裡，手牽手緊握在一起的瞬間。" },
-            { task: "紀錄一張對方的雙手握著方向盤、露出手錶質感的照片。", challenge: "挑戰兩人在路標下做出一套最經典的『情侶老派拍照姿勢』。" },
-            { task: "捕捉公路盡頭、或是轉彎處出現的那抹光亮。", challenge: "拍一張兩人在目的地前，同時看著遠方的背影，充滿期待感。" },
-            { task: "紀錄此刻路邊一棵大樹在風中搖曳出的沙沙聲質感。", challenge: "捕捉對方幫你整理領口或是擦汗時，極其溫柔的細微神情。" },
-            { task: "尋找公路旁一處開闊的風景，拍一張全景壓縮感的照片。", challenge: "挑戰在目的地門口，兩人同時做出最滑稽、最高級的厭世臉。" },
-            { task: "紀錄一張帶有強烈『顆粒感』的公路夜景長曝感照。", challenge: "捕捉兩人在車內共同分享一個耳機聽音樂的親密畫面。" },
-            { task: "捕捉此刻車窗內，光線與灰塵共舞的一抹動態。", challenge: "拍一張兩人在路標前，手比 01（代表 Vol. 01）的合照。" },
-            { task: "紀錄一張對方的背影，正在遠離鏡頭走入那片風景。", challenge: "捕捉對方在成功抵達目的地後，伸大懶腰最放鬆的樣子。" },
-            { task: "尋找路邊一個標誌特別清晰、很有幾何美感的站牌。", challenge: "挑戰兩人在目的地門口，拍一張表情最『驚訝』的特寫合照。" },
-            { task: "紀錄此刻車內溫度計顯示的數字與窗外的季節感。", challenge: "捕捉兩人在目的地門口一人站著一人坐著，充滿對比感的構圖。" },
-            { task: "捕捉對方的視線聚焦在前方公路上的專注神情。", challenge: "拍一張兩人同時對著手機鏡頭做鬼臉的、帶有噪點的黑白照。" },
-            { task: "紀錄一張帶有『強烈對焦在路邊微小事物』的高級感照片。", challenge: "兩人在路標前背對背，拍一張酷到不行的公路雜誌內頁感。" },
-            { task: "尋找這條路上你覺得最美的一個彎道弧度，捕捉它。", challenge: "捕捉對方在目的地買到喜歡東西時，那種藏不住的小雀躍。" },
-            { task: "紀錄此刻這座城鎮空氣中散發出的那種獨特氣味（如泥土、海水）。", challenge: "拍一張兩人在公路旁影子正在跳舞的照片。" },
-            { task: "捕捉一張對方的剪影，背景是目的地最耀眼的那道光。", challenge: "兩人在目的地前一人負責拿雜誌 UI，一人負責拍的同步照。" },
-            { task: "紀錄一張對方的雙腳伸在儀表板（停妥時）的慵懶感照片。", challenge: "捕捉兩人在目的地完食後，拍一張雙手比讚、一臉滿足的合照。" },
-            { task: "尋找路邊一塊帶有強烈手寫感的在地看板或公告。", challenge: "挑戰兩人在目的地路口，大聲對對方說一句感謝的話並錄影。" },
-            { task: "捕捉此刻這場流浪裡，你覺得最『羅曼蒂克』的一個靜止瞬間。", challenge: "兩人在終點相視而笑，拍下一張最自然、不被構圖框架的合照。" }
+        // ==========================================
+        // 題庫區 1：TASKS (浪漫的觀察 / 紀錄細節)
+        // 隨時可以在陣列最後加上逗號，繼續補充你的 500 個 Task！
+        // ==========================================
+        const tasks = [
+            "拍下對方在車窗玻璃上的倒影，背景是移動的風景。",
+            "尋找路邊一塊生鏽或斑駁的招牌，紀錄時間的顆粒感。",
+            "在當地的便利商店，買一罐標誌最簡約的氣泡水。",
+            "捕捉對方的指尖在方向盤或排檔桿上的隨性節奏。",
+            "尋找當地最有歷史感的公共建築，拍下它的幾何線條。",
+            "紀錄路邊一個有趣的店名，或是牆上隨性的塗鴉。",
+            "在路邊攤點一份當地人才知道的小吃，拍下它最真實的樣子。",
+            "拍下車內後照鏡裡，那段正在被你們遺忘在後方的路。",
+            "捕捉陽光穿過擋風玻璃，落在座椅或對方肩膀上的光斑。",
+            "尋找一條看起來沒有盡頭的小徑，紀錄那種消失感。",
+            "在便利商店買一個包裝最醜但看起來很好吃的零食。",
+            "紀錄路邊一隻正在看你們的貓、狗或任何動物。",
+            "尋找當地市場裡最繽紛的一個蔬果攤位，捕捉色彩。",
+            "捕捉對方正在喝飲料或喝咖啡時，視線放空的瞬間。",
+            "紀錄此刻儀表板上的里程數，這是一個幸運數字嗎？",
+            "尋找路邊一個帶有數字的電線桿，拍下它的幾何美。",
+            "在當地雜貨店買一支最傳統的冰棒，拍下融化的樣子。",
+            "捕捉擋風玻璃上乾枯的樹影或雨滴留下的痕跡。",
+            "尋找這座城鎮最高的一棵樹，從底部往上拍出壯闊感。",
+            "捕捉對方的頭髮被公路上的風吹得亂七八糟的瞬間。",
+            "紀錄這條路上最奇怪的一個交通指示牌內容。",
+            "在便利商店買一瓶奇怪顏色的運動飲料。",
+            "捕捉後座亂中有序的旅行行李堆疊出的生活感。",
+            "紀錄目的地最老的一間店鋪門面，捕捉那種鏽色。",
+            "尋找路邊開得正盛的一朵無名野花，紀錄它的姿態。",
+            "紀錄車窗外遠方山脈或海平線的漸層藍色。",
+            "捕捉陽光在水瓶裡折射出的彩虹光影。",
+            "紀錄路邊攤老闆動作流利的雙手特寫。",
+            "尋找當地非常有特色的郵筒或公車站牌。",
+            "紀錄此刻車內音響正在播放的歌單名稱。"
+        ];
+
+        // ==========================================
+        // 題庫區 2：CHALLENGES (搞怪的互動 / 雙人大冒險)
+        // 隨時可以在陣列最後加上逗號，繼續補充你的 500 個 Challenge！
+        // ==========================================
+        const challenges = [
+            "拍一張兩人在公路旁影子正在接吻的照片。",
+            "利用車外後照鏡，拍下兩人在車內擠眉弄眼的合照。",
+            "紀錄對方在副駕睡到流口水的側臉。",
+            "在路標前拍下一張腳尖對碰、只露出鞋子的照片。",
+            "找一棵奇怪的大樹，兩人在樹下擺出浮誇的 VOGUE 姿勢。",
+            "捕捉對方餵你吃第一口當地小食時的表情。",
+            "拍一張充滿動態感的模糊合照：兩人在目的地原地跳起。",
+            "紀錄兩人對著目的地路牌，擺出最嫌棄的表情。",
+            "拍一張以對方眼睛為對焦點，眼底倒映出公路的照片。",
+            "找一面當地的老牆，兩人手牽手拍下充滿電影感的背影。",
+            "挑戰在目的地路牌下跳一段不超過 5 秒的奇怪舞蹈。",
+            "拍一張兩人在路邊一人蹲著、一人站著的時尚雜誌感合照。",
+            "紀錄對方幫你拿包包、提重物時那種『被強迫』的有趣神情。",
+            "找一個大面鏡子或落地窗，拍下兩人全身的 OOTD。",
+            "兩人在路標前背對背，拍下一張特務特務感的照片。",
+            "捕捉對方在你手機鏡頭前故意遮擋、不想被拍的瞬間。",
+            "拍一張兩人同時對著鏡頭做出『厭世臉』的黑白照。",
+            "紀錄兩人在副駕共同分享一份食物的殘缺美感。",
+            "挑戰在路人經過時，依然面不改色地擺出搞怪姿勢合照。",
+            "拍下一張彼此的手在換檔桿旁交疊的特寫。",
+            "挑戰一人在車內、一人在車外，隔著車窗玻璃擊掌合照。",
+            "紀錄對方看到美景時，嘴巴張得大大的震撼表情。",
+            "兩人在路邊練習一次擊掌動作，並錄下聲音或照片。",
+            "拍一張兩人在後座（停妥時）窩在一起的慵懶感照片。",
+            "挑戰兩人在太陽直射下，拍一張完全不眨眼的特寫。",
+            "捕捉對方幫你整理頭髮或領口時的專注眼神。",
+            "在路牌前兩人手比愛心，但故意比得很爛或對不齊。",
+            "拍一張兩人正在為了地圖導航吵架（模擬）的有趣照片。",
+            "挑戰兩人在公車站牌下，模仿等待者的寂寞感寫真。",
+            "拍一張兩人對著鏡子刷牙、洗臉或整理儀容的日常合照。"
         ];
 
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_full_data')) || [];
@@ -277,27 +244,29 @@
                 // 1. 抽取地點
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
                 
-                // 2. 隨機抽取 3 個不重複的任務
-                let shuffled = [...vogueMissions].sort(() => 0.5 - Math.random()).slice(0, 3);
+                // 2. 分別獨立抽取 1 個 Task 與 1 個 Challenge
+                const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+                const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
                 
-                let missionHTML = '';
-                let logText = '';
+                // 組合 HTML 畫面
+                missionBox.innerHTML = `
+                    <div>
+                        <div class="mission-label">TASK</div>
+                        <div class="mission-text">${randomTask}</div>
+                    </div>
+                    <div>
+                        <div class="mission-label">CHALLENGE</div>
+                        <div class="challenge-text">${randomChallenge}</div>
+                    </div>
+                `;
                 
-                shuffled.forEach((m, idx) => {
-                    missionHTML += `
-                    <div class="mission-item">
-                        <div class="mission-task">Task 0${idx + 1}. ${m.task}</div>
-                        <div class="photo-challenge">Challenge: ${m.challenge}</div>
-                    </div>`;
-                    
-                    logText += `<div style="margin-bottom: 6px;"><strong>T0${idx + 1}.</strong> ${m.task}<br><span style="color: #666;">C0${idx + 1}. ${m.challenge}</span></div>`;
-                });
+                // 儲存紀錄用的文字
+                currentLogEntry = `
+                    <div style="margin-bottom: 4px;"><strong>[TASK]</strong> ${randomTask}</div>
+                    <div><strong style="color: #888;">[CHALLENGE]</strong> ${randomChallenge}</div>
+                `;
                 
-                // 更新畫面與資料紀錄
-                currentLogEntry = logText;
                 resultEl.innerText = currentResult;
-                missionBox.innerHTML = missionHTML;
-                
                 resultEl.style.opacity = 1;
                 missionBox.style.opacity = 1;
                 checkInSection.style.display = "block";

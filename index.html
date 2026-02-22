@@ -3,52 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>NOMADIC 368 — LENORMAND COMBINATIONS</title>
+    <title>NOMADIC 368 — THE GRAND COMBINATION</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,800&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
         :root { --black: #0a0a0a; --white: #ffffff; --grey: #888888; --active-color: #d4b483; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; scroll-behavior: smooth; }
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
-        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 20vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; text-transform: uppercase; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); white-space: nowrap; }
+        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 20vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; text-transform: uppercase; transition: 1.5s ease; white-space: nowrap; }
 
         .container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; box-sizing: border-box; text-align: center; }
-        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.6rem; font-weight: 800; margin: 0; color: var(--active-color); }
+        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.6rem; font-weight: 800; margin: 0; color: var(--active-color); letter-spacing: 0.1em; }
         .stats { margin-top: 15px; font-size: 0.5rem; letter-spacing: 0.4em; color: var(--grey); margin-bottom: 20px; }
         
         .display-stage { width: 100%; max-width: 500px; height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 600; color: var(--white); margin-bottom: 10px; white-space: nowrap; }
-        .target-display { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 0.5em; color: var(--active-color); text-transform: uppercase; font-weight: 600; }
+        .loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.1rem; font-weight: 600; color: var(--white); margin-bottom: 15px; white-space: nowrap; overflow: hidden; }
+        .target-display { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.6em; color: var(--active-color); text-transform: uppercase; font-weight: 600; }
 
-        .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 18px 45px; font-size: 0.6rem; letter-spacing: 0.6em; text-transform: uppercase; cursor: pointer; transition: 0.5s; margin-top: 30px; }
+        .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 18px 45px; font-size: 0.65rem; letter-spacing: 0.6em; text-transform: uppercase; cursor: pointer; transition: 0.5s; margin-top: 30px; }
         .btn-vogue:hover { background: var(--white); color: var(--black); }
 
         .mission-panel { display: none; width: 100%; max-width: 420px; text-align: left; margin-top: 40px; animation: fadeIn 1s ease forwards; }
         .mission-panel.active { display: block; }
         .mission-label { font-size: 0.5rem; letter-spacing: 0.5em; color: var(--grey); display: block; margin-bottom: 12px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; text-transform: uppercase; }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: #eee; margin-bottom: 30px; }
-        .tag-box { display: inline-block; padding: 4px 12px; border: 1px solid var(--active-color); color: var(--active-color); font-size: 0.65rem; margin-right: 8px; margin-bottom: 15px; }
+        .tag-box { display: inline-block; padding: 4px 12px; border: 1px solid var(--active-color); color: var(--active-color); font-size: 0.6rem; margin-right: 8px; margin-bottom: 15px; font-weight: 600; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.15rem; line-height: 1.8; color: #eee; margin-bottom: 30px; }
         
-        .btn-save { background: var(--active-color); color: var(--black); border: none; padding: 16px; width: 100%; font-weight: 600; letter-spacing: 0.4em; cursor: pointer; text-transform: uppercase; font-size: 0.65rem; }
+        .btn-save { background: var(--active-color); color: var(--black); border: none; padding: 16px; width: 100%; font-weight: 600; letter-spacing: 0.4em; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
 
         .archive-section { width: 100%; max-width: 420px; margin-top: 100px; text-align: left; border-top: 1px solid #1a1a1a; padding-top: 40px; }
         .journal-item { padding: 35px 0; border-bottom: 1px solid #111; }
-        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; font-weight: 500; margin-bottom: 8px; color: var(--white); }
-        .j-mission { font-family: 'Noto Serif TC', serif; font-size: 0.8rem; color: #888; line-height: 1.6; border-left: 1px solid #222; padding-left: 15px; }
+        .j-meta { font-size: 0.45rem; letter-spacing: 0.2em; color: var(--grey); text-transform: uppercase; margin-bottom: 10px; }
+        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 8px; color: var(--white); }
+        .j-mission { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #888; line-height: 1.7; border-left: 1px solid #222; padding-left: 15px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div class="noise"></div>
-    <div class="bg-text" id="bg-text">COMBINATION</div>
+    <div class="bg-text" id="bg-text">COMBINE</div>
 
     <div class="container">
         <h1 class="vogue-title">NOMADIC</h1>
-        <div class="stats"><span id="regions-count">0</span> / 368 聯覺封存</div>
+        <div class="stats"><span id="regions-count">0</span> / 368 HUNTS RECORDED</div>
         
         <div class="display-stage">
             <div class="loc-display" id="loc-result">尚未入鏡</div>
-            <div class="target-display" id="target-result">READY FOR REVELATION</div>
+            <div class="target-display" id="target-result">WAITING FOR COMBO</div>
         </div>
 
         <button class="btn-vogue" onclick="drawFate()">啟動聯覺抽籤</button>
@@ -69,38 +70,52 @@
     <script>
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
 
-        const lenormandCards = [
-            { id: 1, name: "騎士", action: "前往該區舊郵局或車站", food: "買一份外帶點心在車上吃", style: "休閒但不失優雅的層次穿搭" },
-            { id: 2, name: "幸運草", action: "尋找地圖上的綠地或公園", food: "尋找隱藏在巷弄的小甜點", style: "帶有碎花或清新綠色的點綴" },
-            { id: 3, name: "船", action: "尋找該區離水最近的碼頭", food: "品嚐當地的海鮮或流動攤販", style: "具防風功能的航海風外套" },
-            { id: 4, name: "房子", action: "探訪當地的古厝或老建築", food: "找一間老宅改建的私廚", style: "暖色調的針織或棉麻材質" },
-            { id: 5, name: "樹", action: "尋找該區最古老的一棵樹", food: "品嚐天然發酵的在地飲品", style: "大地色系的森林系裝束" },
-            { id: 6, name: "雲", action: "登上該區視野最高的雲海點", food: "喝一杯奶蓋咖啡或棉花糖點心", style: "柔軟灰調的羊毛披肩" },
-            { id: 7, name: "蛇", action: "尋找該區最彎曲的山路小徑", food: "嘗試一種味道複雜、辛辣的料理", style: "具蛇紋元素或暗黑系的設計感" },
-            { id: 8, name: "棺材", action: "探訪該區寂靜的遺址或舊址", food: "品嚐極致純黑的巧克力或黑咖啡", style: "極簡純黑的時裝剪裁" },
-            { id: 9, name: "花束", action: "前往當地的花店或精選店鋪", food: "品嚐視覺如藝術品般的甜點", style: "正式、充滿慶典感的亮眼禮服" },
-            { id: 10, name: "鐮刀", action: "尋找具金屬感、銳利線條的地標", food: "吃一頓需要親自動手切的排餐", style: "俐落剪裁的西裝外套" },
-            { id: 14, name: "狐狸", action: "走進該區最有設計感的買物店", food: "尋找口味獨特、具層次感的餐廳", style: "正式且具層次感的職場型格" },
-            { id: 19, name: "高塔", action: "尋找這區最高的建築物或瞭望台", food: "在該區評分最高、門檻最嚴的餐廳用餐", style: "挺拔、具權威感的長版風衣" },
-            { id: 33, name: "鑰匙", action: "尋找該區隱藏的小門或出口", food: "品嚐該店的『隱藏菜單』", style: "精緻配飾掛在腰間的巧思" },
-            { id: 34, name: "魚", action: "前往當地的市場或商業街購物", food: "品嚐這區最昂貴或產量稀少的食材", style: "絲綢感、流動性的奢華面料" }
-            // 為簡化代碼，此處僅列出核心樣版，邏輯已支援 36x35 隨機生成
-        ];
+        // 完整 36 張雷諾曼主體屬性
+        const subjects = {
+            1: { n: "騎士", loc: "交通樞紐或活動現場", outfit: "具動感的層次穿搭", color: "#4a90e2" },
+            2: { n: "幸運草", loc: "隱密綠地或草坡", outfit: "帶有自然元素的休閒裝", color: "#6fcf97" },
+            3: { n: "船", loc: "港口、大橋或遠眺點", outfit: "防風機能的高級外套", color: "#2d9cdb" },
+            4: { n: "房子", loc: "古厝、老街或私人空間", outfit: "大地色系的暖心針織", color: "#8b5a2b" },
+            5: { n: "樹", loc: "百年老樹或森林步道", outfit: "有機棉麻質感的服飾", color: "#2d5a4c" },
+            6: { n: "雲", loc: "高海拔稜線或多霧山區", outfit: "柔軟且具包裹感的羊毛", color: "#828282" },
+            7: { n: "蛇", loc: "蜿蜒小路或神祕巷弄", outfit: "修身且具設計感的剪裁", color: "#273321" },
+            8: { n: "棺材", loc: "寂靜廢墟或歷史遺址", outfit: "極簡純黑的冷淡風格", color: "#1a1a1a" },
+            9: { n: "花束", loc: "花店、藝廊或精品小舖", outfit: "正式且充滿活力的禮服", color: "#bb6bd9" },
+            10: { n: "鐮刀", loc: "金屬感強的地標或工廠", outfit: "線條俐落的硬挺西裝", color: "#eb5757" },
+            11: { n: "鞭子", loc: "具節奏感的場所(如運動場)", outfit: "緊身、具運動張力的風格", color: "#b83b3b" },
+            12: { n: "鳥", loc: "吵雜市場或交談頻繁處", outfit: "輕盈、隨風擺動的飄逸感", color: "#f2994a" },
+            13: { n: "小孩", loc: "特色公園或創意滑梯", outfit: "童趣大膽的亮色系搭配", color: "#56ccf2" },
+            14: { n: "狐狸", loc: "具備高度設計感的空間", outfit: "正式且具層次感的職人裝", color: "#e67e22" },
+            15: { n: "熊", loc: "厚重感的巨石或古老銀行", outfit: "具權威感的皮質外套", color: "#4f2f16" },
+            16: { n: "星辰", loc: "夜景點或燈火輝煌處", outfit: "帶有珠光或細閃的服飾", color: "#85c1e9" },
+            17: { n: "鸛鳥", loc: "正在改變或施工的地景", outfit: "便於移動的高級休閒服", color: "#f7f9f9" },
+            18: { n: "狗", loc: "溫暖守候的老舖或雜貨店", outfit: "舒適且具親和力的裝扮", color: "#d4b483" },
+            19: { n: "高塔", loc: "該區最高點或權力建築", outfit: "挺拔優雅的長版大衣", color: "#333333" },
+            20: { n: "公園", loc: "中心廣場或大眾公園", outfit: "如雜誌外拍般的街頭盛裝", color: "#a2d149" },
+            21: { n: "山", loc: "陡峭山頭或具阻礙感的地形", outfit: "硬派的高級登山風格", color: "#4f4f4f" },
+            22: { n: "路徑", loc: "十字路口或分岔點", outfit: "具對稱美感的幾何穿搭", color: "#828282" },
+            23: { n: "老鼠", loc: "充滿生活細節的老舊市場", outfit: "充滿細碎配飾的層次風", color: "#3c3c3c" },
+            24: { n: "心", loc: "浪漫的景觀餐廳或愛心點", outfit: "精緻浪漫的約會服飾", color: "#eb5757" },
+            25: { n: "戒指", loc: "具循環感或圓形的地標", outfit: "極簡且點綴精緻首飾", color: "#f2c94c" },
+            26: { n: "書本", loc: "圖書館、書店或學校", outfit: "文藝且具書卷氣的風格", color: "#6fcf97" },
+            27: { n: "信件", loc: "郵筒、書寫空間或小巷", outfit: "輕便、口袋多的機能美學", color: "#e0e0e0" },
+            28: { n: "男人", loc: "具陽剛結構感的工業地標", outfit: "硬挺、具廓形感的西裝", color: "#2f80ed" },
+            29: { n: "女人", loc: "具柔美光影的自然景觀", outfit: "絲滑、具流動感的服裝", color: "#f2994a" },
+            30: { n: "百合", loc: "靜謐寺廟或白色系建築", outfit: "純淨高雅的白色系時裝", color: "#ffffff" },
+            31: { n: "太陽", loc: "陽光直射的開闊廣場", outfit: "鮮艷、極具視覺衝擊的色系", color: "#f2994a" },
+            32: { n: "月亮", loc: "感性且具光影變化的角落", outfit: "神祕優雅的暗紫或深藍", color: "#4f46e5" },
+            33: { n: "鑰匙", loc: "神祕入口或具解答感之處", outfit: "強調配飾細節的高級裝束", color: "#f2c94c" },
+            34: { n: "魚", loc: "魚市、水邊或奢侈商店", outfit: "流動感強的奢華面料", color: "#273321" },
+            35: { n: "錨", loc: "港邊重型機具或安全牆", outfit: "穩重、具厚度的質感穿搭", color: "#4f4f4f" },
+            36: { n: "十字架", loc: "具宿命感的歷史紀念地", outfit: "莊重、具神聖感的正式服", color: "#333333" }
+        };
 
-        // 隨機生成 36 張雷諾曼牌組（模擬完整 36 張）
-        function getCard(id) {
-            const names = ["騎士","幸運草","船","房子","樹","雲","蛇","棺材","花束","鐮刀","鞭子","鳥","小孩","狐狸","熊","星辰","鸛鳥","狗","高塔","公園","山","路徑","老鼠","心","戒指","書本","信件","男人","女人","百合","太陽","月亮","鑰匙","魚","錨","十字架"];
-            const styles = ["優雅","休閒","正式","極簡","奢華","神秘"];
-            return {
-                id: id,
-                name: names[id-1],
-                action: "執行該牌意的地景任務",
-                food: "品嚐對應牌意的靈感料理",
-                style: styles[id % styles.length] + "風格"
-            };
-        }
+        // 特質定義 (對應 36 張牌的形容詞化)
+        const traits = {
+            1: "快速傳遞的", 2: "意外驚喜的", 3: "渴望遠方的", 4: "安穩且溫暖的", 5: "緩慢生長的", 6: "模糊且神祕的", 7: "曲折誘人的", 8: "終結與封存的", 9: "美麗盛放的", 10: "決絕乾淨的", 11: "律動重複的", 12: "交談喧鬧的", 13: "純真原始的", 14: "狡黠專業的", 15: "強大守護的", 16: "閃耀指引的", 17: "遷徙變動的", 18: "忠誠陪伴的", 19: "孤傲高度的", 20: "大眾社交的", 21: "阻礙挑戰的", 22: "多重選擇的", 23: "細碎損耗的", 24: "滿溢熱情的", 25: "永恆循環的", 26: "隱密未知的", 27: "紀錄私密的", 28: "理性格點的", 29: "柔美直覺的", 30: "高雅純潔的", 31: "狂熱光明的", 32: "朦朧情感的", 33: "啟發解答的", 34: "豐饒流動的", 35: "穩定不變的", 36: "沈重宿命的"
+        };
 
-        let masterJournal = JSON.parse(localStorage.getItem('nomadic_lenormand_combo')) || [];
+        let masterJournal = JSON.parse(localStorage.getItem('nomadic_combo_v9')) || [];
         let currentRecord = null;
 
         window.onload = updateUI;
@@ -111,7 +126,7 @@
             listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; font-size:0.5rem; text-align:center; padding:40px 0;">命運尚未顯化</div>' :
                 [...masterJournal].reverse().map(log => `
                     <div class="journal-item">
-                        <div class="j-meta">${log.date} / ${log.cards}</div>
+                        <div class="j-meta">${log.date} / ${log.combo}</div>
                         <div class="j-name">${log.name}</div>
                         <div class="j-mission">${log.mission}</div>
                     </div>
@@ -123,28 +138,37 @@
             const targetEl = document.getElementById('target-result');
             const panel = document.getElementById('mission-panel');
             
+            panel.classList.remove('active');
             let i = 0;
             const timer = setInterval(() => {
                 locEl.innerText = taiwanData[Math.floor(Math.random() * taiwanData.length)];
-                targetEl.innerText = "正在感應牌陣組合...";
+                targetEl.innerText = "感應靈覺矩陣中...";
                 i++;
-                if (i > 25) {
+                if (i > 30) {
                     clearInterval(timer);
                     const finalLoc = taiwanData[Math.floor(Math.random() * taiwanData.length)];
-                    const c1 = getCard(Math.floor(Math.random() * 36) + 1);
-                    const c2 = getCard(Math.floor(Math.random() * 36) + 1);
-                    while(c2.id === c1.id) c2 = getCard(Math.floor(Math.random() * 36) + 1);
+                    const id1 = Math.floor(Math.random() * 36) + 1;
+                    let id2 = Math.floor(Math.random() * 36) + 1;
+                    while(id1 === id2) id2 = Math.floor(Math.random() * 36) + 1;
+
+                    const s = subjects[id1];
+                    const t = traits[id2];
 
                     locEl.innerText = finalLoc;
-                    targetEl.innerText = `${c1.name} + ${c2.name}`;
+                    targetEl.innerText = `${s.n} ＋ ${subjects[id2].n}`;
                     
-                    document.getElementById('tag-container').innerHTML = `<span class="tag-box">${c1.name}</span><span class="tag-box">${c2.name}</span>`;
+                    document.getElementById('tag-container').innerHTML = `<span class="tag-box">${s.n}</span><span class="tag-box">${subjects[id2].n}</span>`;
                     
-                    const mission = `今日啟示：將『${c1.name}』的能量與『${c2.name}』的行動結合。建議前往這區的${c1.id % 2 === 0 ? '隱密老建築' : '制高點瞭望台'}，尋找一樣具有${c2.name}特徵的物件。美食靈感：品嚐口感${c1.id > 18 ? '豐富層次' : '清爽自然'}的在地小吃。穿搭指引：換上一套${c1.style}的正式服裝，捕捉這場聯覺冒險。`;
+                    // 核心生成邏輯：1260 種組合的語法組合
+                    const mission = `啟示：在這場冒險中，『${s.n}』代表地點，『${subjects[id2].n}』代表你的目標。前往這區的${s.loc}，尋找一個具備『${t}』特徵的獵捕對象。美食導引：品嚐這區最能體現${id1 > 18 ? '豐富層次感' : '食材原味'}的在地老店。穿搭挑戰：請換上妳最優質的『${s.outfit}』，在${s.loc}完成一張具備 VOGUE 質感的定格紀錄。`;
                     
                     document.getElementById('mission-content').innerText = mission;
+                    document.body.style.setProperty('--active-color', s.color);
+                    document.getElementById('bg-text').innerText = s.n;
+                    document.getElementById('bg-text').style.color = s.color + "09";
+                    
                     panel.classList.add('active');
-                    currentRecord = { name: finalLoc, cards: `${c1.name}+${c2.name}`, mission: mission, color: "#d4b483" };
+                    currentRecord = { name: finalLoc, combo: `${s.n}+${subjects[id2].n}`, mission: mission, color: s.color };
                 }
             }, 60);
         }
@@ -152,12 +176,12 @@
         function manualSave() {
             if (!currentRecord) return;
             masterJournal.push({ ...currentRecord, date: new Date().toLocaleDateString() });
-            localStorage.setItem('nomadic_lenormand_combo', JSON.stringify(masterJournal));
+            localStorage.setItem('nomadic_combo_v9', JSON.stringify(masterJournal));
             document.getElementById('loc-result').innerText = "已入鏡封存";
             updateUI();
         }
 
-        function clearData() { if(confirm("確定刪除？")) { localStorage.removeItem('nomadic_lenormand_combo'); location.reload(); } }
+        function clearData() { if(confirm("確定刪除所有歷史？")) { localStorage.removeItem('nomadic_combo_v9'); location.reload(); } }
     </script>
 </body>
 </html>

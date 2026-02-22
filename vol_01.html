@@ -19,25 +19,44 @@
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), 
                         url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000') center/cover no-repeat fixed;
         }
+        
+        /* 回到上一頁按鈕 */
+        .back-nav {
+            position: fixed; top: calc(20px + env(safe-area-inset-top)); left: 25px;
+            z-index: 100; text-decoration: none; color: var(--grey);
+            font-size: 0.6rem; letter-spacing: 0.3em; transition: 0.3s;
+        }
+        .back-nav:hover { color: var(--gold); }
+
         header h2 { font-family: 'Playfair Display', serif; font-size: 0.6rem; letter-spacing: 0.6em; color: var(--gold); margin-bottom: 10px; }
         header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; margin: 0; }
         .stats { margin-top: 15px; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--grey); }
         #regions-count { color: var(--gold); }
+
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; min-height: 40vh; margin: 40px 0; }
-        #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 10px; }
-        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: var(--gold); font-style: italic; line-height: 1.6; max-width: 280px; margin: 0 auto; opacity: 0.8; }
+        #result { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 500; margin-bottom: 10px; transition: 0.5s; }
+        
+        /* 任務與合照挑戰樣式 */
+        .mission-box { max-width: 280px; margin: 0 auto; }
+        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: var(--gold); font-style: italic; line-height: 1.6; margin-bottom: 10px; opacity: 0.8; }
+        #photo-challenge { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--grey); letter-spacing: 0.1em; border-top: 1px solid rgba(212, 180, 131, 0.2); padding-top: 10px; }
+
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; }
-        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 18px; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; }
+        .btn-main { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 18px; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; }
         .btn-main:active { background: rgba(255,255,255,0.1); }
+
         .archive-section { width: 100%; max-width: 500px; margin-top: 60px; text-align: left; border-top: 1px solid #222; padding-top: 40px; }
         .journal-item { margin-bottom: 30px; border-left: 1px solid var(--gold); padding-left: 20px; }
         .journal-date { font-size: 0.55rem; color: var(--grey); letter-spacing: 0.2em; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1rem; margin: 5px 0; }
-        .journal-mission { font-size: 0.7rem; color: #888; font-weight: 300; }
+        .journal-mission { font-size: 0.7rem; color: #888; font-weight: 300; line-height: 1.5; }
+        
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
+
+    <a href="index.html" class="back-nav">← BACK TO HOME</a>
 
     <div class="main-container">
         <header>
@@ -49,7 +68,10 @@
         <div class="display-area">
             <div id="map-core">
                 <div id="result">Ready to Wander?</div>
-                <div id="mission-task">點擊下方按鈕，開啟下一個座標。</div>
+                <div class="mission-box">
+                    <div id="mission-task">點擊下方按鈕，開啟下一個座標。</div>
+                    <div id="photo-challenge" style="display:none;"></div>
+                </div>
             </div>
         </div>
 
@@ -83,7 +105,7 @@
             "嘉義市 東區","嘉義市 西區",
             "嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉",
             "台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區",
-            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","燕巢區","橋頭區","梓官區","彌陀區","永安區","湖內區","旗山區","美濃區","六龜區","內門區","杉林區","甲仙區","桃源區","那瑪夏區","茂林區",
+            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
             "屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉",
             "宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉",
             "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
@@ -97,9 +119,14 @@
             "紀錄擋風玻璃上的光斑。","捕捉空氣裡的濕度。","觀察路人指尖的節奏。","帶走公路盡頭的一抹灰。","留白一段只有引擎聲的時光。","感受在地建築的粗糙質地。","標記這座城鎮獨有的氣味。","凝視後照鏡裡的遠方。","尋找路邊野草的律動。","捕捉屬於此刻的低調光影。"
         ];
 
+        const coupleChallenges = [
+            "Challenge: 紀錄對方在副駕睡著的側臉。","Challenge: 捕捉兩人在後照鏡裡的合照。","Challenge: 在當地地標前，拍一張只露出鞋子的背影。","Challenge: 紀錄對方正在專心看地圖/導航的樣子。","Challenge: 在公路旁，拍一張彼此影子重疊的照片。","Challenge: 捕捉兩人手牽手走進當地市場的背影。","Challenge: 紀錄對方點餐時困惑又可愛的神情。","Challenge: 拍一張充滿底片感的車內合照。","Challenge: 在目的地找一面老牆，拍下兩人的剪影。","Challenge: 紀錄對方與當地特色小吃的第一次接觸。"
+        ];
+
         let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_full_data')) || [];
         let currentResult = "";
         let currentMission = "";
+        let currentChallenge = "";
 
         window.onload = () => {
             updateUI();
@@ -116,12 +143,14 @@
         function roll() {
             const resultEl = document.getElementById('result');
             const taskEl = document.getElementById('mission-task');
+            const challengeEl = document.getElementById('photo-challenge');
             const checkInSection = document.getElementById('check-in-section');
             const pool = taiwanData.filter(place => !visitedPlaces.some(v => v.name === place));
             
             if (pool.length === 0) { 
                 resultEl.innerText = "The World is Yours."; 
                 taskEl.innerText = "你已走遍這座島嶼的所有角落。"; 
+                challengeEl.style.display = "none";
                 return; 
             }
 
@@ -129,9 +158,14 @@
             setTimeout(() => {
                 currentResult = pool[Math.floor(Math.random() * pool.length)];
                 currentMission = inspirations[Math.floor(Math.random() * inspirations.length)];
+                currentChallenge = coupleChallenges[Math.floor(Math.random() * coupleChallenges.length)];
+                
                 resultEl.innerText = currentResult;
                 taskEl.innerText = currentMission;
+                challengeEl.innerText = currentChallenge;
+                
                 resultEl.style.opacity = 1;
+                challengeEl.style.display = "block";
                 checkInSection.style.display = "block";
             }, 300);
         }
@@ -140,7 +174,7 @@
             if (!currentResult || visitedPlaces.some(v => v.name === currentResult)) return;
             const newRecord = {
                 name: currentResult,
-                mission: currentMission,
+                mission: currentMission + " / " + currentChallenge,
                 date: new Date().toLocaleDateString('en-GB').replace(/\//g, '.')
             };
             visitedPlaces.unshift(newRecord);

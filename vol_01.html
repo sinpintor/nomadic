@@ -4,68 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOMADIC — Vol. 01</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+TC:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@200;300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --black: #0a0a0a; --white: #fdfdfd; --grey: #777777; }
         ::-webkit-scrollbar { display: none; }
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Montserrat', 'Noto Serif TC', sans-serif; background-color: var(--black); color: var(--white); overflow: hidden; }
+        .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
 
-        /* 底片噪點 */
-        .noise {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9999;
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E');
-        }
-
-        /* --- 第一層：故事敘事 (扉頁) --- */
-        #preface-layer {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-            z-index: 20; transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1), transform 1.5s ease;
-            padding: 40px; box-sizing: border-box; text-align: center;
-        }
-        .preface-content { max-width: 550px; }
-        .preface-content h2 { font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.6em; text-transform: uppercase; color: var(--grey); margin-bottom: 35px; font-weight: 300; }
+        #preface-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.3), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat; z-index: 20; transition: opacity 1.5s cubic-bezier(0.2, 1, 0.3, 1), transform 1.5s ease; padding: 40px; box-sizing: border-box; text-align: center; }
+        .preface-content h2 { font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.6em; text-transform: uppercase; color: var(--grey); margin-bottom: 35px; }
         .preface-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; line-height: 2.3; color: #ccc; font-weight: 200; letter-spacing: 0.05em; margin-bottom: 50px; }
-        .action-btn-outline { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; background: transparent; border: 1px solid var(--white); padding: 18px 45px; cursor: pointer; color: var(--white); transition: 0.5s; border-radius: 0; }
+        .action-btn-outline { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; background: transparent; border: 1px solid var(--white); padding: 18px 45px; cursor: pointer; color: var(--white); transition: 0.5s; }
         .action-btn-outline:hover { background: var(--white); color: var(--black); }
 
-        /* --- 第二層：抽籤介面 --- */
-        #generator-layer {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background-color: var(--black); z-index: 10; opacity: 0; pointer-events: none;
-            padding: 40px 20px; box-sizing: border-box; transition: opacity 1.2s ease;
-        }
+        #generator-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: var(--black); z-index: 10; opacity: 0; pointer-events: none; padding: 40px 20px; box-sizing: border-box; transition: opacity 1.2s ease; }
         .layout { width: 100%; max-width: 420px; text-align: center; }
-        .nav-back { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; color: var(--grey); margin-bottom: 60px; display: inline-block; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .nav-back:hover { border-bottom: 1px solid var(--grey); }
-        
+        .nav-back { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; color: var(--grey); margin-bottom: 60px; display: inline-block; text-decoration: none; }
         .result-area { min-height: 160px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 40px; }
         .result-box { font-family: 'Noto Serif TC', serif; font-size: 2.6rem; font-weight: 200; letter-spacing: 0.15em; color: var(--white); line-height: 1.4; }
         .result-count { font-size: 0.55rem; color: #444; margin-top: 20px; letter-spacing: 0.3em; text-transform: uppercase; }
-
-        .mission-box { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #999; padding: 25px 0; margin-bottom: 40px; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; line-height: 2; font-weight: 200; display: none; text-align: justify; }
-        
-        .draw-btn { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; padding: 22px; cursor: pointer; border: none; background: var(--white); color: var(--black); width: 100%; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 500; transition: 0.4s; }
+        .mission-box { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #999; padding: 25px 0; margin-bottom: 40px; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; line-height: 2; display: none; text-align: justify; }
+        .draw-btn { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; padding: 22px; cursor: pointer; border: none; background: var(--white); color: var(--black); width: 100%; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 500; }
         .confirm-btn { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; padding: 18px; cursor: pointer; border: 1px solid #333; background: transparent; color: var(--white); width: 100%; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 15px; }
-        
-        .history-reset { font-size: 0.5rem; color: #222; background: none; border: none; margin-top: 40px; letter-spacing: 0.2em; cursor: pointer; text-transform: uppercase; }
-
         .layer-hidden { opacity: 0; transform: scale(1.1); pointer-events: none; }
     </style>
 </head>
 <body>
-
     <div class="noise"></div>
-
     <section id="preface-layer">
         <div class="preface-content">
             <h2>Vol. 01 — The Travel Issue</h2>
             <p class="preface-text">
                 引擎發動的瞬間，這台車就成了地圖上的孤島。<br><br>
-                你是掌舵的遊牧者，我是紀錄風景的副駕視角。我們不再討論「去哪裡」，只討論「這條路會帶給我們什麼」。當我們交出導航的控制權，宇宙便開始在擋風玻璃前顯化奇蹟。<br><br>
+                你是掌舵的遊牧者，我是紀錄風景的副駕視角。我們不再討論「去哪裡」，只討論「這條路會帶給我們什麼」。當我們交出導航的控制權，風景便開始在擋風玻璃前緩緩顯影。<br><br>
                 在那些未被標註的驚喜裡，藏著我們最純粹的浪漫。
             </p>
             <button class="action-btn-outline" onclick="showGenerator()">Start Wandering</button>
@@ -75,24 +46,16 @@
     <section id="generator-layer">
         <div class="layout">
             <a href="index.html" class="nav-back">← Back to Archives</a>
-            
-            <div class="result-area">
-                <div class="result-box" id="result">The Unknown</div>
-                <div class="result-count" id="visited-count">Explored: 0 regions</div>
-            </div>
-
+            <div class="result-area"><div class="result-box" id="result">The Unknown</div><div class="result-count" id="visited-count">Explored: 0 regions</div></div>
             <div class="mission-box" id="mission-box"></div>
-
             <div class="btn-group">
                 <button class="draw-btn" id="main-draw-btn" onclick="startRolling()">Seek Destination</button>
                 <button class="confirm-btn" id="confirm-btn" style="display:none;" onclick="confirmArrival()">Check-in this location</button>
-                <button class="history-reset" onclick="clearHistory()">Reset footprint memory</button>
             </div>
         </div>
     </section>
 
 <script>
-    // 完整的台灣縣市行政區資料
     const taiwanData = {
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
         "台北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
@@ -130,16 +93,13 @@
         }, 1000);
     }
 
-    function updateVisitedCount() {
-        document.getElementById('visited-count').innerText = `Explored: ${visitedPlaces.length} regions`;
-    }
+    function updateVisitedCount() { document.getElementById('visited-count').innerText = `Explored: ${visitedPlaces.length} regions`; }
 
     function startRolling() {
         const resultBox = document.getElementById('result');
         const confirmBtn = document.getElementById('confirm-btn');
         const missionBox = document.getElementById('mission-box');
-        confirmBtn.style.display = "none";
-        missionBox.style.display = "none";
+        confirmBtn.style.display = "none"; missionBox.style.display = "none";
         
         let counter = 0;
         let roll = setInterval(() => {
@@ -148,10 +108,7 @@
             const rT = taiwanData[rC][Math.floor(Math.random() * taiwanData[rC].length)];
             resultBox.innerText = `${rC} ${rT}`;
             counter++;
-            if (counter > 20) {
-                clearInterval(roll);
-                pickFinal();
-            }
+            if (counter > 20) { clearInterval(roll); pickFinal(); }
         }, 50);
     }
 
@@ -165,22 +122,13 @@
             });
         });
 
-        if (available.length === 0) {
-            document.getElementById('result').innerText = "All borders crossed.";
-            return;
-        }
+        if (available.length === 0) { resultBox.innerText = "All borders crossed."; return; }
 
         currentResult = available[Math.floor(Math.random() * available.length)];
         document.getElementById('result').innerText = currentResult;
         document.getElementById('confirm-btn').style.display = "block";
         
-        const missions = [
-            "尋找當地最老的一棵樹並合影",
-            "在當地雜貨店買一樣沒見過的小零食",
-            "找一個能看見地平線的高處發呆十分鐘",
-            "為彼此拍一張帶有當地路標的特寫照片",
-            "收集一片當地的落葉或小石頭作為紀念"
-        ];
+        const missions = ["尋找當地最老的一棵樹並合影", "在當地雜貨店買一樣沒見過的小零食", "找一個能看見地平線的高處發呆十分鐘", "為彼此拍一張帶有當地路標的特寫照片"];
         document.getElementById('mission-box').innerHTML = `<strong>Nomadic Mission:</strong><br>${missions[Math.floor(Math.random() * missions.length)]}`;
         document.getElementById('mission-box').style.display = "block";
     }
@@ -192,14 +140,6 @@
             updateVisitedCount();
             alert(`📍 ${currentResult} 已寫入遊牧歷史`);
             document.getElementById('confirm-btn').style.display = "none";
-        }
-    }
-
-    function clearHistory() {
-        if (confirm("確定要刪除所有已探索的地點記憶嗎？")) {
-            visitedPlaces = [];
-            localStorage.removeItem('visitedPlaces');
-            updateVisitedCount();
         }
     }
 </script>

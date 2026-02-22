@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>VOL.01 The Travel Issue — NOMADIC</title>
+    <title>VOL.01 光影浮沉 — NOMADIC</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Noto+Serif+TC:wght@300;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #888888; --dark-grey: #151515; }
+        :root { --black: #0a0a0a; --gold: #d4b483; --white: #ffffff; --grey: #666666; --dark-grey: #151515; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', sans-serif; min-height: 100%; -webkit-font-smoothing: antialiased; }
         
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E'); }
 
-        .container { max-width: 600px; margin: 0 auto; padding: calc(40px + env(safe-area-inset-top)) 25px 80px; box-sizing: border-box; }
+        .container { max-width: 600px; margin: 0 auto; padding: calc(50px + env(safe-area-inset-top)) 25px 100px; box-sizing: border-box; }
 
         .nav-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
-        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.2em; transition: color 0.3s; }
+        .nav-back { text-decoration: none; color: var(--grey); font-size: 0.65rem; letter-spacing: 0.2em; transition: color 0.3s; }
         .nav-back:hover { color: var(--gold); }
 
-        .stamp-area { position: relative; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
-        .digital-stamp { width: 120px; height: 120px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--gold); font-size: 0.5rem; letter-spacing: 0.1em; padding: 10px; opacity: 0.3; transform: rotate(-15deg); transition: all 0.8s ease; }
-        .stamped .digital-stamp { opacity: 1; transform: rotate(10deg) scale(1.1); border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(212, 180, 131, 0.2); }
+        .stamp-area { position: relative; margin-bottom: 50px; text-align: center; }
+        .digital-stamp { width: 120px; height: 120px; border: 1px solid var(--gold); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-align: center; color: var(--gold); font-size: 0.55rem; letter-spacing: 0.1em; line-height: 1.5; opacity: 0.2; transform: rotate(-15deg); transition: all 1s cubic-bezier(0.23, 1, 0.32, 1); }
+        .stamped .digital-stamp { opacity: 1; transform: rotate(12deg) scale(1.1); border-width: 2px; background: rgba(212, 180, 131, 0.05); box-shadow: 0 0 20px rgba(212, 180, 131, 0.1); }
 
-        .dest-name { font-family: 'Noto Serif TC', serif; font-size: 2.5rem; font-weight: 500; margin: 25px 0 10px; color: var(--white); text-align: center; }
+        .dest-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3rem; font-weight: 400; margin: 25px 0 10px; color: var(--white); text-align: center; letter-spacing: -0.02em; }
 
-        .mission-card { background: var(--dark-grey); border: 1px solid rgba(255,255,255,0.05); padding: 30px; margin-bottom: 30px; }
-        .mission-label { font-size: 0.6rem; color: var(--gold); letter-spacing: 0.4em; margin-bottom: 20px; display: block; }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; line-height: 1.8; color: #eee; min-height: 80px; }
+        .mission-card { background: var(--dark-grey); border: 1px solid rgba(255,255,255,0.05); padding: 40px 30px; margin-bottom: 40px; position: relative; overflow: hidden; }
+        .mission-label { font-size: 0.6rem; color: var(--gold); letter-spacing: 0.5em; margin-bottom: 25px; display: block; text-transform: uppercase; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.25rem; line-height: 1.8; color: #eeeeee; min-height: 100px; }
 
-        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); font-family: 'Noto Serif TC', serif; padding: 15px 0; margin-bottom: 40px; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); font-family: 'Noto Serif TC', serif; padding: 20px 0; margin-bottom: 50px; font-size: 1.1rem; outline: none; transition: border-color 0.4s; }
         .journal-input:focus { border-color: var(--gold); }
 
-        .btn-log { background: transparent; border: 1px solid var(--white); color: var(--white); padding: 20px; font-size: 0.7rem; letter-spacing: 0.3em; cursor: pointer; width: 100%; transition: all 0.3s; }
-        .btn-log:hover { background: var(--white); color: var(--black); }
+        .btn-log { background: var(--gold); border: none; color: var(--black); padding: 22px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; width: 100%; transition: all 0.3s; }
+        .btn-log:hover { filter: brightness(1.1); letter-spacing: 0.5em; }
 
-        .logged-info { display: none; text-align: center; font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em; line-height: 2; }
-        .logged-note { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--white); font-style: italic; margin-bottom: 30px; }
+        .logged-view { display: none; text-align: center; animation: fadeIn 1.2s ease forwards; }
+        .logged-note { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; color: var(--gold); font-style: italic; margin-bottom: 40px; line-height: 1.8; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -44,149 +46,143 @@
     <div class="container">
         <div class="nav-header">
             <a href="index.html" class="nav-back">← CLOSE ISSUE</a>
-            <div style="font-size: 0.6rem; color: var(--gold); letter-spacing: 0.2em;">VOL. 01 / TRAVEL</div>
+            <div style="font-size: 0.6rem; color: var(--gold); letter-spacing: 0.3em;">VOL. 01 / LIGHT</div>
         </div>
 
         <div class="stamp-area" id="stamp-container">
-            <div class="digital-stamp" id="stamp-date">NOT ARRIVED</div>
-            <h1 class="dest-name" id="display-loc">...</h1>
+            <div class="digital-stamp" id="stamp-text">NOT<br>ARRIVED</div>
+            <h1 class="dest-name" id="display-loc">Seeking...</h1>
         </div>
 
         <div class="mission-card">
-            <span class="mission-label">RANDOM MISSION</span>
-            <div class="mission-text" id="mission-content">Generating challenge...</div>
+            <span class="mission-label">光影浮沉 CHALLENGE</span>
+            <div class="mission-text" id="mission-content">Generatig quest...</div>
         </div>
 
         <div id="action-area">
-            <input type="text" class="journal-input" id="journal-text" placeholder="寫下一句話，留存此地的氣味或光影...">
-            <button class="btn-log" onclick="saveJourney()">MINT JOURNEY LOG (留下足跡)</button>
+            <input type="text" class="journal-input" id="journal-text" placeholder="描述此刻的光影，或寫下一段私語...">
+            <button class="btn-log" onclick="saveJourney()">MINT FOOTPRINT (留下足跡)</button>
         </div>
 
-        <div class="logged-info" id="logged-view">
+        <div class="logged-view" id="logged-view">
             <div class="logged-note" id="saved-journal"></div>
-            <p style="border-top: 1px solid #222; padding-top: 20px;">
-                此足跡已永久寫入你的探險日誌。<br>請返回總部查看進度。
+            <p style="border-top: 1px solid #222; padding-top: 30px; font-size: 0.65rem; color: #555; letter-spacing: 0.2em; line-height: 2;">
+                此地光影已寫入底片。<br>
+                JOURNEY LOGGED IN ARCHIVE.
             </p>
         </div>
     </div>
 
     <script>
-const missions = [
-    // === 攝影挑戰 (25種) ===
-    "拍攝一張「垂直」視角的照片，避開所有地平線。",
-    "尋找該地區最古老的標誌或招牌，記錄文字的斑駁。",
-    "觀察光影，拍攝一張光亮與黑暗比例為 1:1 的構圖。",
-    "紀錄一種屬於這裡的顏色，畫面中只能出現該色系。",
-    "對著反射面（鏡子、櫥窗）拍攝一張包含你自己與街道的合照。",
-    "尋找一隻當地的動物（貓、狗、鳥），在不打擾的情況下拍下牠的身影。",
-    "以「螞蟻視角」從極低的角度拍攝一張當地的地標。",
-    "捕捉一張「移動中」的照片，呈現這個地區的流動感。",
-    "尋找三個圓形元素，將它們組合成一個畫面。",
-    "拍攝一張路人的背影，猜測他正要去哪裡？",
-    "尋找一個生鏽的物品，拍攝其微距特寫。",
-    "拍一張這裡最醜的建築，但要試著把它拍得很唯美。",
-    "尋找地面上的裂縫或修補痕跡，拍攝一張抽象畫。",
-    "捕捉陽光透過樹葉或孔洞產生的「星芒」。",
-    "拍一張這個地方最讓你感到「平靜」的角度。",
-    "尋找一扇看起來很有故事的窗戶並拍攝它。",
-    "拍下一張能代表這裡「氣味」的照片。",
-    "捕捉一張對比強烈的照片：例如新與舊、大與小。",
-    "尋找當地的一棵樹，拍出它像是有靈魂的樣子。",
-    "拍下你腳下的地面，代表你曾站在此處。",
-    "尋找一個三角形的建築結構並拍攝它。",
-    "捕捉一張在當地街道上「消失的點」（透視線）。",
-    "拍一張這裡「最色彩繽紛」的角落。",
-    "尋找一個廢棄的物品，拍出它的孤獨感。",
-    "拍下這趟旅程中你最喜歡的一個文字標誌。",
-
-    // === 搞怪行動 (25種) ===
-    "在當地的便利商店買一瓶沒喝過的飲料，以此為背景拍攝街道。",
-    "模仿當地某尊雕像或海報上的姿勢合照。",
-    "在沒人的巷弄裡大跳一段 5 秒鐘的舞並錄影/截圖。",
-    "找一塊奇怪的石頭，幫它命名並帶它去景點拍照。",
-    "穿上這輩子你絕對不會在台北市中心穿的混搭風格出門。",
-    "對著天空大喊一聲這個區的名字（例如：大安區！）。",
-    "買一份當地的報紙，隨便指一個字，作為你今天的幸運關鍵字。",
-    "跟當地的紅綠燈比誰站得比較久。",
-    "找一個路人，問他附近有沒有「通往未來的路」。",
-    "在公園裡跟一棵樹握手，並感謝它提供氧氣。",
-    "假裝自己是外星人，用奇怪的步伐走過一條斑馬線。",
-    "買一塊當地的雞排或小吃，先幫它拍一組名模沙龍照。",
-    "隨機對著一個郵筒敬禮。",
-    "找一個地標，用你的鼻孔跟它合照。",
-    "蹲在路邊觀察一列螞蟻 2 分鐘，紀錄牠們的目的地。",
-    "去當地的雜貨店買一顆最便宜的糖果，並慎重地寫下品嚐心得。",
-    "對著當地最老的一棵樹講一個冷笑話。",
-    "在不被發現的情況下，偷偷模仿前面路人的走路姿勢 10 步。",
-    "尋找一個印有「禁止」字樣的標誌，並在它旁邊做一件溫柔的事。",
-    "找一塊空地，倒著走 30 步（注意安全）。",
-    "隨機買一張刮刮樂，如果中了，全部花在當地的下一餐。",
-    "把你的相機/手機放在地上，對著它做一個鬼臉。",
-    "找一張當地的長椅，坐著發呆 5 分鐘，什麼都不准看。",
-    "用手機錄下一段當地環境的聲音，持續 30 秒。",
-    "把自己當成導遊，對著空無一人的巷弄介紹這裡的歷史（瞎掰也可以）。",
-
-    // === 情侶互動 (30種) ===
-    "在當地的街道上，手牽手走完一段 100 公尺的距離。",
-    "互相幫對方拍一張「對方不知道我在拍他」的瞬間。",
-    "找出一個這裡最適合接吻的角落，並拍下那個場景。",
-    "交換手機螢幕，直到離開這個地區為止。",
-    "一人說一個關於這個地方的冷知識，輸的人要背對方走 10 步。",
-    "互相比賽看誰先找到「愛心形狀」的物品。",
-    "由對方指定一個搞怪姿勢，你必須在地標前完成。",
-    "一起在當地的飲料店點一杯「對方會喜歡」的飲料。",
-    "互相用對方的名字縮寫，編一個關於這趟旅行的故事。",
-    "在路邊玩「一二三木頭人」，終點是對方。 ",
-    "拍一張兩人影子的合照，影子必須擺出心型。",
-    "互相幫對方在當地選一份價值 50 元以下的「紀念品」。",
-    "由對方決定你接下來 15 分鐘要走的路線，不准看地圖。",
-    "在安靜的巷弄裡，對著對方耳語一句從未說過的讚美。",
-    "拍一張「只有對方局部」的照片（例如手、腳、眼睛），展現親密感。",
-    "兩人合力拼出一個「大愛心」的全身合照。",
-    "交換穿一件對方的衣物（如外套、帽子），拍下合照。",
-    "比誰先看到藍色的車子，贏的人可以要求對方一個小願望。",
-    "在當地的公園長椅上，閉上眼睛靠在對方肩膀上 1 分鐘。",
-    "互相幫對方畫一張 30 秒的快速素描，就在這張紀錄裡。",
-    "一人出一半的錢，買一個當地的點心分著吃。",
-    "拍一張「手牽手」但背景是當地地標的特寫照。",
-    "在路燈下一起轉圈圈，直到頭暈為止。",
-    "由對方當導演，指導你拍出一張最有「意境」的網美照。",
-    "找出一個最像你們未來「家」的門口，合照一張。",
-    "互相在對方的掌心寫一個字，猜猜寫了什麼。",
-    "比誰能最快找到寫有對方名字中其中一個字的招牌。",
-    "兩人一起在鏡頭前做出「醜到爆」的表情並記錄下來。",
-    "拍一張兩人的腳步踏在同一個方格磚上的照片。",
-    "在離開前，一起對著這片土地說聲「謝謝」。",
-
-    // === 當地限定/深度任務 (20種) ===
-    "去當地最老的一間廟，觀察香爐上的煙是什麼形狀。",
-    "找一間當地最破舊但有人進出的店，嘗試進去消費。",
-    "尋找當地的一張門牌號碼，數字加起來要是你的幸運數。",
-    "去當地的圖書館或書店，翻開一本書的第 22 頁，讀出一句情節。",
-    "觀察當地路人的穿著，找出最受歡迎的一種顏色。",
-    "找一個當地的布告欄，讀完所有過期的訊息。",
-    "尋找這區「海拔最高」或「地勢最低」的地方。",
-    "找一個當地的長輩，問他這裡以前是什麼樣子。",
-    "尋找這區最隱密的一條防火巷，並拍下巷底的光線。",
-    "去當地的雜貨店，買一樣你小時候吃過的零食。",
-    "找一個有水的地方（水溝、噴泉、河流），看著水流 1 分鐘。",
-    "觀察這裡的植被，找出一種你叫不出名字的花。",
-    "去當地的文具店買一張明信片寄給未來的自己。",
-    "找尋一個有「數字」的地標，並跟它合照。",
-    "觀察當地的建築裝飾，找出一個龍或獅子的圖案。",
-    "找一個當地的公車站牌，看看下一班車多久會來。",
-    "在當地的一個轉角，等待一個穿紅色衣服的人經過。",
-    "尋找一個有歷史感的滅火器並拍下它。",
-    "去當地的金菸酒行（或柑仔店）買一罐鋁罐飲料。",
-    "找出這區的一個地圖看板，指著「你現在的位置」合照。"
-];
+        const missions = [
+            "拍攝一張「垂直」視角的照片，避開所有地平線。",
+            "尋找該地區最古老的標誌或招牌，記錄文字的斑駁。",
+            "觀察光影，拍攝一張光亮與黑暗比例為 1:1 的構圖。",
+            "紀錄一種屬於這裡的顏色，畫面中只能出現該色系。",
+            "對著反射面拍攝一張包含你自己與街道的合照。",
+            "尋找一隻當地的動物，在不打擾的情況下拍下牠的身影。",
+            "以極低角度拍攝一張當地的地標，模擬螞蟻的視角。",
+            "捕捉一張「移動中」的照片，呈現這個地區的流動感。",
+            "尋找三個圓形元素，將它們組合成一個畫面。",
+            "拍一張路人的背影，標題寫下你猜測他要去哪裡。",
+            "尋找一個生鏽的物品，拍攝其細節特寫。",
+            "拍一張這裡最醜的建築，但要試著把它拍得很唯美。",
+            "尋找地面上的裂縫，拍攝一張如抽象畫般的照片。",
+            "捕捉陽光透過樹葉產生的「星芒」光效。",
+            "拍一張這個地方最讓你感到「平靜」的角度。",
+            "尋找一扇看起來很有故事的窗戶並拍攝它。",
+            "拍下一張能代表這裡「氣味」的照片。",
+            "捕捉對比強烈的照片：例如新與舊、大與小。",
+            "尋找當地的一棵樹，拍出它像是有靈魂的樣子。",
+            "拍下你腳下的地面，代表你曾站在此處。",
+            "尋找一個三角形的建築結構並拍攝它。",
+            "捕捉街道上的「消失點」（透視線收縮處）。",
+            "拍一張這裡「最色彩繽紛」的角落。",
+            "尋找一個廢棄的物件，拍出它的孤獨感。",
+            "拍下這趟旅程中你最喜歡的一個文字標誌。",
+            "捕捉一張陽光在水窪或玻璃上的倒影。",
+            "拍攝一張「框架構圖」，利用門框或樹枝框住景點。",
+            "拍下這裡的「天空線」，觀察建築與天空的交界。",
+            "尋找這區色彩最跳脫的一扇門並合照。",
+            "紀錄一張展現該區日常節奏的照片（如等待紅綠燈的人）。",
+            "模仿當地某尊雕像或海報上的姿勢合照。",
+            "拍一張兩人的影子合照，影子必須擺出心型。",
+            "互相比賽看誰先找到「愛心形狀」的天然物品並拍攝。",
+            "由對方指定一個搞怪姿勢，你必須在地標前完成並拍照。",
+            "拍一張兩人的腳步踏在同一個方格磚上的特寫。",
+            "捕捉一張對方正在專注側拍風景的樣子。",
+            "尋找一種屬於這裡的植被，拍下它與你們的合照。",
+            "拍下對方手持當地特色小吃的特寫，背景模糊處理。",
+            "找出一個這裡最適合接吻的角落，拍下那個空景。",
+            "挑戰只用黑白色調拍一張最有情緒的照片。",
+            "拍攝一張「動靜結合」：背景不動，但有人物走過。",
+            "尋找當地的一處壁畫或塗鴉，拍下兩人的互動。",
+            "拍下一張當地的郵筒，並與它合照。",
+            "捕捉一張兩人「背對背」站立在老街中心的照片。",
+            "尋找一個寫有這區名字的指標，拍下兩人的手指著它。",
+            "拍下一張能體現「速度感」的照片。",
+            "捕捉陽光灑在對方頭髮上的金色邊緣（逆光照）。",
+            "尋找一處長廊，拍下無限延伸的感覺。",
+            "拍下一張兩人穿著這區特有色彩衣物的對比照。",
+            "在離開前，拍下一張這區最後看到的風景，作為結尾。",
+            "拍一張照片，裡面必須包含紅、黃、藍三種顏色。",
+            "尋找一個生鏽的鐵捲門，拍下它幾何重複的線條。",
+            "捕捉一張對方大笑的瞬間，無視構圖是否完美。",
+            "拍一張照片，焦點模糊，只留下色彩的感覺。",
+            "拍攝這區「最高」的建築物，從它的正下方往上看。",
+            "尋找這裡最窄的一條巷弄並拍下深處的光線。",
+            "拍下一張當地雜貨店門口掛著的雜物，要有生活感。",
+            "捕捉一張光線穿透噴泉或灑水器產生的虹彩。",
+            "尋找一個圓形的窗戶或門洞拍照。",
+            "拍下這裡最古老的一座橋梁。",
+            "捕捉一張路邊盛開的無名小花，與這區建築的對比。",
+            "拍一張「只有雙手」的照片，描述當下的情緒。",
+            "尋找一個有數位顯示器的鐘，拍下這趟旅程的精確時間。",
+            "拍攝這區特有的地磚紋路。",
+            "捕捉一張光線在牆壁上形成的幾何影子。",
+            "尋找這區最色彩斑駁的牆壁作為背景拍一張人像。",
+            "拍下一張這裡最現代化的建築細節。",
+            "捕捉一張煙霧或蒸氣在空中飄散的電影感畫面。",
+            "尋找一個對稱的場景並拍攝它。",
+            "拍下一張這裡最「雜亂」但有美感的角落。",
+            "捕捉一張兩人手牽手走遠的背影。",
+            "尋找一個印有當地行政區地圖的看板並合影。",
+            "拍下一張反映這區「安靜」的照片。",
+            "捕捉一張當地的「清晨」或「黃昏」色調。",
+            "尋找一個寫著「出口」或「入口」的標誌並拍下它。",
+            "拍下一張代表這區「質地」的照片（粗糙、光滑或刺人）。",
+            "捕捉一張光線灑在植物葉片脈絡上的特寫。",
+            "拍下一張這區讓你聯想到「家」的畫面。",
+            "尋找一個老舊的公車站牌並合照。",
+            "拍下一張這裡最讓你感到「驚奇」的小細節。",
+            "捕捉一張水面上泛起的漣漪，背景是這裡的風景。",
+            "拍一張照片，裡面包含一個圓形和一個三角形。",
+            "尋找一棵姿態最奇特的樹並拍攝它。",
+            "拍下一張這裡最「閃亮」的物品。",
+            "捕捉一張陽光剛好照在對方臉上的半邊光影。",
+            "拍下一張這區最「孤獨」的長椅。",
+            "捕捉一張當地路人與貓狗互動的溫馨瞬間。",
+            "拍下這裡最老的雜貨店招牌。",
+            "尋找一個有數字「1」的地標並拍照。",
+            "拍下一張兩人在當地公園鞦韆上的照片。",
+            "捕捉一張這區「正在施工」的工業美感。",
+            "拍下一張這裡最繽紛的垃圾桶（尋找平凡之美）。",
+            "捕捉一張陽光穿透玻璃瓶的折射光。",
+            "拍下一張這裡最「高聳」的樹木頂端。",
+            "尋找一處有階梯的地方，拍下層次感。",
+            "拍下一張這裡最「溫暖」的色調。",
+            "捕捉一張兩人在當地的影子擁抱的照片。",
+            "拍下一張這區「最混亂」的電線桿，拍出美感。",
+            "尋找一個有藍色元素的場景並拍攝。",
+            "在離開前，拍下一張你對這區最後的印象筆記。"
+        ];
 
         const urlParams = new URLSearchParams(window.location.search);
-        const locationName = urlParams.get('loc') || "未知的幻境";
+        const locationName = urlParams.get('loc') || "未知座標";
         document.getElementById('display-loc').innerText = locationName;
         
         let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
-        const existingRecord = masterJournal.find(v => v.name === locationName);
+        const existingRecord = masterJournal.find(v => v.name === locationName && v.issue === "VOL.01");
 
         if (existingRecord) {
             renderLoggedState(existingRecord);
@@ -196,7 +192,7 @@ const missions = [
         }
 
         function saveJourney() {
-            const note = document.getElementById('journal-text').value || "無語的瞬間，也是一種紀錄。";
+            const note = document.getElementById('journal-text').value || "光影浮沉，我們在此留下印記。";
             const mission = document.getElementById('mission-content').innerText;
             const now = new Date();
             const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
@@ -216,9 +212,8 @@ const missions = [
 
         function renderLoggedState(record) {
             document.getElementById('stamp-container').classList.add('stamped');
-            document.getElementById('stamp-date').innerHTML = `ARRIVED<br>${record.date}`;
+            document.getElementById('stamp-text').innerHTML = `STAMPED<br>${record.date}`;
             document.getElementById('mission-content').innerText = record.mission;
-            
             document.getElementById('action-area').style.display = 'none';
             document.getElementById('logged-view').style.display = 'block';
             document.getElementById('saved-journal').innerText = `“ ${record.note} ”`;

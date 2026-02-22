@@ -20,17 +20,16 @@
             background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.04"/%3E%3C/svg%3E');
         }
 
-        /* --- 第一頁：PREFACE (公路連結版) --- */
+        /* --- 第一頁：PREFACE --- */
         .preface-section {
             height: 100vh; width: 100%; display: flex; flex-direction: column;
             justify-content: center; align-items: center; padding: 0 40px;
             box-sizing: border-box; position: relative;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
                         url('https://images.unsplash.com/photo-1449156003053-c30205280592?q=80&w=2000') center/cover no-repeat;
         }
         .preface-content { max-width: 100%; z-index: 2; animation: fadeIn 2.5s ease; }
         
-        /* 英文標題致中 */
         .preface-content h1 {
             font-family: 'Playfair Display', serif; font-size: 0.75rem;
             letter-spacing: 0.7em; text-transform: uppercase; color: var(--gold);
@@ -44,7 +43,7 @@
             text-align: left;
         }
 
-        /* 雙座標：WADE & CLOUDY 的連結 */
+        /* 雙座標 */
         .location-log {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.5rem; letter-spacing: 0.3em;
@@ -59,14 +58,14 @@
             margin-bottom: 30px;
         }
 
-        /* 名字說明：遊牧生活 */
         .nomadic-def {
             font-family: 'Noto Serif TC', serif; font-size: 0.8rem;
             line-height: 1.8; color: var(--grey); font-weight: 200;
             border-top: 1px solid rgba(212, 180, 131, 0.2); padding-top: 20px;
+            text-align: justify;
         }
 
-        /* 延伸感連結按鈕：致中顯示 */
+        /* 延伸感連結按鈕 */
         .btn-container { text-align: center; margin-top: 70px; width: 100%; }
         .enter-btn {
             font-family: 'Montserrat', sans-serif; font-size: 0.65rem;
@@ -82,27 +81,29 @@
         .enter-btn:hover { color: var(--gold); }
         .enter-btn:hover::after { width: 65px; background: var(--gold); }
 
-        /* --- 第二頁：ARCHIVES 藝廊 --- */
-        .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 120px; }
+        /* --- 第二頁：ARCHIVES --- */
+        .archives-section { min-height: 100vh; background-color: var(--black); padding-bottom: 140px; }
         .header { text-align: center; padding: 100px 20px 45px 20px; letter-spacing: 0.4em; font-size: 0.6rem; text-transform: uppercase; color: var(--grey); }
-        .header strong { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); display: block; margin-bottom: 10px; font-weight: 400; font-style: italic; }
+        .header strong { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--white); display: block; margin-bottom: 10px; font-weight: 400; font-style: italic; letter-spacing: 0.02em; }
 
         .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px; }
-        .card { position: relative; aspect-ratio: 3 / 4.5; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px 10px; box-sizing: border-box; }
-        .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 1.2s cubic-bezier(0.2, 1, 0.3, 1); filter: brightness(0.6) grayscale(15%); z-index: 1; }
-        .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 70%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); z-index: 2; }
-        .card-content { position: relative; z-index: 3; text-align: center; }
-        .vol { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: #fff; margin-bottom: 6px; }
-        .title { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: #999; }
-        .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.7rem; color: #777; font-weight: 300; }
+        .card { position: relative; aspect-ratio: 3 / 4.5; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 25px 15px; box-sizing: border-box; }
+        .card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 1.5s cubic-bezier(0.2, 1, 0.3, 1); filter: brightness(0.6) grayscale(15%); z-index: 1; }
+        .card:hover .card-bg { transform: scale(1.1); filter: brightness(0.8) grayscale(0%); }
+        .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; background: linear-gradient(to top, rgba(0,0,0,0.95), transparent); z-index: 2; }
+        .card-content { position: relative; z-index: 3; text-align: left; }
+        .vol { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-style: italic; color: #fff; margin-bottom: 8px; font-weight: 400; }
+        .title { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+        .subtitle { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; color: #999; font-weight: 300; letter-spacing: 0.05em; line-height: 1.6; }
 
-        .social-links { text-align: center; margin-top: 60px; display: flex; justify-content: center; gap: 30px; position: relative; z-index: 3; }
-        .social-item { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--grey); text-decoration: none; }
+        .social-links { text-align: center; margin-top: 80px; display: flex; justify-content: center; gap: 40px; position: relative; z-index: 3; }
+        .social-item { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: 0.3s; }
+        .social-item:hover { color: var(--gold); }
 
-        .footer-marquee { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); padding: 20px 0 calc(20px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.05); z-index: 100; }
-        .marquee-inner { display: inline-block; white-space: nowrap; animation: move 50s linear infinite; font-size: 0.5rem; letter-spacing: 0.3em; color: var(--grey); text-transform: uppercase; }
+        .footer-marquee { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); padding: 22px 0 calc(22px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(212,180,131,0.1); z-index: 100; }
+        .marquee-inner { display: inline-block; white-space: nowrap; animation: move 60s linear infinite; font-size: 0.5rem; letter-spacing: 0.4em; color: #444; text-transform: uppercase; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     </style>
 </head>
@@ -143,37 +144,61 @@
         <div class="gallery">
             <a href="vol_01.html" class="card">
                 <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1000');"></div>
-                <div class="card-content"><div class="vol">Vol. 01</div><div class="title">The Travel Issue</div><div class="subtitle">羅曼蒂克的遊牧路徑</div></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 01</div>
+                    <div class="title">The Travel Issue</div>
+                    <div class="subtitle">羅曼蒂克的遊牧路徑</div>
+                </div>
             </a>
             <a href="vol_02.html" class="card">
                 <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000');"></div>
-                <div class="card-content"><div class="vol">Vol. 02</div><div class="title">The Taste Issue</div><div class="subtitle">交付直覺的餐桌對話</div></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 02</div>
+                    <div class="title">The Taste Issue</div>
+                    <div class="subtitle">交付直覺的餐桌對話</div>
+                </div>
             </a>
             <a href="vol_03.html" class="card">
                 <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000');"></div>
-                <div class="card-content"><div class="vol">Vol. 03</div><div class="title">The Void Issue</div><div class="subtitle">遠離喧囂的靜謐留白</div></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 03</div>
+                    <div class="title">The Void Issue</div>
+                    <div class="subtitle">遠離喧囂的靜謐留白</div>
+                </div>
             </a>
             <a href="vol_04.html" class="card">
                 <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1000');"></div>
-                <div class="card-content"><div class="vol">Vol. 04</div><div class="title">The Sound Issue</div><div class="subtitle">共振靈魂的頻率紀錄</div></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 04</div>
+                    <div class="title">The Sound Issue</div>
+                    <div class="subtitle">共振靈魂的頻率紀錄</div>
+                </div>
             </a>
             <a href="vol_05.html" class="card">
-                <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/7464266497419567654');"></div>
-                <div class="card-content"><div class="vol">Vol. 05</div><div class="title">The Vision Issue</div><div class="subtitle">預演未來的旅遊畫報</div></div>
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 05</div>
+                    <div class="title">The Vision Issue</div>
+                    <div class="subtitle">預演未來的旅遊畫報</div>
+                </div>
             </a>
             <a href="vol_06.html" class="card">
-                <div class="card-bg" style="background-image: url('http://googleusercontent.com/image_collection/image_retrieval/3399265737145122748');"></div>
-                <div class="card-content"><div class="vol">Vol. 06</div><div class="title">The Night Issue</div><div class="subtitle">沉溺光影的午夜逃亡</div></div>
+                <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1467139701929-18c0d27a7516?q=80&w=1000');"></div>
+                <div class="card-content">
+                    <div class="vol">Vol. 06</div>
+                    <div class="title">The Night Issue</div>
+                    <div class="subtitle">沉溺光影的午夜逃亡</div>
+                </div>
             </a>
         </div>
         <div class="social-links">
-            <a href="你的IG網址" target="_blank" class="social-item">Instagram</a>
-            <a href="你的FB網址" target="_blank" class="social-item">Facebook</a>
+            <a href="#" target="_blank" class="social-item">Instagram</a>
+            <a href="#" target="_blank" class="social-item">Facebook</a>
         </div>
     </section>
 
     <div class="footer-marquee">
-        <div class="marquee-inner">NOMADIC : THE ART OF BELONGING ✦ BEYOND THE HORIZON ✦ THE BEAUTY OF THE UNKNOWN ✦ LIFE IN TRANSIT ✦ NOMADIC SOUL ✦ NO DESTINATION REQUIRED ✦ DRIFTING IN STYLE ✦ THE ART OF BEING ✦ LOST & FOUND ✦A NOMADIC ROMANCE ✦ SCENERY OF TWO ✦ SURRENDER TO THE MOMENT ✦ THE JOURNEY IS THE MUSE ✦</div>
+        <div class="marquee-inner">NOMADIC : THE ART OF BELONGING ✦ BEYOND THE HORIZON ✦ THE BEAUTY OF THE UNKNOWN ✦ LIFE IN TRANSIT ✦ NOMADIC SOUL ✦ NO DESTINATION REQUIRED ✦ DRIFTING IN STYLE ✦ THE ART OF BEING ✦ LOST & FOUND ✦ A NOMADIC ROMANCE ✦ SCENERY OF TWO ✦ SURRENDER TO THE MOMENT ✦ THE JOURNEY IS THE MUSE ✦</div>
     </div>
 </body>
 </html>

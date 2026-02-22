@@ -17,53 +17,44 @@
         .main-container {
             height: 100vh; display: flex; flex-direction: column;
             justify-content: space-between; align-items: center;
-            padding: calc(85px + env(safe-area-inset-top)) 40px calc(80px + env(safe-area-inset-bottom));
+            padding: calc(75px + env(safe-area-inset-top)) 40px calc(70px + env(safe-area-inset-bottom));
             box-sizing: border-box; text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
                         url('https://images.unsplash.com/photo-1449156003053-c30205280592?q=80&w=2000') center/cover no-repeat;
             position: relative; z-index: 2;
         }
 
         header h2 { font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--gold); margin-bottom: 12px; }
-        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.6rem; font-weight: 700; margin: 0; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
         
-        .footprint-stats {
-            margin-top: 20px; font-size: 0.65rem; letter-spacing: 0.2em; 
-            color: var(--grey); text-transform: uppercase; cursor: pointer;
-        }
+        .footprint-stats { margin-top: 15px; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--grey); text-transform: uppercase; cursor: pointer; }
         #regions-count { color: var(--white); font-weight: 600; margin-left: 5px; }
 
         .display-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+
+        /* --- 第一階段：敘事扉頁 (羅曼蒂克的遊牧路徑) --- */
+        #prologue { transition: opacity 1s ease, transform 1s ease; }
+        .location-log { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; letter-spacing: 0.35em; color: var(--gold); text-transform: uppercase; margin-bottom: 35px; line-height: 1.8; }
         
-        #result { 
-            font-family: 'Noto Serif TC', serif; font-size: 2.5rem; 
-            letter-spacing: 0.1em; margin-bottom: 15px; min-height: 4rem; 
-            font-weight: 500; color: var(--white); transition: 0.5s ease;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
-            word-break: keep-all;
-        }
+        .narrative-title { font-family: 'Noto Serif TC', serif; font-size: 1.15rem; color: var(--white); margin-bottom: 25px; letter-spacing: 0.15em; font-weight: 500; }
+        .story-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; color: #ccc; line-height: 2.4; font-weight: 300; letter-spacing: 0.05em; }
+        .story-text strong { color: var(--gold); font-weight: 500; }
 
-        #mission-task {
-            font-family: 'Noto Serif TC', serif; font-size: 1rem;
-            color: var(--gold); letter-spacing: 0.05em;
-            min-height: 3.5rem; font-style: italic; opacity: 0; transition: 1s ease;
-            line-height: 1.6; max-width: 280px; margin: 0 auto;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        }
+        /* --- 第二階段：抽籤核心 (初始隱藏) --- */
+        #map-core { display: none; opacity: 0; transform: translateY(20px); transition: 1.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        #result { font-family: 'Noto Serif TC', serif; font-size: 2.8rem; letter-spacing: 0.1em; margin-bottom: 15px; font-weight: 500; color: var(--white); text-shadow: 0 0 20px rgba(0,0,0,0.8); }
+        #mission-task { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: var(--gold); letter-spacing: 0.05em; min-height: 4rem; font-style: italic; line-height: 1.6; max-width: 280px; margin: 0 auto; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
 
+        /* 按鈕區 */
         .action-group { width: 100%; display: flex; flex-direction: column; gap: 15px; }
-        .btn-main {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.4); 
-            color: var(--white); padding: 22px; font-size: 0.8rem; letter-spacing: 0.4em; 
-            text-transform: uppercase; cursor: pointer; border-radius: 0;
-            -webkit-tap-highlight-color: transparent; backdrop-filter: blur(5px);
-        }
+        .btn-main { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 22px; font-size: 0.8rem; letter-spacing: 0.4em; text-transform: uppercase; cursor: pointer; border-radius: 0; -webkit-tap-highlight-color: transparent; }
         .btn-main:active { background: var(--white); color: var(--black); }
         
-        #check-in-section { display: none; }
-        .checkin-btn { border: none; background: var(--gold); color: var(--black); font-weight: 600; }
+        /* 啟程按鈕 */
+        #unfold-btn { border: none; border-bottom: 1px solid rgba(212, 180, 131, 0.5); padding: 12px 0; letter-spacing: 0.5em; background: transparent; color: var(--gold); font-size: 0.7rem; transition: 0.5s; cursor: pointer; }
+        #unfold-btn:hover { color: var(--white); border-color: var(--white); }
 
-        .back-link { position: fixed; top: calc(25px + env(safe-area-inset-top)); left: 25px; text-decoration: none; color: #999; font-size: 0.65rem; letter-spacing: 0.3em; z-index: 10; }
+        .back-link { position: fixed; top: calc(25px + env(safe-area-inset-top)); left: 25px; text-decoration: none; color: #777; font-size: 0.65rem; letter-spacing: 0.3em; z-index: 10; }
     </style>
 </head>
 <body>
@@ -80,19 +71,41 @@
         </header>
 
         <div class="display-area">
-            <div id="result">The Unknown</div>
-            <div id="mission-task">Ready to wander?</div>
+            <div id="prologue">
+                <div class="location-log">
+                    23.98°N 120.68°E / WADE<br>
+                    23.44°N 120.40°E / CLOUDY
+                </div>
+                <div class="narrative-title">羅曼蒂克的遊牧路徑</div>
+                <div class="story-text">
+                    最遠的旅行，<br>
+                    終點永遠是彼此的側臉。<br><br>
+                    <strong>草屯</strong> 與 <strong>水上</strong> 之間，<br>
+                    我們不趕路，<br>
+                    我們只是在風景裡。
+                </div>
+            </div>
+
+            <div id="map-core">
+                <div id="result">The Unknown</div>
+                <div id="mission-task">Seek your destination.</div>
+            </div>
         </div>
 
         <div class="action-group">
-            <button class="btn-main" onclick="roll()">Seek Destination</button>
-            <div id="check-in-section">
-                <button class="btn-main checkin-btn" onclick="recordPlace()">Mark as Explored</button>
+            <button id="unfold-btn" onclick="unfold()">BEGIN THE JOURNEY</button>
+            
+            <div id="action-btns" style="display:none; flex-direction: column; gap: 15px; width: 100%;">
+                <button class="btn-main" onclick="roll()">Seek Destination</button>
+                <div id="check-in-section" style="display:none;">
+                    <button class="btn-main" style="background:var(--gold); color:var(--black); border:none; font-weight:600;" onclick="recordPlace()">Mark as Explored</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // 台灣 368 鄉鎮完整數據
         const taiwanData = [
             "基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區",
             "台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區",
@@ -108,7 +121,7 @@
             "嘉義市 東區","嘉義市 西區",
             "嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉",
             "台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區",
-            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 鳳山區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
+            "高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區",
             "屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉",
             "宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉",
             "花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉",
@@ -118,6 +131,7 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
         
+        // 100 個任務清單
         const rawMissions = [
             "在路邊買一袋當季水果", "拍一張對方的側臉", "找一間開很久的雜貨店", "在便利商店買一罐沒喝過的飲料", "紀錄一段導航的聲音", "找個看得到山頭的地方停車", "跟當地的路標合照一張", "尋找當地最老的一棵樹", "在當地買一份傳統早餐", "拍下這條路上的電線桿剪影", "找一條沒走過的小徑鑽進去", "聽一首符合當下路況的歌", "在擋風玻璃拍一張倒影照片", "找一個投幣式販賣機買飲料", "在空曠處大喊一聲", "紀錄此刻的里程數", "拍一張對方在看地圖的樣子", "尋找這座城鎮最有名的指標", "下車感受一下當地的風速", "找一個有奇怪名字的站牌", "拍一張車內後照鏡的視角", "在當地買一個紀念小標籤", "找個地方看著夕陽消失", "模仿當地路人的走路節奏", "拍一張對方的背影", "在路邊攤點一份沒吃過的小吃", "找尋這條路上最美的一個彎道", "紀錄此刻車內的溫度", "拍下當地警察局或公所的牌子", "寫一張明信片給未來的自己", "找一個安靜的空地停十分鐘", "拍一張對方的笑容", "尋找這區最有特色的廟宇", "觀察一種當地的植物", "錄一段十秒鐘的路邊環境音", "找一個有流水的地方洗手", "拍下天空中最像某種動物的雲", "在車內大聲合唱一首歌", "拍下路邊的一隻狗或貓", "找一個特殊的門牌號碼", "在草地上坐三分鐘", "拍下此刻的光影變化", "找尋這座城鎮的市場入口", "在車窗上寫下彼此的名字", "紀錄路途中的一場小雨", "找一個高度高過三公尺的招牌", "跟對方的影子合照", "找尋當地的老戲院或老建築", "在下一個紅綠燈深呼吸三次", "拍下一張完全失焦的風景", "找一個有大樹遮陰的地方", "數數看這一路看到了多少台同色車", "拍下對方認真開車的神情", "找尋當地的古井或水源", "在沒人的路上跳一下", "錄一段關於此刻心情的語音", "拍一張有對稱感的照片", "找一個色彩很繽紛的牆壁", "跟對方交換一個旅遊秘密", "拍下一張看起來像電影劇照的照片", "找尋當地的特色公園", "在車內噴一點喜歡的香氛", "拍下一張路面的質地照片", "找一個有風標或旗幟的地方", "跟對方擊掌慶祝抵達", "拍下一張夜晚的路燈", "找尋這條路上最有味道的舊招牌", "在目的地買兩瓶一樣的飲料", "拍下一張對方在思考的樣子", "找尋這區最高的建築物", "在路邊跟一位路人點頭微笑", "拍下天空最藍的角度", "找尋當地的特色郵筒", "在車內共享一份小點心", "拍下一張黑白效果的照片", "找尋這條路上最舊的一個路標", "觀察路邊的野花三分鐘", "錄下一段風吹過車窗的聲音", "拍下一張垂直向上的天空視角", "找一個有歷史感的長椅坐下", "跟對方說一件感謝的事", "拍下一張對方的局部特寫", "找尋當地的校園大門", "在目的地轉一圈", "拍下一張有強烈對比色的東西", "找尋這條路上最有活力的顏色", "在路邊安靜地聽一次鳥叫", "拍下一張車窗外的地平線", "找尋當地的消防栓", "跟對方預約下一次的旅行主題", "拍下一張有模糊動態感的路景", "找尋這區最窄的一條巷子", "在車內安靜地待一分鐘", "拍下一張天空與電線的交織", "找尋當地的特色路燈設計", "紀錄下這個座標的具體感覺", "拍下一張對方的剪影", "找尋當地的社區公告欄", "跟這份網頁合照一張", "在終點深深一吻"
         ];
@@ -126,17 +140,36 @@
         let currentResult = "";
         document.getElementById('regions-count').innerText = visitedPlaces.length;
 
+        // 展開敘事
+        function unfold() {
+            const prologue = document.getElementById('prologue');
+            const unfoldBtn = document.getElementById('unfold-btn');
+            const mapCore = document.getElementById('map-core');
+            const actionBtns = document.getElementById('action-btns');
+
+            prologue.style.opacity = '0';
+            prologue.style.transform = 'translateY(-20px)';
+            unfoldBtn.style.opacity = '0';
+
+            setTimeout(() => {
+                prologue.style.display = 'none';
+                unfoldBtn.style.display = 'none';
+                mapCore.style.display = 'block';
+                actionBtns.style.display = 'flex';
+                setTimeout(() => {
+                    mapCore.style.opacity = '1';
+                    mapCore.style.transform = 'translateY(0)';
+                }, 50);
+            }, 1000);
+        }
+
         function roll() {
             const resultEl = document.getElementById('result');
             const taskEl = document.getElementById('mission-task');
             const checkInSection = document.getElementById('check-in-section');
             const pool = taiwanData.filter(place => !visitedPlaces.includes(place));
             
-            if (pool.length === 0) { 
-                resultEl.innerText = "All Explored."; 
-                taskEl.innerText = "";
-                return; 
-            }
+            if (pool.length === 0) { resultEl.innerText = "All Explored."; taskEl.innerText = ""; return; }
 
             resultEl.style.opacity = 0;
             taskEl.style.opacity = 0;
@@ -161,10 +194,8 @@
         }
 
         function clearFootprints() {
-            if (confirm("確定要清空所有足跡，重啟這段全台旅程嗎？")) {
-                visitedPlaces = [];
-                localStorage.removeItem('nomadic_footprints');
-                location.reload();
+            if (confirm("要重啟全台 368 鄉鎮的遊牧旅程嗎？")) {
+                visitedPlaces = []; localStorage.removeItem('nomadic_footprints'); location.reload();
             }
         }
     </script>

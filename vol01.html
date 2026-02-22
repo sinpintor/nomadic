@@ -20,6 +20,7 @@
         }
         
         .back-nav { position: fixed; top: calc(20px + env(safe-area-inset-top)); left: 25px; z-index: 100; text-decoration: none; color: var(--grey); font-size: 0.6rem; letter-spacing: 0.3em; transition: 0.3s; }
+        .back-nav:hover { color: var(--gold); }
 
         header h2 { font-family: 'Playfair Display', serif; font-size: 0.6rem; letter-spacing: 0.6em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
         header h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.2rem; font-weight: 700; margin: 0; }
@@ -48,7 +49,6 @@
 
         .action-group { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         
-        /* 自訂地點輸入框的樣式 */
         .location-input { background: transparent; border: none; border-bottom: 1px solid rgba(212, 180, 131, 0.5); color: var(--white); font-family: 'Noto Serif TC', serif; font-size: 1rem; padding: 10px 5px; text-align: center; letter-spacing: 0.1em; outline: none; transition: border-color 0.3s; width: 100%; box-sizing: border-box; margin-bottom: 5px; }
         .location-input::placeholder { color: #555; font-size: 0.8rem; letter-spacing: 0.05em; }
         .location-input:focus { border-bottom: 1px solid var(--gold); }
@@ -62,13 +62,14 @@
         .journal-date { font-size: 0.6rem; color: var(--grey); letter-spacing: 0.2em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
         .journal-place { font-family: 'Noto Serif TC', serif; font-size: 1.1rem; margin: 8px 0; font-weight: 500; }
         .journal-mission { font-size: 0.8rem; color: #aaa; font-weight: 300; line-height: 1.6; }
+        .vol-badge { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; color: var(--gold); border: 1px solid var(--gold); padding: 2px 6px; border-radius: 2px; letter-spacing: 0.1em;}
         .clear-btn { margin-top: 40px; background: transparent; border: none; color: #333; font-size: 0.5rem; letter-spacing: 0.2em; cursor: pointer; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="noise"></div>
-    <a href="index.html" class="back-nav">← BACK TO ARCHIVE</a>
+    <a href="index.html" class="back-nav">← COMPASS</a>
 
     <div class="main-container">
         <header>
@@ -87,8 +88,7 @@
 
             <div id="map-core" class="content-block">
                 <div id="result">The Unknown</div>
-                <div class="mission-box" id="mission-box">
-                    </div>
+                <div class="mission-box" id="mission-box"></div>
             </div>
         </div>
 
@@ -106,9 +106,9 @@
         </div>
 
         <div class="archive-section" id="archive-section" style="display:none;">
-            <div style="font-family:'Playfair Display'; font-style:italic; color:var(--gold); margin-bottom:25px; font-size:1rem;">The Travel Journal</div>
+            <div style="font-family:'Playfair Display'; font-style:italic; color:var(--gold); margin-bottom:25px; font-size:1rem;">The Master Journal</div>
             <div id="journal-list"></div>
-            <button class="clear-btn" onclick="clearFootprints()">RESET ALL DATA</button>
+            <button class="clear-btn" onclick="clearFootprints()">RESET MASTER JOURNAL</button>
         </div>
     </div>
 
@@ -138,7 +138,6 @@
             "連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"
         ];
 
-        // 題庫區 1：TASKS (浪漫的觀察 / 紀錄細節)
         const tasks = [
             "拍下對方在車窗玻璃上的倒影，背景是移動的風景。",
             "尋找路邊一塊生鏽或斑駁的招牌，紀錄時間的顆粒感。",
@@ -172,7 +171,6 @@
             "紀錄此刻車內音響正在播放的歌單名稱。"
         ];
 
-        // 題庫區 2：CHALLENGES (搞怪的互動 / 雙人大冒險)
         const challenges = [
             "拍一張兩人在公路旁影子正在接吻的照片。",
             "利用車外後照鏡，拍下兩人在車內擠眉弄眼的合照。",
@@ -206,24 +204,26 @@
             "拍一張兩人對著鏡子刷牙、洗臉或整理儀容的日常合照。"
         ];
 
-        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_full_data')) || [];
+        // 讀取全域旅行日記
+        let visitedPlaces = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let currentResult = "";
         let currentLogEntry = "";
         let isRolling = false;
 
         window.onload = () => {
-            document.getElementById('regions-count').innerText = visitedPlaces.length;
+            const uniquePlaces = new Set(visitedPlaces.map(item => item.name));
+            document.getElementById('regions-count').innerText = uniquePlaces.size;
+
             if (visitedPlaces.length > 0) {
                 document.getElementById('archive-section').style.display = 'block';
                 renderJournal();
             }
 
-            // 讀取從 index.html 傳遞過來的地點參數 (如果有的話)
+            // 讀取從 index.html 傳遞過來的地點參數
             const urlParams = new URLSearchParams(window.location.search);
             const loc = urlParams.get('loc');
             if (loc) {
                 document.getElementById('custom-location').value = loc;
-                // 自動展開按鈕
                 setTimeout(unfold, 500); 
             }
         };
@@ -249,7 +249,7 @@
             const missionBox = document.getElementById('mission-box');
             const checkInSection = document.getElementById('check-in-section');
             
-            // 決定目的地池 (如果有輸入自訂地點，池子裡就只有那個地點)
+            // 決定目的地池
             let pool = [];
             if (locationInput !== "") {
                 pool = [locationInput];
@@ -266,12 +266,11 @@
             btn.innerText = "SEEKING..."; 
             checkInSection.style.display = "none";
 
-            // 動畫階段：快速洗牌
+            // 動畫階段
             resultEl.style.color = "#888"; 
             
             let rollInterval = setInterval(() => {
                 resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
-                
                 missionBox.innerHTML = `
                     <div>
                         <div class="mission-label">TASK</div>
@@ -325,9 +324,10 @@
             const dd = String(d.getDate()).padStart(2, '0');
             const formattedDate = `${yyyy}.${mm}.${dd}`;
 
-            const newRecord = { name: currentResult, mission: currentLogEntry, date: formattedDate };
+            // 加入 vol 標籤區分是哪本雜誌的紀錄
+            const newRecord = { name: currentResult, mission: currentLogEntry, date: formattedDate, vol: 'VOL. 01' };
             visitedPlaces.unshift(newRecord);
-            localStorage.setItem('nomadic_full_data', JSON.stringify(visitedPlaces));
+            localStorage.setItem('nomadic_master_journal', JSON.stringify(visitedPlaces));
             location.reload();
         }
 
@@ -335,16 +335,19 @@
             const listEl = document.getElementById('journal-list');
             listEl.innerHTML = visitedPlaces.map(item => `
                 <div class="journal-item">
-                    <div class="journal-date">${item.date}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <div class="journal-date">${item.date}</div>
+                        <div class="vol-badge">${item.vol || 'VOL. 01'}</div>
+                    </div>
                     <div class="journal-place">${item.name}</div>
-                    <div class="journal-mission" style="margin-top: 10px;">${item.mission}</div>
+                    <div class="journal-mission">${item.mission}</div>
                 </div>
             `).join('');
         }
 
         function clearFootprints() {
-            if (confirm("確定要永久重置 368 鄉鎮的所有足跡紀錄嗎？")) {
-                localStorage.removeItem('nomadic_full_data'); location.reload();
+            if (confirm("警告：這將會清除全域旅遊紀錄（包含 Vol 01 與 Vol 02），確定重置嗎？")) {
+                localStorage.removeItem('nomadic_master_journal'); location.reload();
             }
         }
     </script>

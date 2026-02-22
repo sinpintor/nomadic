@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WADE & CLOUDY - The Art of Wandering</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --black: #111111;
             --white: #fdfdfd;
             --grey: #888888;
+            --light-grey: #f4f4f4;
             --vogue-red: #a81c1c;
         }
 
@@ -24,279 +25,67 @@
             scroll-behavior: smooth;
         }
 
-        /* ------------------
-           PAGE 1: COVER (風景大片版)
-           ------------------ */
+        /* PAGE 1: COVER */
         #index-page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: linear-gradient(rgba(0,0,0,0.3), rgba(17,17,17,0.85)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-            color: var(--white);
-            z-index: 10;
+            color: var(--white); z-index: 10;
             transition: opacity 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
-            padding: 40px;
-            box-sizing: border-box;
+            padding: 40px; box-sizing: border-box;
         }
+        .index-container { max-width: 650px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .index-issue { font-size: 0.7rem; letter-spacing: 0.4em; color: #d1d1d1; text-transform: uppercase; margin-bottom: 3vh; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; width: 100%; text-align: center; }
+        .index-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; margin: 0; letter-spacing: 0.08em; text-align: center; line-height: 1.1; text-transform: uppercase; }
+        .index-subtitle { font-size: 0.85rem; letter-spacing: 0.5em; text-transform: uppercase; margin-top: 15px; margin-bottom: 50px; color: #b0b0b0; text-align: center; }
+        .editor-note { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 2; text-align: justify; color: #e0e0e0; margin-bottom: 50px; padding: 0 20px; font-weight: 300; }
+        .editor-note strong { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); display: block; margin-bottom: 15px; font-weight: 600; }
+        .enter-btn { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 0.3em; text-transform: uppercase; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid var(--white); padding: 18px 45px; cursor: pointer; transition: all 0.5s ease; color: var(--white); }
+        .enter-btn:hover { background: var(--white); color: var(--black); }
 
-        .index-container {
-            max-width: 650px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .index-issue {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
-            color: #d1d1d1;
-            text-transform: uppercase;
-            margin-bottom: 3vh;
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            padding-bottom: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .index-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 700;
-            margin: 0;
-            letter-spacing: 0.08em;
-            text-align: center;
-            line-height: 1.1;
-            text-transform: uppercase;
-        }
-
-        .index-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            margin-top: 15px;
-            margin-bottom: 50px;
-            color: #b0b0b0;
-            text-align: center;
-        }
-
-        .editor-note {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 1rem;
-            line-height: 2;
-            text-align: justify;
-            color: #e0e0e0;
-            margin-bottom: 50px;
-            position: relative;
-            padding: 0 20px;
-            font-weight: 300;
-        }
-
-        .editor-note strong {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            font-style: normal;
-            color: var(--white);
-            display: block;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .enter-btn {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--white);
-            padding: 18px 45px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            color: var(--white);
-        }
-
-        .enter-btn:hover {
-            background: var(--white);
-            color: var(--black);
-        }
-
-        /* ------------------
-           PAGE 2: GENERATOR (極簡內頁版)
-           ------------------ */
+        /* PAGE 2: GENERATOR */
         #generator-page {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--white);
-            color: var(--black);
-            z-index: 5;
-            opacity: 0; 
-            pointer-events: none;
-            padding: 40px 20px;
-            box-sizing: border-box;
-            transition: opacity 1.2s ease-in-out;
+            position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-color: var(--white); color: var(--black); z-index: 5; opacity: 0; pointer-events: none;
+            padding: 40px 20px; box-sizing: border-box; transition: opacity 1.2s ease-in-out;
         }
-
-        .magazine-layout {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .nav-back {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            cursor: pointer;
-            color: var(--grey);
-            margin-bottom: 50px;
-            display: inline-block;
-            transition: color 0.3s;
-        }
+        .magazine-layout { width: 100%; max-width: 520px; }
+        .nav-back { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; color: var(--grey); margin-bottom: 30px; display: inline-block; transition: color 0.3s; }
         .nav-back:hover { color: var(--black); }
-
-        .gen-masthead {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 0.1em;
-            margin: 0;
-            text-transform: uppercase;
-        }
-
-        .control-panel {
-            text-align: center;
-            margin: 40px 0 30px 0;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85em;
-            letter-spacing: 0.1em;
-        }
         
-        select {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 1.1em;
-            padding: 5px;
-            border: none;
-            border-bottom: 1px solid var(--black);
-            background: transparent;
-            color: var(--black);
-            outline: none;
-            cursor: pointer;
-            letter-spacing: 2px;
-            text-align: center;
-        }
+        .gen-masthead { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; text-align: center; letter-spacing: 0.1em; margin: 0; text-transform: uppercase; }
+        .control-panel { text-align: center; margin: 30px 0; font-size: 0.85em; letter-spacing: 0.1em; }
+        select { font-family: 'Noto Serif TC', serif; font-size: 1.1em; padding: 5px; border: none; border-bottom: 1px solid var(--black); background: transparent; color: var(--black); outline: none; cursor: pointer; letter-spacing: 2px; text-align: center; }
 
-        .destination-area {
-            text-align: center;
-            min-height: 160px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .result-box {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 3.5em;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            color: var(--vogue-red);
-            line-height: 1.2;
-            transition: color 0.3s;
-        }
+        .destination-area { text-align: center; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 20px; }
+        .result-box { font-family: 'Noto Serif TC', serif; font-size: 3.2em; font-weight: 300; letter-spacing: 0.1em; color: var(--vogue-red); line-height: 1.2; transition: color 0.3s; }
+        .duration-badge { font-size: 0.8em; letter-spacing: 0.15em; color: var(--grey); margin-top: 20px; text-transform: uppercase; display: none; border-top: 1px solid #eaeaea; padding-top: 15px; }
 
-        .duration-badge {
-            font-family: 'Montserrat', 'Noto Serif TC', sans-serif;
-            font-size: 0.85em;
-            letter-spacing: 0.15em;
-            color: var(--grey);
-            margin-top: 25px;
-            text-transform: uppercase;
-            display: none;
-            border-top: 1px solid #eaeaea;
-            padding-top: 15px;
-        }
+        .mission-box { font-family: 'Noto Serif TC', serif; font-size: 0.95em; color: #222; padding: 25px 0 15px 0; margin-top: 10px; display: none; text-align: justify; line-height: 1.9; border-top: 1px solid var(--black); font-weight: 300; }
+        .mission-title { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.8em; letter-spacing: 0.2em; margin-bottom: 10px; color: var(--black); text-transform: uppercase; }
 
-        .mission-box {
-            font-family: 'Noto Serif TC', serif;
-            font-size: 0.95em;
-            color: #222;
-            padding: 30px 0;
-            margin-top: 10px;
-            margin-bottom: 40px;
-            display: none;
-            text-align: justify;
-            line-height: 1.9;
-            border-top: 1px solid var(--black);
-            border-bottom: 1px solid var(--black);
-            font-weight: 300;
-        }
-        
-        .mission-title {
-            font-family: 'Montserrat', sans-serif;
-            font-style: normal;
-            font-weight: 600;
-            font-size: 0.8em;
-            letter-spacing: 0.2em;
-            margin-bottom: 15px;
-            color: var(--black);
-            text-transform: uppercase;
-        }
+        /* 新增：細節資訊區塊 (牌卡與攝影) */
+        .editorial-details { display: none; flex-direction: column; gap: 15px; background: var(--light-grey); padding: 20px; margin-bottom: 30px; border-left: 3px solid var(--black); }
+        .detail-item { font-size: 0.85em; line-height: 1.6; color: #333; }
+        .detail-item strong { font-family: 'Playfair Display', serif; font-size: 1.1em; font-style: italic; display: block; margin-bottom: 5px; color: var(--black); }
 
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .action-btn { font-family: 'Montserrat', sans-serif; font-size: 0.75em; padding: 18px; cursor: pointer; border: 1px solid var(--black); transition: all 0.4s ease; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; text-decoration: none; width: 100%; box-sizing: border-box; display: block; font-weight: 500;}
         
-        .action-btn {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8em;
-            padding: 20px;
-            cursor: pointer;
-            border: 1px solid var(--black);
-            background-color: var(--black);
-            color: var(--white);
-            transition: all 0.4s ease;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            text-align: center;
-            text-decoration: none;
-            width: 100%;
-            box-sizing: border-box;
-            display: block;
-        }
+        .draw-btn { background-color: var(--black); color: var(--white); }
+        .draw-btn:hover { background-color: transparent; color: var(--black); }
         
-        .action-btn:hover { background-color: transparent; color: var(--black); }
+        .dispatch-btn { background-color: transparent; color: var(--black); display: none; }
+        .dispatch-btn:hover { background-color: var(--light-grey); }
         
-        .map-btn {
-            background-color: transparent;
-            color: var(--black);
-            display: none;
-        }
-        .map-btn:hover { background-color: #f4f4f4; }
+        .map-btn { background-color: transparent; color: var(--grey); border: none; padding: 10px; display: none; letter-spacing: 0.1em; }
+        .map-btn:hover { color: var(--black); }
 
-        /* 隱藏狀態動畫 */
-        .hidden {
-            opacity: 0;
-            transform: translateY(-30px);
-            pointer-events: none;
-        }
+        .hidden { opacity: 0; transform: translateY(-30px); pointer-events: none; }
+        
+        /* Loading 動畫 */
+        .loader { display: none; font-size: 0.8em; letter-spacing: 0.2em; color: var(--vogue-red); text-align: center; margin-top: 10px; font-style: italic; }
     </style>
 </head>
 <body>
@@ -306,23 +95,19 @@
             <div class="index-issue">Vol. 01 — The Travel Issue</div>
             <h1 class="index-title">WADE & CLOUDY</h1>
             <div class="index-subtitle">The Art of Wandering</div>
-            
             <div class="editor-note">
                 <strong>Editor's Note —</strong>
                 旅行，是我們在平靜的歲月裡，為彼此留下的專屬空白。<br><br>
                 不需要精準的導航，也不需要完美的行程表。這是一場專屬於 WADE 與 CLOUDY 的盲旅。讓宇宙的吸引力法則為我們決定下一個經緯度；帶上相機，套上最愛的底片濾鏡，將這趟漫無目的的邂逅，顯化成觀景窗裡最迷人的光影。<br><br>
                 把副駕的位子準備好，把路線的控制權交給直覺，我們一起出發吧。
             </div>
-
             <button class="enter-btn" onclick="enterZine()">Turn The Page</button>
         </div>
     </div>
 
-
     <div id="generator-page">
         <div class="magazine-layout">
             <div class="nav-back" onclick="goBack()">← Back to Cover</div>
-            
             <h2 class="gen-masthead">Destination</h2>
             
             <div class="control-panel">
@@ -337,34 +122,32 @@
 
             <div class="mission-box" id="mission-box"></div>
 
+            <div class="editorial-details" id="editorial-details">
+                <div class="detail-item" id="oracle-card"></div>
+                <div class="detail-item" id="lens-vibe"></div>
+            </div>
+
             <div class="btn-group">
                 <button class="action-btn draw-btn" onclick="startRolling()">Reveal The Location</button>
+                <button class="action-btn dispatch-btn" id="dispatch-btn" onclick="dispatchJourney()">Dispatch to LINE & Vault</button>
+                <div class="loader" id="loader">Manifesting and synchronizing...</div>
                 <a href="#" target="_blank" class="action-btn map-btn" id="map-btn">Explore The Map</a>
             </div>
         </div>
     </div>
 
 <script>
-    // --- 頁面切換 ---
+    // --- 換頁邏輯 ---
     function enterZine() {
         document.getElementById('index-page').classList.add('hidden');
-        setTimeout(() => {
-            const genPage = document.getElementById('generator-page');
-            genPage.style.opacity = '1';
-            genPage.style.pointerEvents = 'auto';
-        }, 1000);
+        setTimeout(() => { document.getElementById('generator-page').style.opacity = '1'; document.getElementById('generator-page').style.pointerEvents = 'auto'; }, 1000);
     }
-
     function goBack() {
-        const genPage = document.getElementById('generator-page');
-        genPage.style.opacity = '0';
-        genPage.style.pointerEvents = 'none';
-        setTimeout(() => {
-            document.getElementById('index-page').classList.remove('hidden');
-        }, 800);
+        document.getElementById('generator-page').style.opacity = '0'; document.getElementById('generator-page').style.pointerEvents = 'none';
+        setTimeout(() => { document.getElementById('index-page').classList.remove('hidden'); }, 800);
     }
 
-    // --- 台灣縣市鄉鎮資料庫 ---
+    // --- 資料庫 ---
     const taiwanData = {
         "基隆市": ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
         "台北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
@@ -390,72 +173,57 @@
         "連江縣": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
     };
 
-    const regions = {
-        "北": ["基隆市", "台北市", "新北市", "桃園市", "新竹市", "新竹縣"],
-        "中": ["苗栗縣", "台中市", "彰化縣", "南投縣", "雲林縣"],
-        "南": ["嘉義市", "嘉義縣", "台南市", "高雄市", "屏東縣"],
-        "東": ["宜蘭縣", "花蓮縣", "台東縣"],
-        "外島": ["澎湖縣", "金門縣", "連江縣"]
-    };
-
-    // 專屬兩人的浪漫邂逅任務
     const encounters = [
         "這是一場專屬兩人的視覺顯化。尋找這座城鎮裡，光影層次最豐富的角落。為彼此按下快門，留住那份渾然天成的電影感。",
         "牽著手在巷弄間漫無目的地走十分鐘。試著用底片濾鏡的視角，重新觀察陌生的街道與老建築的肌理。",
         "一起走進一家沒有刻意裝潢的在地小吃，點一份從沒吃過的餐點。在咀嚼之間，品味兩人共享的未知驚喜。",
-        "丟掉行程表。找一個能看見天空的高處，什麼都不想，單純享受與彼此並肩發呆的片刻。",
-        "這是一場與未知的浪漫調情。隨機走進一條陌生的街道，尋找一抹鮮豔的色彩——也許是一扇斑駁的紅門，也許是盛開的九重葛，一起將它捕捉下來。",
-        "走進當地的傳統市場，那是這座城市最真實的後台。買一樣兩人都不曾嚐過的在地小吃，享受這份只屬於你們的脫軌日常。"
+        "丟掉行程表。找一個能看見天空的高處，什麼都不想，單純享受與彼此並肩發呆的片刻。"
     ];
 
-    let rollInterval;
+    // 新增：宇宙神諭卡 (Lenormand 靈感)
+    const oracleCards = [
+        { name: "The Key (鑰匙)", text: "命運的鎖已經解開。這趟旅程的某個瞬間，將為你們解開近期的一個小煩惱，讓靈感湧現。" },
+        { name: "The Clover (幸運草)", text: "幸運正悄悄降臨。請特別留意路邊微小的事物，也許是一隻貓、一朵花，那都是宇宙給你們的暗號。" },
+        { name: "The Ship (船隻)", text: "放下控制。不要刻意規劃路線，讓這趟旅程的水流帶領你們前往該去的地方。" },
+        { name: "The Stars (星星)", text: "指引已經明確。今晚非常適合找個沒有光害的角落，抬頭仰望夜空，與宇宙對話。" }
+    ];
+
+    // 新增：攝影與光影提示
+    const photoVibes = [
+        "套上 Dazz Cam 的復古濾鏡，將這座城鎮的粗糙肌理轉化為質感底片大片。",
+        "帶上 Canon PowerShot SX60 HS，試著拉近焦距，捕捉那些常被忽略的建築細節與遠方輪廓。",
+        "夜幕低垂時，記得為彼此裝上 Godox TT350 閃光燈。今晚非常適合拍出帶有強烈張力的雜誌感人像。",
+        "善用自然光。在下午三點到五點的魔幻時刻，尋找陽光灑落在對方髮絲上的完美角度。"
+    ];
+
+    let currentJourney = {}; // 暫存當次抽籤結果，準備傳送給 LINE
 
     window.onload = function() {
         const selectBox = document.getElementById("start-select");
         Object.keys(taiwanData).forEach(county => {
-            let option = document.createElement("option");
-            option.value = county;
-            option.text = county;
+            let option = document.createElement("option"); option.value = county; option.text = county;
             if (county === "嘉義縣") option.selected = true; // 預設所在地
             selectBox.appendChild(option);
         });
     };
 
-    // 中英混合天數建議
-    function getRecommendedDays(startCounty, endCounty) {
-        if (startCounty === endCounty) return "1-Day Getaway / 單日輕慢遊";
-        let startRegion = "", endRegion = "";
-        for (const [region, counties] of Object.entries(regions)) {
-            if (counties.includes(startCounty)) startRegion = region;
-            if (counties.includes(endCounty)) endRegion = region;
-        }
-        if (endRegion === "外島" || startRegion === "外島") return "3 Days+ / 離島避世之旅";
-        const isEastCross = (startRegion === "東" && endRegion !== "東") || (endRegion === "東" && startRegion !== "東");
-        if (isEastCross) return "3 Days / 東岸慢節奏";
-        const isFar = (startRegion === "北" && endRegion === "南") || (startRegion === "南" && endRegion === "北");
-        if (isFar) return "3 Days / 跨越經緯的長途";
-        if (startRegion === endRegion) return "2 Days / 鄰城深度探索";
-        return "2 Days / 週末出逃計畫";
-    }
-
     function startRolling() {
         const destBox = document.getElementById('result');
         const badge = document.getElementById('duration-badge');
         const missionBox = document.getElementById('mission-box');
+        const editorialDetails = document.getElementById('editorial-details');
+        const dispatchBtn = document.getElementById('dispatch-btn');
         const mapBtn = document.getElementById('map-btn');
-        const startCounty = document.getElementById('start-select').value;
         const btn = document.querySelector('.draw-btn');
 
-        badge.style.display = "none";
-        missionBox.style.display = "none";
-        mapBtn.style.display = "none";
-        btn.disabled = true;
-        destBox.style.color = "#ccc";
+        badge.style.display = "none"; missionBox.style.display = "none"; 
+        editorialDetails.style.display = "none"; dispatchBtn.style.display = "none"; mapBtn.style.display = "none";
+        btn.disabled = true; destBox.style.color = "#ccc";
 
         const counties = Object.keys(taiwanData);
         let counter = 0;
         
-        rollInterval = setInterval(() => {
+        let rollInterval = setInterval(() => {
             const randomCounty = counties[Math.floor(Math.random() * counties.length)];
             const townships = taiwanData[randomCounty];
             const randomTownship = townships[Math.floor(Math.random() * townships.length)];
@@ -464,38 +232,85 @@
 
             if (counter > 20) {
                 clearInterval(rollInterval);
-                finishDraw(startCounty, counties);
+                finishDraw(document.getElementById('start-select').value, counties);
             }
         }, 65);
     }
 
     function finishDraw(startCounty, counties) {
-        const destBox = document.getElementById('result');
-        const badge = document.getElementById('duration-badge');
-        const missionBox = document.getElementById('mission-box');
-        const mapBtn = document.getElementById('map-btn');
-        const btn = document.querySelector('.draw-btn');
-
         const finalCounty = counties[Math.floor(Math.random() * counties.length)];
         const townships = taiwanData[finalCounty];
         const finalTownship = townships[Math.floor(Math.random() * townships.length)];
 
-        destBox.style.color = "var(--vogue-red)"; 
-        destBox.innerHTML = `${finalCounty}<br>${finalTownship}`; 
+        document.getElementById('result').style.color = "var(--vogue-red)"; 
+        document.getElementById('result').innerHTML = `${finalCounty}<br>${finalTownship}`; 
         
-        badge.innerText = getRecommendedDays(startCounty, finalCounty);
-        badge.style.display = "block";
+        // 隨機抽取任務、牌卡、攝影提示
+        const mission = encounters[Math.floor(Math.random() * encounters.length)];
+        const card = oracleCards[Math.floor(Math.random() * oracleCards.length)];
+        const vibe = photoVibes[Math.floor(Math.random() * photoVibes.length)];
 
-        const randomMission = encounters[Math.floor(Math.random() * encounters.length)];
-        missionBox.innerHTML = `<div class="mission-title">Editor's Pick</div>${randomMission}`;
-        missionBox.style.display = "block";
+        document.getElementById('duration-badge').style.display = "block";
+        document.getElementById('duration-badge').innerText = `Destination Locked`;
+
+        document.getElementById('mission-box').innerHTML = `<div class="mission-title">Editor's Pick</div>${mission}`;
+        document.getElementById('mission-box').style.display = "block";
+
+        document.getElementById('oracle-card').innerHTML = `<strong>The Oracle Draw / 宇宙顯化牌卡：${card.name}</strong>${card.text}`;
+        document.getElementById('lens-vibe').innerHTML = `<strong>The Lens Vibe / 編輯台光影提示：</strong>${vibe}`;
+        document.getElementById('editorial-details').style.display = "flex";
 
         const searchQuery = `${finalCounty}${finalTownship} 景點`;
-        mapBtn.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
-        mapBtn.style.display = "block"; 
+        document.getElementById('map-btn').href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
+        
+        document.getElementById('dispatch-btn').style.display = "block";
+        document.getElementById('map-btn').style.display = "block"; 
+        document.querySelector('.draw-btn').disabled = false;
+        document.querySelector('.draw-btn').innerText = "Re-Roll Destination";
 
-        btn.disabled = false;
-        btn.innerText = "Re-Roll Destination";
+        // 儲存當前狀態以供推播
+        currentJourney = {
+            date: new Date().toLocaleDateString('zh-TW'),
+            start: startCounty,
+            destination: `${finalCounty} ${finalTownship}`,
+            mission: mission,
+            cardName: card.name,
+            vibe: vibe
+        };
+    }
+
+    // --- 串接 GAS API 的發送邏輯 ---
+    function dispatchJourney() {
+        const btn = document.getElementById('dispatch-btn');
+        const loader = document.getElementById('loader');
+        
+        // 替換成你的 Google Apps Script 部署網址
+        const WEBHOOK_URL = "YOUR_GAS_WEBHOOK_URL_HERE"; 
+        
+        btn.style.display = "none";
+        loader.style.display = "block";
+
+        if(WEBHOOK_URL === "YOUR_GAS_WEBHOOK_URL_HERE") {
+            // 模擬發送成功 (當你還沒放上真正的 URL 時)
+            setTimeout(() => {
+                loader.innerText = "✓ Dispatched to LINE & Saved to Vault.";
+                loader.style.color = "#27ae60";
+            }, 1500);
+            return;
+        }
+
+        fetch(WEBHOOK_URL, {
+            method: "POST",
+            body: JSON.stringify(currentJourney)
+        })
+        .then(response => response.json())
+        .then(data => {
+            loader.innerText = "✓ Dispatched to LINE & Saved to Vault.";
+            loader.style.color = "#27ae60";
+        })
+        .catch(error => {
+            loader.innerText = "✕ Sync failed. But the journey remains.";
+        });
     }
 </script>
 

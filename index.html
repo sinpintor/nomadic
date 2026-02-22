@@ -10,52 +10,45 @@
             --black: #0a0a0a; --white: #ffffff; --grey: #888888;
             --vol1: #d4b483; --vol2: #b83b3b; --vol3: #2d5a4c; 
             --vol4: #1a2a3a; --vol5: #8b5a2b; --vol6: #e0e0e0;
-            --active-color: var(--vol1); 
+            --active-color: #d4b483; 
         }
-        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; min-height: 100%; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; min-height: 100%; -webkit-font-smoothing: antialiased; overflow-x: hidden; scroll-behavior: smooth; }
         
         /* VOGUE 質感底層 */
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
-        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 25vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; transition: 1.5s cubic-bezier(0.19, 1, 0.22, 1); text-transform: uppercase; }
+        .bg-text { position: fixed; bottom: -5vh; left: -5vw; font-family: 'Playfair Display', serif; font-size: 25vw; font-weight: 800; color: rgba(255,255,255,0.02); z-index: -1; pointer-events: none; white-space: nowrap; transition: 1.2s ease; text-transform: uppercase; }
 
-        /* 頁面切換機制 */
-        .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: calc(80px + env(safe-area-inset-top)) 30px 100px; box-sizing: border-box; text-align: center; }
-        .page.active { display: flex; animation: pageIn 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+        /* 頁面容器 */
+        .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: calc(60px + env(safe-area-inset-top)) 30px 100px; box-sizing: border-box; text-align: center; }
+        .page.active { display: flex; animation: pageIn 1s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
 
-        /* Typography */
-        h2.subtitle { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.8em; color: var(--grey); text-transform: uppercase; margin-bottom: 20px; }
-        h1.vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.5rem; font-weight: 800; margin: 0; color: var(--active-color); letter-spacing: -0.02em; transition: color 1s; }
-        
+        /* 字體排版 */
+        .subtitle { font-size: 0.6rem; letter-spacing: 0.8em; color: var(--grey); text-transform: uppercase; margin-bottom: 20px; }
+        .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.2rem; font-weight: 800; margin: 0; color: var(--active-color); transition: color 0.8s; }
         .stats { margin-top: 20px; font-size: 0.55rem; letter-spacing: 0.4em; color: var(--grey); }
-        .completion-bar { width: 150px; height: 1px; background: rgba(255,255,255,0.1); margin: 30px auto; position: relative; }
-        .completion-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--vol1); transition: width 1s; }
-
+        
         /* 抽籤視覺 */
-        .dest-display { font-family: 'Noto Serif TC', serif; font-size: 2.4rem; font-weight: 500; height: 6rem; display: flex; align-items: center; justify-content: center; margin: 40px 0; letter-spacing: 0.1em; width: 100%; max-width: 400px; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 25px 50px; font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; cursor: pointer; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); margin-top: 20px; }
-        .btn-vogue:hover { border-color: var(--white); background: var(--white); color: var(--black); letter-spacing: 0.7em; }
+        .dest-display { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; height: 6rem; display: flex; align-items: center; justify-content: center; margin: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; max-width: 400px; }
+        .btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 25px 50px; font-size: 0.7rem; letter-spacing: 0.5em; text-transform: uppercase; cursor: pointer; transition: 0.5s; }
+        .btn-vogue:hover { background: var(--white); color: var(--black); }
 
-        /* 任務卡片 */
-        .mission-container { width: 100%; max-width: 450px; text-align: left; margin-top: 60px; }
-        .mission-tag { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 0.5em; color: var(--active-color); font-weight: 600; display: block; margin-bottom: 25px; }
-        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.35rem; line-height: 1.8; color: #f0f0f0; margin-bottom: 50px; }
-        
-        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #222; color: var(--white); padding: 15px 0; font-size: 1.1rem; outline: none; margin-bottom: 50px; font-family: 'Noto Serif TC', serif; transition: 0.4s; }
-        .journal-input:focus { border-color: var(--active-color); }
-        
-        .btn-save { background: var(--active-color); color: var(--black); border: none; padding: 22px; width: 100%; font-weight: 600; letter-spacing: 0.4em; cursor: pointer; transition: 0.4s; }
+        /* 任務內容 */
+        .mission-container { width: 100%; max-width: 450px; text-align: left; margin-top: 40px; }
+        .mission-tag { font-size: 0.6rem; letter-spacing: 0.5em; color: var(--active-color); font-weight: 600; display: block; margin-bottom: 20px; }
+        .mission-text { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; line-height: 1.8; color: #eee; margin-bottom: 40px; }
+        .journal-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; color: var(--white); padding: 15px 0; font-size: 1.1rem; outline: none; margin-bottom: 40px; font-family: 'Noto Serif TC', serif; }
+        .btn-save { background: var(--active-color); color: #000; border: none; padding: 22px; width: 100%; font-weight: 600; letter-spacing: 0.4em; cursor: pointer; transition: 0.3s; }
 
-        /* 檔案館 */
-        .archive-section { width: 100%; max-width: 450px; margin-top: 120px; text-align: left; }
-        .archive-label { font-size: 0.6rem; letter-spacing: 0.5em; color: #444; margin-bottom: 40px; display: block; }
-        .journal-item { padding: 30px 0; border-bottom: 1px solid #1a1a1a; transition: 0.3s; }
-        .j-meta { font-size: 0.5rem; letter-spacing: 0.2em; color: var(--grey); margin-bottom: 15px; text-transform: uppercase; }
-        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.4rem; margin-bottom: 10px; font-weight: 500; }
-        .j-note { font-size: 0.9rem; color: #888; line-height: 1.8; font-style: italic; }
+        /* 歷史足跡 */
+        .archive-section { width: 100%; max-width: 450px; margin-top: 100px; text-align: left; border-top: 1px solid #1a1a1a; padding-top: 40px; }
+        .journal-item { padding: 30px 0; border-bottom: 1px solid #111; }
+        .j-meta { font-size: 0.5rem; letter-spacing: 0.2em; color: var(--grey); margin-bottom: 10px; }
+        .j-name { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; font-weight: 500; margin-bottom: 8px; }
+        .j-note { font-size: 0.85rem; color: #888; font-style: italic; }
 
-        .btn-clear { background: transparent; border: none; color: #333; font-size: 0.55rem; letter-spacing: 0.3em; cursor: pointer; margin-top: 80px; text-decoration: underline; text-underline-offset: 5px; }
+        .btn-clear { background: transparent; border: none; color: #333; font-size: 0.55rem; letter-spacing: 0.3em; cursor: pointer; margin-top: 60px; text-decoration: underline; width: 100%; }
 
-        @keyframes pageIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pageIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -65,17 +58,13 @@
     <div id="home-page" class="page active">
         <h2 class="subtitle">Personal Road Movie</h2>
         <h1 class="vogue-title">NOMADIC</h1>
+        <div class="stats"><span id="regions-count">0</span> / 368 REGIONS</div>
         
-        <div class="stats">
-            <span id="regions-count">0</span> / 368 REGIONS
-        </div>
-        <div class="completion-bar"><div class="completion-fill" id="comp-fill" style="width: 0%"></div></div>
-
         <div class="dest-display" id="dest-result">...</div>
         <button class="btn-vogue" id="draw-btn" onclick="drawFate()">Draw Fate</button>
         
         <div class="archive-section">
-            <span class="archive-label">COLLECTED FOOTPRINTS</span>
+            <div style="font-size: 0.6rem; letter-spacing: 0.5em; color: #444; margin-bottom: 30px;">COLLECTED FOOTPRINTS</div>
             <div id="journal-list"></div>
             <button class="btn-clear" onclick="clearData()">ERASE MEMORIES</button>
         </div>
@@ -83,34 +72,30 @@
 
     <div id="mission-page" class="page">
         <div style="width: 100%; text-align: left; max-width: 450px;">
-            <a href="javascript:void(0)" onclick="showPage('home-page')" style="color: var(--grey); text-decoration: none; font-size: 0.6rem; letter-spacing: 0.2em;">← BACK TO HUB</a>
+            <a href="javascript:void(0)" onclick="showPage('home-page')" style="color: var(--grey); text-decoration: none; font-size: 0.6rem; letter-spacing: 0.2em;">← CANCEL SCENE</a>
         </div>
         
-        <div style="margin: 60px 0 20px;">
-            <h1 id="mission-loc" style="font-family: 'Noto Serif TC', serif; font-size: 3rem; margin: 0; font-weight: 500;">地區</h1>
-        </div>
+        <h1 id="mission-loc" style="font-family: 'Noto Serif TC', serif; font-size: 2.8rem; margin: 60px 0 20px; font-weight: 500;">地區</h1>
 
         <div class="mission-container">
             <span class="mission-tag" id="mission-vol-tag">VOL.01 / LIGHT</span>
             <div class="mission-text" id="mission-content">Fetching the next scene...</div>
             
-            <input type="text" class="journal-input" id="journal-input" placeholder="紀錄此刻的筆記...">
-            <button class="btn-save" id="save-btn" onclick="saveMission()">MINT RECORD</button>
+            <input type="text" class="journal-input" id="journal-input" placeholder="寫下一句話紀錄此處...">
+            <button class="btn-save" id="save-mission-btn">MINT FOOTPRINT</button>
         </div>
     </div>
 
     <script>
-        // 完整的台灣 368 鄉鎮區名單
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑南鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
 
-        // 任務庫 (精選 100+ 任務混合)
         const allMissions = {
-            "VOL.1": ["拍攝一張「垂直」視角的照片","尋找地區最古老的標誌","紀錄一種屬於這裡的顏色","捕捉陽光透過路樹產生的斑駁感","找一個路燈，拍一張兩人的腳步踏在同一個方格磚上"],
-            "VOL.2": ["盲選一道你從沒吃過名字的料理","問路人他們今天午餐吃什麼並跟著去吃","討論：如果我們要開一間餐廳，店名會叫什麼？","問對方：你吃什麼東西的時候看起來最幸福？","挑戰整頓飯只用非慣用手進食"],
-            "VOL.3": ["【重慶森林式】拉著對方手快速跑過並拍照","【對視 180 秒】在安靜角落對視不准說話","【不露臉的情書】拍一張只有局部親密感的照片","【時光旅人】找出這裡最像 30 年前的角落合照","一人說一句你聽過最浪漫的電影台詞並錄音"],
-            "VOL.4": ["錄下一段當地的火車或公車到站聲","閉上眼告訴對方你聽到了哪五種環境音","尋找風吹過樹葉的聲音並錄音","錄下對方叫你名字的聲音","錄下兩個人一起打開罐裝飲料的噴氣聲"],
-            "VOL.5": ["摸摸看這區最老的一棵樹","找一個生鏽招牌讀上面的電話號碼","觸摸一堵老牆並描述質地","撿一片這裡的落葉夾在筆記本裡","找尋一個舊式的水泵或公共水龍頭"],
-            "VOL.6": ["閉上眼睛，由對方牽著你的手走 100 步","告訴對方如果定居在此你會選哪間房","描述一個對方讓你感到最有安全感的瞬間","錄下兩人一起說出：我們回家吧","在日誌寫下：有你在哪都是家"]
+            "VOL.1": ["拍攝一張垂直視角的照片，避開所有地平線。","捕捉陽光透過路樹產生的斑駁感。","尋找地區最古老的標誌並記錄文字。"],
+            "VOL.2": ["盲選一道你從沒吃過名字的料理。","用餐時討論：如果你變成水果，會是什麼？","去當地的傳統市場，買一種你叫不出名字的點心。"],
+            "VOL.3": ["【一期一會】拍下兩人手拉手、身體模糊但感覺強烈的瞬間。","【對視180秒】看著對方的眼睛持續3分鐘，說出一件他的優點。"],
+            "VOL.4": ["錄下一段環境音，找出裡面最尖銳與最沉悶的聲音。","錄下對方叫你名字的聲音，這是你最珍貴的收藏。"],
+            "VOL.5": ["摸摸看這區最老的一棵樹，形容樹皮觸感。","找一個生鏽招牌，讀出上面斑駁的電話。"],
+            "VOL.6": ["閉上眼睛，由對方牽著你的手走100步。","寫下一句關於永恆的承諾。"]
         };
 
         const config = {
@@ -125,28 +110,31 @@
         let masterJournal = JSON.parse(localStorage.getItem('nomadic_master_journal')) || [];
         let currentFate = { loc: "", vol: "" };
 
+        // 初始化
+        window.onload = updateUI;
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
         function updateUI() {
             const unique = new Set(masterJournal.map(j => j.name));
             document.getElementById('regions-count').innerText = unique.size;
             
-            const perc = (unique.size / 368) * 100;
-            document.getElementById('comp-fill').style.width = perc + "%";
-            
             const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#222; font-size:0.6rem; letter-spacing:0.2em;">EXPLORATION PENDING...</div>' : 
-                [...masterJournal].reverse().map(log => `
-                    <div class="journal-item" style="border-left-color: ${config[log.issue].color}">
+            if (masterJournal.length === 0) {
+                listEl.innerHTML = '<div style="color:#222; font-size:0.6rem;">NO MEMORIES YET.</div>';
+            } else {
+                listEl.innerHTML = [...masterJournal].reverse().map(log => `
+                    <div class="journal-item" style="border-left: 2px solid ${config[log.issue].color}; padding-left: 20px;">
                         <div class="j-meta">${log.date} / ${log.issue}</div>
                         <div class="j-name">${log.name}</div>
                         <div class="j-note">“ ${log.note} ”</div>
                     </div>
                 `).join('');
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
+            }
         }
 
         function drawFate() {
@@ -161,22 +149,23 @@
             const timer = setInterval(() => {
                 resultEl.innerText = pool[Math.floor(Math.random() * pool.length)];
                 i++;
-                if (i > 18) {
+                if (i > 15) {
                     clearInterval(timer);
                     currentFate.loc = pool[Math.floor(Math.random() * pool.length)];
                     currentFate.vol = "VOL." + (Math.floor(Math.random() * 6) + 1);
                     resultEl.innerText = currentFate.loc;
-                    setTimeout(() => enterMission(), 1000);
+                    setTimeout(enterMission, 800);
                 }
-            }, 70);
+            }, 80);
         }
 
         function enterMission() {
             const vol = currentFate.vol;
             const cfg = config[vol];
+            
             document.body.style.setProperty('--active-color', cfg.color);
             document.getElementById('bg-text').innerText = cfg.label;
-            document.getElementById('bg-text').style.color = cfg.color + "09";
+            document.getElementById('bg-text').style.color = cfg.color + "11";
             
             document.getElementById('mission-vol-tag').innerText = vol + " / " + cfg.label;
             document.getElementById('mission-vol-tag').style.color = cfg.color;
@@ -190,29 +179,33 @@
             document.getElementById('draw-btn').disabled = false;
         }
 
-        function saveMission() {
-            const note = document.getElementById('journal-input').value || "紀錄一段不可複製的時光。";
+        // 核心修正：將點擊事件綁定移到腳本內部
+        document.getElementById('save-mission-btn').onclick = function() {
+            const note = document.getElementById('journal-input').value || "紀錄此刻。";
+            const mission = document.getElementById('mission-content').innerText;
+            
             masterJournal.push({
                 name: currentFate.loc,
                 issue: currentFate.vol,
                 date: new Date().toLocaleDateString(),
                 note: note,
-                mission: document.getElementById('mission-content').innerText
+                mission: mission
             });
+
             localStorage.setItem('nomadic_master_journal', JSON.stringify(masterJournal));
+            
+            // 清空輸入並回首頁
             document.getElementById('journal-input').value = "";
             updateUI();
             showPage('home-page');
-        }
+        };
 
         function clearData() {
-            if (confirm("Erase all footprints? This cannot be undone.")) {
+            if (confirm("Erase all memories? This cannot be undone.")) {
                 localStorage.removeItem('nomadic_master_journal');
                 location.reload();
             }
         }
-
-        window.onload = updateUI;
     </script>
 </body>
 </html>

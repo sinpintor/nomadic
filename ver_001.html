@@ -50,32 +50,37 @@
         .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
 
-        /* 相冊地標章 (Stamp Board) */
-        .stamp-board { 
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; 
-            padding: 25px 15px; background: rgba(255,255,255,0.02); 
-            border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 50px; 
-            width: 100%; box-sizing: border-box; 
+        /* 相冊地標章：縣市分類的極緻排版 */
+        .stamp-group { width: 100%; margin-bottom: 35px; }
+        .stamp-county-title { 
+            font-family: 'Noto Serif TC', serif; font-size: 1rem; font-weight: 600; 
+            color: var(--white); margin: 0 0 15px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; 
+            letter-spacing: 0.2em; text-align: left; width: 100%; 
+        }
+        .stamp-board-grouped { 
+            display: flex; flex-wrap: wrap; gap: 10px; 
+            justify-content: flex-start; /* 靠左排列更整齊 */
         }
         .stamp { 
             width: auto; padding: 6px 14px; 
-            border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); 
-            font-family: 'Noto Serif TC', serif; font-size: 0.55rem; letter-spacing: 0.1em; 
+            border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.3); 
+            font-family: 'Noto Serif TC', serif; font-size: 0.6rem; letter-spacing: 0.1em; 
             border-radius: 20px; transition: all 0.4s ease; 
             display: flex; align-items: center; justify-content: center;
         }
 
-        /* 相冊內的版塊標題設計 */
         .archive-section-title { 
             font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; 
             color: var(--white); width: 100%; text-align: left; 
-            border-bottom: 1px solid #333; padding-bottom: 10px; margin: 20px 0 10px 0; letter-spacing: 0.1em; 
+            border-bottom: 1px solid #333; padding-bottom: 10px; margin: 40px 0 10px 0; letter-spacing: 0.1em; 
         }
         .archive-section-desc { 
-            font-family: 'Noto Serif TC', serif; font-size: 0.7rem; color: #666; width: 100%; text-align: left; 
+            font-family: 'Noto Serif TC', serif; font-size: 0.75rem; color: #666; width: 100%; text-align: left; 
             margin-bottom: 30px; letter-spacing: 0.05em; font-weight: 300; 
         }
 
+        /* Timeline 日誌樣式 */
         .journal-list { width: 100%; display: flex; flex-direction: column; gap: 40px; text-align: left; }
         .journal-card { width: 100%; border-left: 1px solid #333; padding-left: 20px; position: relative; }
         .j-index { position: absolute; left: -15px; top: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.6rem; color: var(--active-color); background: var(--black); padding: 2px; }
@@ -134,7 +139,6 @@
         .poster-mission { width: 100%; text-align: left; }
         .pm-item { margin-bottom: 30px; display: flex; flex-direction: column; }
         
-        /* 高級雜誌感標題排版：拿掉色塊，改用細膩線條與序號 */
         .pm-title { 
             display: flex; align-items: center; width: 100%; text-align: left; 
             font-family: 'Noto Serif TC', serif; font-size: 11px; letter-spacing: 0.15em; 
@@ -142,10 +146,7 @@
             font-weight: 500;
         }
         .pm-num { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; margin-right: 8px; }
-        /* 文字後方的延伸細線 */
         .pm-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.15); margin-left: 10px; }
-        
-        /* 內文些微內縮，增加留白層次 */
         .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 1.8; color: #e6e6e6; font-weight: 300; padding-left: 20px; }
         
         .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
@@ -160,6 +161,7 @@
     <nav>
         <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">今日靈感</div>
         <div class="nav-link" id="nav-archive" onclick="showPage('archive')">藏品</div>
+        <div class="nav-link" id="nav-timeline" onclick="showPage('timeline')">日誌</div>
         <div class="nav-link" id="nav-about" onclick="showPage('about')">紀事</div>
     </nav>
 
@@ -243,18 +245,24 @@
     <div id="archive" class="page">
         <div class="content-wrapper">
             <div class="page-title-box">
-                <h1 class="vogue-title" style="color:#fff">The Collection</h1>
-                <p class="page-desc">當快門落下，那些我們走過的地方，都成了帶有溫度的紀念章與漫遊特輯。</p>
+                <h1 class="vogue-title" style="color:#fff">Map Collection</h1>
+                <p class="page-desc">將台灣解構為區塊，收集每一寸土地的溫度。這裡是你專屬的漫遊護照。</p>
             </div>
             
-            <div class="stamp-board" id="stamp-board"></div>
+            <div id="stamp-container" style="width: 100%;"></div>
             
             <div class="archive-section-title">Map Editorial</div>
             <p class="archive-section-desc">以地圖為章節，為你編排的專屬旅行特輯。</p>
             <div id="editorial-list" style="width:100%;"></div>
+        </div>
+    </div>
 
-            <div class="archive-section-title" style="margin-top: 40px;">Timeline</div>
-            <p class="archive-section-desc">依時間排序，每一趟不期而遇的靈感紀錄。</p>
+    <div id="timeline" class="page">
+        <div class="content-wrapper">
+            <div class="page-title-box">
+                <h1 class="vogue-title" style="color:#fff">Timeline</h1>
+                <p class="page-desc">依時間排序，每一趟不期而遇的靈感紀錄。</p>
+            </div>
             <div id="journal-list" class="journal-list"></div>
         </div>
     </div>
@@ -279,26 +287,26 @@
             <div class="about-section">
                 <h2 class="about-title">Changelog</h2>
                 <div class="changelog-item">
-                    <span class="cl-version">v3.0.0</span>
+                    <span class="cl-version">v3.5.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">The Collection 總集篇上線。將地標徽章、地圖特輯與時光日誌融合為一體。IG 海報全面導入高級雜誌延伸線排版。</span>
+                    <span class="cl-desc">地標章收集冊終極進化。導入「縣市分類」護照排版，並將時間線日誌獨立為專屬頁面。</span>
+                </div>
+                <div class="changelog-item">
+                    <span class="cl-version">v2.6.0</span>
+                    <span class="cl-date">2026.02.23</span>
+                    <span class="cl-desc">IG 海報導入細膩延伸線排版，全站日期自動格式化。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v2.5.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">全面升級為雲端相冊系統。引入「電台頻段」概念，探索範圍擴展至全台灣的戶外與秘境。</span>
-                </div>
-                <div class="changelog-item">
-                    <span class="cl-version">v1.0.0</span>
-                    <span class="cl-date">2026.02</span>
-                    <span class="cl-desc">第十九號航線正式啟航。建立 36 張雷諾曼牌義與台灣座標演算邏輯。</span>
+                    <span class="cl-desc">升級為雲端相冊系統，引入「電台頻段」概念。</span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑名鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
+        const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 丰原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑名鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
         
         const subjects = {
             1: { n: "太陽", loc: "陽光充足的開闊空地或廣場", color: "#FFD700" },
@@ -351,12 +359,9 @@
         let currentTemp = 'MILD';
         let currentRecord = null;
 
-        // 裁切多餘的時區字元，還原成 YYYY.MM.DD
         function formatToDateOnly(rawDate) {
             if (!rawDate) return '';
-            if (rawDate.includes('T')) {
-                return rawDate.split('T')[0].replace(/-/g, '.');
-            }
+            if (rawDate.includes('T')) return rawDate.split('T')[0].replace(/-/g, '.');
             return rawDate.replace(/\//g, '.');
         }
 
@@ -372,7 +377,8 @@
             document.getElementById(pId).classList.add('active');
             document.getElementById(`nav-${pId}`).classList.add('active');
             
-            if(pId === 'archive') {
+            // 當切換到藏品或日誌頁面時，確保資料重新渲染
+            if(pId === 'archive' || pId === 'timeline') {
                 renderView();
             }
         }
@@ -388,7 +394,6 @@
         }
 
         async function loadCloudData() {
-            // 在整合頁面顯示共同的載入訊息
             document.getElementById('journal-list').innerHTML = `<div class="state-message">正在為你調頻至 [ ${currentChannel} ]，尋回相冊記憶...</div>`;
             document.getElementById('editorial-list').innerHTML = ``;
             
@@ -406,21 +411,51 @@
             }
         }
 
+        // 初始化徽章牆：以「縣市」為單位進行分組排版
         function initLights() {
-            const board = document.getElementById('stamp-board');
-            if(!board) return;
-            board.innerHTML = '';
-            for(let i=0; i<taiwanData.length; i++) {
-                const stamp = document.createElement('div');
-                stamp.className = 'stamp';
-                stamp.id = `map-stamp-${i}`;
-                stamp.innerText = taiwanData[i].split(' ')[1] || taiwanData[i]; 
-                board.appendChild(stamp);
+            const container = document.getElementById('stamp-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            // 整理資料：將所有區鎮依縣市分組，並記錄它在原本 taiwanData 中的 index 以便對應打卡
+            const grouped = {};
+            taiwanData.forEach((item, index) => {
+                const [county, district] = item.split(' ');
+                if (!grouped[county]) grouped[county] = [];
+                // 如果沒有空格(例如外島某些寫法)，就直接用原本的字
+                grouped[county].push({ district: district || item, index });
+            });
+
+            // 產出 HTML
+            for (const county in grouped) {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'stamp-group';
+
+                // 縣市標題
+                const title = document.createElement('div');
+                title.className = 'stamp-county-title';
+                title.innerText = county;
+                groupDiv.appendChild(title);
+
+                // 該縣市底下的所有區域徽章
+                const board = document.createElement('div');
+                board.className = 'stamp-board-grouped';
+
+                grouped[county].forEach(loc => {
+                    const stamp = document.createElement('div');
+                    stamp.className = 'stamp';
+                    stamp.id = `map-stamp-${loc.index}`;
+                    stamp.innerText = loc.district;
+                    board.appendChild(stamp);
+                });
+
+                groupDiv.appendChild(board);
+                container.appendChild(groupDiv);
             }
         }
 
         function renderView() {
-            // 1. 徽章牆 (置中、未點亮半透明，點亮加粗發光)
+            // 1. 徽章牆狀態重置與點亮
             document.querySelectorAll('.stamp').forEach(s => { 
                 s.classList.remove('active'); 
                 s.style.background = 'transparent';
@@ -451,54 +486,58 @@
 
             // 2. 渲染地圖特輯 (Map Editorial)
             const editEl = document.getElementById('editorial-list');
-            const grouped = {};
-            cloudData.forEach(log => {
-                if (!log.name) return;
-                const city = log.name.split(' ')[0] || log.name;
-                if(!grouped[city]) grouped[city] = [];
-                grouped[city].push(log);
-            });
+            if (editEl) {
+                const grouped = {};
+                cloudData.forEach(log => {
+                    if (!log.name) return;
+                    const city = log.name.split(' ')[0] || log.name;
+                    if(!grouped[city]) grouped[city] = [];
+                    grouped[city].push(log);
+                });
 
-            editEl.innerHTML = Object.keys(grouped).length === 0 ? `<div class="state-message">等你踏出第一步，這裡會為你編排專屬的地圖特輯。</div>` :
-                Object.keys(grouped).map(city => {
-                    const logs = grouped[city];
-                    const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color || '#FFD700'}"></div>`).join('');
-                    
-                    return `
-                    <div class="ed-project-card" style="margin-bottom:60px; width:100%; border-top:1px solid #1a1a1a; padding-top:35px;">
-                        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px;">
-                            <h2 style="font-family:'Noto Serif TC', serif; font-weight:600; font-size:2.2rem; margin:0; line-height:0.9; letter-spacing:0.05em; color:var(--white);">${city}</h2>
-                            <span style="font-family:'Playfair Display'; font-style:italic; font-size:0.55rem; letter-spacing:0.3em; color:var(--active-color); margin-bottom:5px;">VOL. ${String(logs.length).padStart(2, '0')}</span>
+                editEl.innerHTML = Object.keys(grouped).length === 0 ? `<div class="state-message">等你踏出第一步，這裡會為你編排專屬的地圖特輯。</div>` :
+                    Object.keys(grouped).map(city => {
+                        const logs = grouped[city];
+                        const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color || '#FFD700'}"></div>`).join('');
+                        
+                        return `
+                        <div class="ed-project-card" style="margin-bottom:60px; width:100%; border-top:1px solid #1a1a1a; padding-top:35px;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px;">
+                                <h2 style="font-family:'Noto Serif TC', serif; font-weight:600; font-size:2.2rem; margin:0; line-height:0.9; letter-spacing:0.05em; color:var(--white);">${city}</h2>
+                                <span style="font-family:'Playfair Display'; font-style:italic; font-size:0.55rem; letter-spacing:0.3em; color:var(--active-color); margin-bottom:5px;">VOL. ${String(logs.length).padStart(2, '0')}</span>
+                            </div>
+                            <div style="width:100%; height:4px; display:flex; margin-bottom:30px; opacity:0.8;">${paletteItems}</div>
+                            <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
+                                ${logs.map(l => {
+                                    const district = l.name.split(' ')[1] || '';
+                                    return `
+                                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:300; letter-spacing:0.02em; border-bottom:1px solid #111; padding-bottom:10px;">
+                                        <span style="color:#ddd; font-family:'Noto Serif TC';">${district}</span>
+                                        <span style="color:#666; font-family:'Playfair Display'; font-style:italic; font-size:0.65rem;">${l.combo}</span>
+                                    </div>
+                                    `
+                                }).join('')}
+                            </div>
                         </div>
-                        <div style="width:100%; height:4px; display:flex; margin-bottom:30px; opacity:0.8;">${paletteItems}</div>
-                        <div style="display:grid; grid-template-columns: 1fr; gap:12px;">
-                            ${logs.map(l => {
-                                const district = l.name.split(' ')[1] || '';
-                                return `
-                                <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:300; letter-spacing:0.02em; border-bottom:1px solid #111; padding-bottom:10px;">
-                                    <span style="color:#ddd; font-family:'Noto Serif TC';">${district}</span>
-                                    <span style="color:#666; font-family:'Playfair Display'; font-style:italic; font-size:0.65rem;">${l.combo}</span>
-                                </div>
-                                `
-                            }).join('')}
-                        </div>
-                    </div>
-                    `;
-                }).join('');
+                        `;
+                    }).join('');
+            }
 
-            // 3. 渲染時間線日誌清單 (Timeline)
+            // 3. 渲染獨立的 Timeline 日誌
             const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = cloudData.length === 0 ? `` :
-                [...cloudData].reverse().map((log, i, arr) => `
-                    <div class="journal-card">
-                        <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
-                        <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${formatToDateOnly(log.date)} / ${log.combo}</div>
-                        <span class="j-district">${log.name}</span>
-                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">LOCATION</strong>${log.m_action}</div>
-                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">TASTE</strong>${log.m_food}</div>
-                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">STYLING</strong>${log.m_style}</div>
-                    </div>
-                `).join('');
+            if (listEl) {
+                listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">頻段 [ ${currentChannel} ] 的日誌還空著，去抽取你的第一個靈感吧。</div>` :
+                    [...cloudData].reverse().map((log, i, arr) => `
+                        <div class="journal-card">
+                            <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
+                            <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${formatToDateOnly(log.date)} / ${log.combo}</div>
+                            <span class="j-district">${log.name}</span>
+                            <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">LOCATION</strong>${log.m_action}</div>
+                            <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">TASTE</strong>${log.m_food}</div>
+                            <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">STYLING</strong>${log.m_style}</div>
+                        </div>
+                    `).join('');
+            }
         }
 
         function setTemp(t) {
@@ -606,7 +645,6 @@
             document.getElementById('poster-food').innerText = currentRecord.m_food;
             document.getElementById('poster-style').innerText = currentRecord.m_style;
             
-            // 輸出給海報的日期一律裁切為 YYYY.MM.DD
             document.getElementById('poster-date').innerText = formatToDateOnly(currentRecord.date);
 
             const posterTemplate = document.getElementById('poster-template');

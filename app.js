@@ -124,8 +124,33 @@ function formatToDateOnly(rawDate) {
 window.onload = () => { 
     document.getElementById('current-channel-display').innerText = currentChannel;
     initLights(); 
+    initManualSelect();
     loadCloudData(); 
 };
+
+function initManualSelect() {
+    const select = document.getElementById('manual-loc-select');
+    if(!select) return;
+    taiwanData.forEach(loc => {
+        const opt = document.createElement('option');
+        opt.value = loc;
+        opt.innerText = loc;
+        select.appendChild(opt);
+    });
+}
+
+function toggleManualSelect() {
+    const select = document.getElementById('manual-loc-select');
+    const text = document.querySelector('.manual-select-text');
+    if(select.style.display === 'none') {
+        select.style.display = 'block';
+        text.innerText = '[ 收起選單 ]';
+    } else {
+        select.style.display = 'none';
+        text.innerText = '[ 或是，由我指定目的地 ]';
+        select.value = ""; 
+    }
+}
 
 function showPage(pId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -272,7 +297,7 @@ function setTemp(t) {
     document.getElementById(`btn-${t}`).classList.add('active');
 }
 
-function drawFate() {
+function drawFate(manualLoc = null) {
     const locEl = document.getElementById('loc-result');
     const comboEl = document.getElementById('combo-display');
     const panel = document.getElementById('mission-panel');
@@ -286,7 +311,7 @@ function drawFate() {
         i++;
         if (i > 25) {
             clearInterval(timer);
-            const finalLoc = taiwanData[Math.floor(Math.random() * taiwanData.length)];
+            const finalLoc = manualLoc || taiwanData[Math.floor(Math.random() * taiwanData.length)];
             
             const id1 = Math.floor(Math.random() * 36) + 1;
             let id2 = Math.floor(Math.random() * 36) + 1;

@@ -93,7 +93,7 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .j-district { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; font-weight: 500; color: var(--white); margin: 8px 0 25px; display: block; letter-spacing: 0.1em;}
 .j-row-info { margin-bottom: 18px; font-size: 0.9rem; color: #bbb; line-height: 1.8; font-weight: 300; letter-spacing: 0.05em;}
 .j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.15em; margin-bottom: 6px; text-transform: uppercase; font-weight: 500; }
-.state-message { color:#777; padding:50px 0; font-weight:300; font-size: 0.95rem; line-height: 2; text-align: center; width: 100%; letter-spacing: 0.05em; }
+.state-message { color:#777; padding:50px 0; font-weight:300; font-size: 0.95rem; line-height: 2; text-align: left; width: 100%; letter-spacing: 0.05em; }
 
 /* ================= 關於我們 ================= */
 .about-section { margin-bottom: 65px; }

@@ -50,11 +50,11 @@
         .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
 
-        /* 相冊地標章 (Stamp Board) 視覺升級：置中、微光與高反差發光 */
+        /* 相冊地標章 (Stamp Board) */
         .stamp-board { 
             display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; 
             padding: 25px 15px; background: rgba(255,255,255,0.02); 
-            border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 45px; 
+            border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 50px; 
             width: 100%; box-sizing: border-box; 
         }
         .stamp { 
@@ -65,13 +65,24 @@
             display: flex; align-items: center; justify-content: center;
         }
 
+        /* 相冊內的版塊標題設計 */
+        .archive-section-title { 
+            font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; 
+            color: var(--white); width: 100%; text-align: left; 
+            border-bottom: 1px solid #333; padding-bottom: 10px; margin: 20px 0 10px 0; letter-spacing: 0.1em; 
+        }
+        .archive-section-desc { 
+            font-family: 'Noto Serif TC', serif; font-size: 0.7rem; color: #666; width: 100%; text-align: left; 
+            margin-bottom: 30px; letter-spacing: 0.05em; font-weight: 300; 
+        }
+
         .journal-list { width: 100%; display: flex; flex-direction: column; gap: 40px; text-align: left; }
         .journal-card { width: 100%; border-left: 1px solid #333; padding-left: 20px; position: relative; }
         .j-index { position: absolute; left: -15px; top: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.6rem; color: var(--active-color); background: var(--black); padding: 2px; }
         .j-district { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; font-weight: 500; color: var(--white); margin: 5px 0 20px; display: block; }
         .j-row-info { margin-bottom: 15px; font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 300; }
         .j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.1em; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
-        .state-message { color:#888; padding:40px 0; font-weight:300; font-size: 0.9rem; line-height: 1.8; text-align: center; }
+        .state-message { color:#888; padding:40px 0; font-weight:300; font-size: 0.9rem; line-height: 1.8; text-align: center; width: 100%; }
 
         .about-section { margin-bottom: 60px; }
         .about-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; letter-spacing: 0.1em; }
@@ -148,8 +159,7 @@
     
     <nav>
         <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">今日靈感</div>
-        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">相冊</div>
-        <div class="nav-link" id="nav-editorial" onclick="showPage('editorial')">地圖</div>
+        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">藏品</div>
         <div class="nav-link" id="nav-about" onclick="showPage('about')">紀事</div>
     </nav>
 
@@ -233,22 +243,19 @@
     <div id="archive" class="page">
         <div class="content-wrapper">
             <div class="page-title-box">
-                <h1 class="vogue-title" style="color:#fff">Memory Archive</h1>
-                <p class="page-desc">當快門落下，那些我們走過的地方，都成了帶有溫度的地標紀念章。</p>
+                <h1 class="vogue-title" style="color:#fff">The Collection</h1>
+                <p class="page-desc">當快門落下，那些我們走過的地方，都成了帶有溫度的紀念章與漫遊特輯。</p>
             </div>
+            
             <div class="stamp-board" id="stamp-board"></div>
             
-            <div id="journal-list" class="journal-list"></div>
-        </div>
-    </div>
-
-    <div id="editorial" class="page">
-        <div class="content-wrapper">
-            <div class="page-title-box">
-                <h1 class="vogue-title" style="color:#fff">Map Editorial</h1>
-                <p class="page-desc">以地圖為章節，收集你的每一次出發。Route19 的台灣漫遊誌。</p>
-            </div>
+            <div class="archive-section-title">Map Editorial</div>
+            <p class="archive-section-desc">以地圖為章節，為你編排的專屬旅行特輯。</p>
             <div id="editorial-list" style="width:100%;"></div>
+
+            <div class="archive-section-title" style="margin-top: 40px;">Timeline</div>
+            <p class="archive-section-desc">依時間排序，每一趟不期而遇的靈感紀錄。</p>
+            <div id="journal-list" class="journal-list"></div>
         </div>
     </div>
 
@@ -272,19 +279,19 @@
             <div class="about-section">
                 <h2 class="about-title">Changelog</h2>
                 <div class="changelog-item">
-                    <span class="cl-version">v2.6.0</span>
+                    <span class="cl-version">v3.0.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">美學終極重構：IG 海報導入細膩延伸線排版，相冊牆進化為置中高光打卡徽章。全站日期自動格式化，徹底去除雜訊。</span>
+                    <span class="cl-desc">The Collection 總集篇上線。將地標徽章、地圖特輯與時光日誌融合為一體。IG 海報全面導入高級雜誌延伸線排版。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v2.5.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">全面升級為雲端相冊系統。引入「電台頻段」概念，並將相冊視覺重構為地標收集徽章牆。</span>
+                    <span class="cl-desc">全面升級為雲端相冊系統。引入「電台頻段」概念，探索範圍擴展至全台灣的戶外與秘境。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v1.0.0</span>
                     <span class="cl-date">2026.02</span>
-                    <span class="cl-desc">第十九號航線正式啟航。</span>
+                    <span class="cl-desc">第十九號航線正式啟航。建立 36 張雷諾曼牌義與台灣座標演算邏輯。</span>
                 </div>
             </div>
         </div>
@@ -338,15 +345,13 @@
             "HOT": ["滑順的絲緞單品與一點金屬首飾", "涼爽的綢緞裝束與細帶涼鞋", "透氣的亞麻套裝搭配簡單頸鍊", "設計感十足的純白棉質單品", "輕盈的鏤空上衣與舒適的棉麻寬褲", "充滿夏日感的印花單品與草編包", "微露背的設計感背心與丹寧", "通風舒適的連身裝與極簡涼鞋", "有點寬鬆的白襯衫與輕薄短裙", "帶點波西米亞風的罩衫與金屬配飾", "亮色系的平口或細肩帶單品", "輕薄的針織背心與亞麻長裙", "美式復古運動風搭配高腰長裙", "雪紡單品搭配貼身的羅紋背心", "全白亞麻襯衫與亮眼內搭", "一字領上衣與簡單的直筒短褲", "帶點透視感的微涼針織與高腰短裙", "充滿度假感的短袖襯衫與闊腿褲", "短版合身背心與輕柔的絲質長褲", "清爽的洋裝搭配簡單的配件"]
         };
 
-        // 雲端 API
         const API_URL = "https://script.google.com/macros/s/AKfycbzPZeJ8BZAXOMakvaL64QnlQf5sfrqsA8qsUnbO3DS2mKPPVbhxObKqiL3LBiYXaPoP/exec";
         let cloudData = [];
-        
         let currentChannel = localStorage.getItem('route19_current_channel') || 'Wade&Cloudy';
         let currentTemp = 'MILD';
         let currentRecord = null;
 
-        // 輔助函數：將冗長的 ISO 日期轉為 YYYY.MM.DD
+        // 裁切多餘的時區字元，還原成 YYYY.MM.DD
         function formatToDateOnly(rawDate) {
             if (!rawDate) return '';
             if (rawDate.includes('T')) {
@@ -367,7 +372,7 @@
             document.getElementById(pId).classList.add('active');
             document.getElementById(`nav-${pId}`).classList.add('active');
             
-            if(pId === 'archive' || pId === 'editorial') {
+            if(pId === 'archive') {
                 renderView();
             }
         }
@@ -383,8 +388,9 @@
         }
 
         async function loadCloudData() {
+            // 在整合頁面顯示共同的載入訊息
             document.getElementById('journal-list').innerHTML = `<div class="state-message">正在為你調頻至 [ ${currentChannel} ]，尋回相冊記憶...</div>`;
-            document.getElementById('editorial-list').innerHTML = `<div class="state-message">正在為你編排專屬地圖特輯...</div>`;
+            document.getElementById('editorial-list').innerHTML = ``;
             
             try {
                 const response = await fetch(`${API_URL}?channel=${encodeURIComponent(currentChannel)}`);
@@ -397,7 +403,6 @@
             } catch (error) {
                 console.error("同步失敗:", error);
                 document.getElementById('journal-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，暫時無法連接至電台資料庫，請稍後再試。</div>`;
-                document.getElementById('editorial-list').innerHTML = `<div class="state-message" style="color:#e74c3c;">訊號微弱，特輯準備中。</div>`;
             }
         }
 
@@ -415,7 +420,7 @@
         }
 
         function renderView() {
-            // 重置徽章牆 (還原未收集的半透明狀態)
+            // 1. 徽章牆 (置中、未點亮半透明，點亮加粗發光)
             document.querySelectorAll('.stamp').forEach(s => { 
                 s.classList.remove('active'); 
                 s.style.background = 'transparent';
@@ -426,7 +431,6 @@
                 s.style.transform = 'scale(1)';
             });
             
-            // 點亮已收集的徽章 (加上高光與霓虹陰影)
             cloudData.forEach(j => {
                 if (!j.name) return; 
                 const cleanName = j.name.replace(/\s+/g, '');
@@ -445,21 +449,7 @@
                 }
             });
 
-            // 渲染相冊清單 (帶有自動過濾日期的 formatToDateOnly)
-            const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">頻段 [ ${currentChannel} ] 的相冊還空著，去抽取你的第一個靈感吧。</div>` :
-                [...cloudData].reverse().map((log, i, arr) => `
-                    <div class="journal-card">
-                        <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
-                        <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${formatToDateOnly(log.date)} / ${log.combo}</div>
-                        <span class="j-district">${log.name}</span>
-                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">LOCATION</strong>${log.m_action}</div>
-                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">TASTE</strong>${log.m_food}</div>
-                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">STYLING</strong>${log.m_style}</div>
-                    </div>
-                `).join('');
-            
-            // 渲染地圖特輯
+            // 2. 渲染地圖特輯 (Map Editorial)
             const editEl = document.getElementById('editorial-list');
             const grouped = {};
             cloudData.forEach(log => {
@@ -469,13 +459,13 @@
                 grouped[city].push(log);
             });
 
-            editEl.innerHTML = Object.keys(grouped).length === 0 ? `<div class="state-message">等你踏出第一步，這裡會為你排版專屬的旅行特輯。</div>` :
+            editEl.innerHTML = Object.keys(grouped).length === 0 ? `<div class="state-message">等你踏出第一步，這裡會為你編排專屬的地圖特輯。</div>` :
                 Object.keys(grouped).map(city => {
                     const logs = grouped[city];
                     const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color || '#FFD700'}"></div>`).join('');
                     
                     return `
-                    <div class="ed-project-card" style="margin-bottom:80px; width:100%; border-top:1px solid #1a1a1a; padding-top:35px;">
+                    <div class="ed-project-card" style="margin-bottom:60px; width:100%; border-top:1px solid #1a1a1a; padding-top:35px;">
                         <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px;">
                             <h2 style="font-family:'Noto Serif TC', serif; font-weight:600; font-size:2.2rem; margin:0; line-height:0.9; letter-spacing:0.05em; color:var(--white);">${city}</h2>
                             <span style="font-family:'Playfair Display'; font-style:italic; font-size:0.55rem; letter-spacing:0.3em; color:var(--active-color); margin-bottom:5px;">VOL. ${String(logs.length).padStart(2, '0')}</span>
@@ -492,12 +482,23 @@
                                 `
                             }).join('')}
                         </div>
-                        <div style="margin-top:25px; font-size:0.45rem; color:#444; letter-spacing:0.5em; text-transform:uppercase; font-family:'Montserrat';">
-                            MAP VISUAL ARCHIVE / PROJECT NO. ${city.length * logs.length}
-                        </div>
                     </div>
                     `;
                 }).join('');
+
+            // 3. 渲染時間線日誌清單 (Timeline)
+            const listEl = document.getElementById('journal-list');
+            listEl.innerHTML = cloudData.length === 0 ? `` :
+                [...cloudData].reverse().map((log, i, arr) => `
+                    <div class="journal-card">
+                        <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
+                        <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${formatToDateOnly(log.date)} / ${log.combo}</div>
+                        <span class="j-district">${log.name}</span>
+                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">LOCATION</strong>${log.m_action}</div>
+                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">TASTE</strong>${log.m_food}</div>
+                        <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">STYLING</strong>${log.m_style}</div>
+                    </div>
+                `).join('');
         }
 
         function setTemp(t) {
@@ -550,7 +551,7 @@
                         card2: s2.n.split(' ')[0], 
                         m_action: m_a, m_food: m_f, m_style: m_s, 
                         color: s1.color, 
-                        date: new Date().toISOString() // 儲存為 ISO 標準格式傳給 GAS
+                        date: new Date().toISOString() 
                     };
                 }
             }, 60);
@@ -605,7 +606,7 @@
             document.getElementById('poster-food').innerText = currentRecord.m_food;
             document.getElementById('poster-style').innerText = currentRecord.m_style;
             
-            // 輸出給海報的日期一律裁切為 YYYY.MM.DD 雜誌感
+            // 輸出給海報的日期一律裁切為 YYYY.MM.DD
             document.getElementById('poster-date').innerText = formatToDateOnly(currentRecord.date);
 
             const posterTemplate = document.getElementById('poster-template');

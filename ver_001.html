@@ -50,18 +50,19 @@
         .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
 
-        /* 相冊地標章 (Stamp Board) 視覺升級 */
-        .stamp-board { display: flex; flex-wrap: wrap; gap: 12px; padding: 25px 20px; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 45px; width: 100%; box-sizing: border-box; justify-content: flex-start; }
-        .stamp { 
-            width: auto; padding: 6px 12px; 
-            border: 1px solid #333; color: #333; 
-            font-family: 'Noto Serif TC', serif; font-size: 0.55rem; letter-spacing: 0.1em; 
-            border-radius: 20px; transition: 0.5s; 
-            display: flex; align-items: center; justify-content: center;
+        /* 相冊地標章 (Stamp Board) 視覺升級：置中、微光與高反差發光 */
+        .stamp-board { 
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; 
+            padding: 25px 15px; background: rgba(255,255,255,0.02); 
+            border: 1px dashed rgba(255,255,255,0.1); margin-bottom: 45px; 
+            width: 100%; box-sizing: border-box; 
         }
-        .stamp.active { 
-            color: var(--black); font-weight: 600; 
-            border-color: transparent; 
+        .stamp { 
+            width: auto; padding: 6px 14px; 
+            border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); 
+            font-family: 'Noto Serif TC', serif; font-size: 0.55rem; letter-spacing: 0.1em; 
+            border-radius: 20px; transition: all 0.4s ease; 
+            display: flex; align-items: center; justify-content: center;
         }
 
         .journal-list { width: 100%; display: flex; flex-direction: column; gap: 40px; text-align: left; }
@@ -70,7 +71,7 @@
         .j-district { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; font-weight: 500; color: var(--white); margin: 5px 0 20px; display: block; }
         .j-row-info { margin-bottom: 15px; font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 300; }
         .j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.1em; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
-        .state-message { color:#888; padding:40px 0; font-weight:300; font-size: 0.9rem; line-height: 1.8; text-align: left; }
+        .state-message { color:#888; padding:40px 0; font-weight:300; font-size: 0.9rem; line-height: 1.8; text-align: center; }
 
         .about-section { margin-bottom: 60px; }
         .about-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; letter-spacing: 0.1em; }
@@ -120,15 +121,21 @@
         .poster-divider { width: 40px; height: 2px; background: var(--active-color); margin-bottom: 45px; }
         
         .poster-mission { width: 100%; text-align: left; }
-        .pm-item { margin-bottom: 35px; display: flex; flex-direction: column; }
+        .pm-item { margin-bottom: 30px; display: flex; flex-direction: column; }
         
+        /* 高級雜誌感標題排版：拿掉色塊，改用細膩線條與序號 */
         .pm-title { 
-            display: inline-block; width: 80px; text-align: center; 
-            font-family: 'Noto Serif TC', sans-serif; font-size: 11px; letter-spacing: 0.1em; 
-            color: #000; background: var(--active-color); padding: 4px 0; margin-bottom: 12px; 
-            font-weight: 700; border-radius: 2px;
+            display: flex; align-items: center; width: 100%; text-align: left; 
+            font-family: 'Noto Serif TC', serif; font-size: 11px; letter-spacing: 0.15em; 
+            color: var(--active-color); background: transparent; padding: 0; margin-bottom: 10px; 
+            font-weight: 500;
         }
-        .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 18px; line-height: 1.7; color: #fafafa; font-weight: 300; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
+        .pm-num { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; margin-right: 8px; }
+        /* 文字後方的延伸細線 */
+        .pm-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.15); margin-left: 10px; }
+        
+        /* 內文些微內縮，增加留白層次 */
+        .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 1.8; color: #e6e6e6; font-weight: 300; padding-left: 20px; }
         
         .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
         .poster-hashtag { color: #fff; font-weight: 600; }
@@ -166,15 +173,15 @@
                 
                 <div class="poster-mission">
                     <div class="pm-item">
-                        <span class="pm-title">地點靈感</span>
+                        <span class="pm-title"><span class="pm-num">01</span> 地點靈感</span>
                         <div class="pm-desc" id="poster-action"></div>
                     </div>
                     <div class="pm-item">
-                        <span class="pm-title">味蕾提案</span>
+                        <span class="pm-title"><span class="pm-num">02</span> 味蕾提案</span>
                         <div class="pm-desc" id="poster-food"></div>
                     </div>
                     <div class="pm-item">
-                        <span class="pm-title">穿搭建議</span>
+                        <span class="pm-title"><span class="pm-num">03</span> 穿搭建議</span>
                         <div class="pm-desc" id="poster-style"></div>
                     </div>
                 </div>
@@ -265,19 +272,19 @@
             <div class="about-section">
                 <h2 class="about-title">Changelog</h2>
                 <div class="changelog-item">
-                    <span class="cl-version">v2.5.0</span>
+                    <span class="cl-version">v2.6.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">全面升級為雲端相冊系統。引入「電台頻段」概念，並將相冊視覺重構為地標收集徽章牆。容錯機制強化，穩定讀取各種格式的地點資料。</span>
+                    <span class="cl-desc">美學終極重構：IG 海報導入細膩延伸線排版，相冊牆進化為置中高光打卡徽章。全站日期自動格式化，徹底去除雜訊。</span>
                 </div>
                 <div class="changelog-item">
-                    <span class="cl-version">v2.1.5</span>
+                    <span class="cl-version">v2.5.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">海報標題中文化與動態編號：標籤改為「地點/味蕾/穿搭」並優化等寬比例。左上角實裝動態 #001 藏品序號系統。</span>
+                    <span class="cl-desc">全面升級為雲端相冊系統。引入「電台頻段」概念，並將相冊視覺重構為地標收集徽章牆。</span>
                 </div>
                 <div class="changelog-item">
                     <span class="cl-version">v1.0.0</span>
                     <span class="cl-date">2026.02</span>
-                    <span class="cl-desc">第十九號航線正式啟航。建立 36 張雷諾曼牌義與台灣座標演算邏輯。</span>
+                    <span class="cl-desc">第十九號航線正式啟航。</span>
                 </div>
             </div>
         </div>
@@ -339,6 +346,15 @@
         let currentTemp = 'MILD';
         let currentRecord = null;
 
+        // 輔助函數：將冗長的 ISO 日期轉為 YYYY.MM.DD
+        function formatToDateOnly(rawDate) {
+            if (!rawDate) return '';
+            if (rawDate.includes('T')) {
+                return rawDate.split('T')[0].replace(/-/g, '.');
+            }
+            return rawDate.replace(/\//g, '.');
+        }
+
         window.onload = () => { 
             document.getElementById('current-channel-display').innerText = currentChannel;
             initLights(); 
@@ -385,7 +401,6 @@
             }
         }
 
-        // 初始化「地標章」的空白狀態
         function initLights() {
             const board = document.getElementById('stamp-board');
             if(!board) return;
@@ -394,45 +409,49 @@
                 const stamp = document.createElement('div');
                 stamp.className = 'stamp';
                 stamp.id = `map-stamp-${i}`;
-                // 只顯示縣市，讓徽章小一點
                 stamp.innerText = taiwanData[i].split(' ')[1] || taiwanData[i]; 
                 board.appendChild(stamp);
             }
         }
 
-        // 更新畫面 UI (包含容錯機制與地標徽章邏輯)
         function renderView() {
-            // 1. 重置徽章牆
+            // 重置徽章牆 (還原未收集的半透明狀態)
             document.querySelectorAll('.stamp').forEach(s => { 
                 s.classList.remove('active'); 
                 s.style.background = 'transparent';
-                s.style.color = '#333';
+                s.style.color = 'rgba(255,255,255,0.3)';
+                s.style.borderColor = 'rgba(255,255,255,0.15)';
+                s.style.boxShadow = 'none';
+                s.style.fontWeight = 'normal';
+                s.style.transform = 'scale(1)';
             });
             
-            // 2. 點亮雲端紀錄裡的徽章
+            // 點亮已收集的徽章 (加上高光與霓虹陰影)
             cloudData.forEach(j => {
                 if (!j.name) return; 
-                
-                // 安全比對：濾除空白
                 const cleanName = j.name.replace(/\s+/g, '');
                 const idx = taiwanData.findIndex(loc => loc.replace(/\s+/g, '') === cleanName);
                 
                 const stamp = document.getElementById(`map-stamp-${idx}`);
                 if (stamp) { 
                     stamp.classList.add('active'); 
-                    const stampColor = j.color || '#FFD700'; // 容錯顏色
+                    const stampColor = j.color || '#FFD700'; 
                     stamp.style.background = stampColor; 
-                    stamp.style.color = '#000'; // 徽章亮起時字體變黑以確保辨識度
+                    stamp.style.color = '#000'; 
+                    stamp.style.fontWeight = '700';
+                    stamp.style.borderColor = 'transparent';
+                    stamp.style.boxShadow = `0 0 12px ${stampColor}, 0 0 25px ${stampColor}`;
+                    stamp.style.transform = 'scale(1.05)';
                 }
             });
 
-            // 3. 渲染記憶相冊清單
+            // 渲染相冊清單 (帶有自動過濾日期的 formatToDateOnly)
             const listEl = document.getElementById('journal-list');
             listEl.innerHTML = cloudData.length === 0 ? `<div class="state-message">頻段 [ ${currentChannel} ] 的相冊還空著，去抽取你的第一個靈感吧。</div>` :
                 [...cloudData].reverse().map((log, i, arr) => `
                     <div class="journal-card">
                         <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
-                        <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${log.date} / ${log.combo}</div>
+                        <div style="font-size:0.45rem; letter-spacing:0.2em; color:#555; text-transform:uppercase; margin-bottom:10px;">${formatToDateOnly(log.date)} / ${log.combo}</div>
                         <span class="j-district">${log.name}</span>
                         <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">LOCATION</strong>${log.m_action}</div>
                         <div class="j-row-info"><strong style="color:${log.color || '#FFD700'}">TASTE</strong>${log.m_food}</div>
@@ -440,12 +459,12 @@
                     </div>
                 `).join('');
             
-            // 4. 渲染地圖特輯
+            // 渲染地圖特輯
             const editEl = document.getElementById('editorial-list');
             const grouped = {};
             cloudData.forEach(log => {
                 if (!log.name) return;
-                const city = log.name.split(' ')[0] || log.name; // 容錯處理
+                const city = log.name.split(' ')[0] || log.name;
                 if(!grouped[city]) grouped[city] = [];
                 grouped[city].push(log);
             });
@@ -524,7 +543,15 @@
                     document.body.style.setProperty('--active-color', s1.color);
                     panel.style.display = 'block';
                     
-                    currentRecord = { name: finalLoc, combo: `${s1.n.split(' ')[0]} ✕ ${s2.n.split(' ')[0]}`, card1: s1.n.split(' ')[0], card2: s2.n.split(' ')[0], m_action: m_a, m_food: m_f, m_style: m_s, color: s1.color, date: new Date().toLocaleDateString() };
+                    currentRecord = { 
+                        name: finalLoc, 
+                        combo: `${s1.n.split(' ')[0]} ✕ ${s2.n.split(' ')[0]}`, 
+                        card1: s1.n.split(' ')[0], 
+                        card2: s2.n.split(' ')[0], 
+                        m_action: m_a, m_food: m_f, m_style: m_s, 
+                        color: s1.color, 
+                        date: new Date().toISOString() // 儲存為 ISO 標準格式傳給 GAS
+                    };
                 }
             }, 60);
         }
@@ -578,9 +605,8 @@
             document.getElementById('poster-food').innerText = currentRecord.m_food;
             document.getElementById('poster-style').innerText = currentRecord.m_style;
             
-            const today = new Date();
-            const dateString = `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
-            document.getElementById('poster-date').innerText = dateString;
+            // 輸出給海報的日期一律裁切為 YYYY.MM.DD 雜誌感
+            document.getElementById('poster-date').innerText = formatToDateOnly(currentRecord.date);
 
             const posterTemplate = document.getElementById('poster-template');
             posterTemplate.style.setProperty('--active-color', currentRecord.color);

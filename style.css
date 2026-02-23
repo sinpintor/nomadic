@@ -1,153 +1,120 @@
-:root { --black: #0a0a0a; --white: #ffffff; --grey: #888888; --active-color: #FFD700; }
+:root { 
+    --black: #0c0c0c; /* 稍微帶一點點灰度的黑，不那麼刺眼 */
+    --white: #F8F8F6; /* 燕麥白，讓文字有紙本的柔和感 */
+    --grey: #8a8a8a; 
+    --active-color: #F1C40F; /* 調整為稍微沉穩一點的暖金色 */
+}
 body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-.noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
+.noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.06"/%3E%3C/svg%3E'); }
 
-nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; gap: 20px; padding: 25px 10px; box-sizing: border-box; z-index: 1000; background: linear-gradient(to bottom, var(--black) 60%, transparent); }
-.nav-link { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--grey); text-decoration: none; text-transform: uppercase; cursor: pointer; transition: 0.3s; opacity: 0.6; padding: 5px 0; }
-.nav-link.active { color: var(--white); border-bottom: 1.5px solid var(--white); opacity: 1; }
+nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; gap: 24px; padding: 30px 10px; box-sizing: border-box; z-index: 1000; background: linear-gradient(to bottom, rgba(12,12,12,0.9) 50%, transparent); }
+.nav-link { font-size: 0.55rem; letter-spacing: 0.25em; color: var(--grey); text-decoration: none; text-transform: uppercase; cursor: pointer; transition: 0.4s ease; opacity: 0.5; padding: 6px 0; }
+.nav-link.active { color: var(--white); border-bottom: 1px solid var(--white); opacity: 1; }
 
-.page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 90px 25px 120px; box-sizing: border-box; }
+.page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 100px 25px 120px; box-sizing: border-box; }
 .page.active { display: flex; animation: fadeIn 0.8s ease forwards; }
-.content-wrapper { width: 100%; max-width: 400px; display: flex; flex-direction: column; }
+.content-wrapper { width: 100%; max-width: 420px; display: flex; flex-direction: column; }
 
-.page-title-box { text-align: center; width: 100%; margin-bottom: 35px; }
-.vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; font-weight: 800; color: var(--active-color); letter-spacing: 0.15em; margin-bottom: 15px; }
-.page-desc { font-size: 0.75rem; color: #888; line-height: 1.8; text-align: left; font-weight: 300; letter-spacing: 0.05em; border-left: 1px solid #333; padding-left: 15px; margin-bottom: 20px; }
+.page-title-box { text-align: center; width: 100%; margin-bottom: 40px; }
+.vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; font-weight: 800; color: var(--active-color); letter-spacing: 0.15em; margin-bottom: 18px; }
+.page-desc { font-size: 0.75rem; color: #999; line-height: 2; text-align: justify; font-weight: 300; letter-spacing: 0.08em; border-left: 1px solid #333; padding-left: 18px; margin-bottom: 20px; }
 
-.channel-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 12px 15px; margin-bottom: 30px; font-size: 0.65rem; color: #aaa; letter-spacing: 0.1em; border-radius: 2px;}
-.channel-name { font-family: 'Montserrat'; font-weight: 600; color: var(--white); margin-left: 5px; }
-.btn-switch-channel { background: none; border: 1px solid #444; color: #ccc; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; transition: 0.3s; border-radius: 2px;}
+.channel-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.015); border: 1px solid #1f1f1f; padding: 14px 18px; margin-bottom: 35px; font-size: 0.65rem; color: #999; letter-spacing: 0.1em; border-radius: 1px;}
+.channel-name { font-family: 'Montserrat'; font-weight: 500; color: var(--white); margin-left: 6px; letter-spacing: 0.15em; }
+.btn-switch-channel { background: none; border: 1px solid #444; color: #ccc; font-size: 0.5rem; padding: 6px 12px; cursor: pointer; transition: 0.3s; border-radius: 1px; letter-spacing: 0.1em;}
 .btn-switch-channel:hover { border-color: var(--active-color); color: var(--active-color); }
 
-.temp-selector { display: flex; gap: 8px; margin-bottom: 30px; width: 100%; }
-.temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 12px 10px; font-size: 0.42rem; letter-spacing: 0.05em; cursor: pointer; flex: 1; border-radius: 2px; transition: 0.3s; }
-.temp-btn.active { border-color: var(--active-color); color: var(--active-color); background: rgba(255, 255, 255, 0.03); }
+.temp-selector { display: flex; gap: 10px; margin-bottom: 35px; width: 100%; }
+.temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 14px 8px; font-size: 0.42rem; letter-spacing: 0.1em; cursor: pointer; flex: 1; border-radius: 1px; transition: all 0.4s ease; font-weight: 300; }
+.temp-btn.active { border-color: var(--active-color); color: var(--active-color); background: rgba(255, 255, 255, 0.02); }
 
-.display-stage { width: 100%; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 50px 0; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.1rem; font-weight: 600; color: var(--white); letter-spacing: 0.1em; margin-bottom: 25px; transition: color 0.3s;}
-.tag-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.tag-pill { font-family: 'Noto Serif TC', serif; font-size: 0.65rem; color: var(--active-color); border: 1px solid var(--active-color); padding: 4px 14px; background: rgba(0,0,0,0.5); }
+.display-stage { width: 100%; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 55px 0; margin-bottom: 45px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.loc-display { font-family: 'Noto Serif TC', serif; font-size: 2.2rem; font-weight: 600; color: var(--white); letter-spacing: 0.12em; margin-bottom: 25px; transition: color 0.4s ease;}
+.tag-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.tag-pill { font-family: 'Noto Serif TC', serif; font-size: 0.65rem; color: var(--active-color); border: 1px solid var(--active-color); padding: 5px 16px; background: rgba(0,0,0,0.6); letter-spacing: 0.1em;}
 
-.btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--white); padding: 18px 0; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: 0.5s; width: 100%; margin-bottom: 15px; border-radius: 2px;}
-.btn-vogue:hover { background: var(--white); color: var(--black); }
-.btn-primary { background: var(--active-color); color: var(--black); font-weight: 600; border: none; }
-.btn-primary:hover { opacity: 0.9; background: var(--active-color); }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-vogue { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--white); padding: 18px 0; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: all 0.5s ease; width: 100%; margin-bottom: 15px; border-radius: 1px;}
+.btn-vogue:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+.btn-primary { background: var(--active-color); color: var(--black); font-weight: 600; border: 1px solid var(--active-color); }
+.btn-primary:hover { opacity: 0.85; background: var(--active-color); color: var(--black); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.mission-panel { display: none; width: 100%; margin-top: 30px; text-align: left; }
-.mission-item { margin-bottom: 40px; }
-.m-header { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--grey); display: block; margin-bottom: 12px; border-bottom: 1px solid #1a1a1a; padding-bottom: 8px; }
-.m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
-.m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
+.mission-panel { display: none; width: 100%; margin-top: 35px; text-align: left; }
+.mission-item { margin-bottom: 45px; }
+.m-header { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--grey); display: block; margin-bottom: 14px; border-bottom: 1px solid #1f1f1f; padding-bottom: 10px; }
+.m-header strong { color: var(--active-color); font-weight: 600; margin-right: 12px; font-family: 'Montserrat'; font-size: 0.8rem;}
+.m-content { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; line-height: 2; color: #e0e0e0; font-weight: 300; text-align: justify; letter-spacing: 0.05em;}
 
 /* ================= 進度條樣式 ================= */
-.progress-container { width: 100%; margin-bottom: 35px; }
+.progress-container { width: 100%; margin-bottom: 45px; }
 .progress-info { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
 .progress-text { font-family: 'Noto Serif TC', serif; font-size: 0.75rem; font-weight: 500; color: var(--white); letter-spacing: 0.15em; }
-.progress-text span { font-family: 'Montserrat', sans-serif; margin-left: 8px; font-size: 0.7rem; color: #888; }
-.progress-percent { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); font-weight: 600; letter-spacing: 0.1em; }
-.progress-bar-bg { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.progress-text span { font-family: 'Montserrat', sans-serif; margin-left: 8px; font-size: 0.7rem; color: #777; }
+.progress-percent { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); font-weight: 500; letter-spacing: 0.1em; }
+.progress-bar-bg { width: 100%; height: 2px; background: rgba(255,255,255,0.08); border-radius: 1px; overflow: hidden; }
 .progress-bar-fill { height: 100%; background: var(--active-color); width: 0%; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* ================= 相冊地標章：縣市分類與字數視覺平衡 ================= */
-.stamp-group { width: 100%; margin-bottom: 35px; }
+/* ================= 相冊地標章 ================= */
+.stamp-group { width: 100%; margin-bottom: 40px; }
 .stamp-county-title { 
     font-family: 'Noto Serif TC', serif; font-size: 1rem; font-weight: 600; 
-    color: var(--white); margin: 0 0 15px 0; 
-    border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; 
-    letter-spacing: 0.2em; text-align: left; width: 100%; 
+    color: var(--white); margin: 0 0 18px 0; 
+    border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; 
+    letter-spacing: 0.25em; text-align: left; width: 100%; 
 }
-.stamp-board-grouped { 
-    display: flex; flex-wrap: wrap; gap: 10px; 
-    justify-content: flex-start;
-}
+.stamp-board-grouped { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start; }
 .stamp { 
-    min-width: 68px; /* 給予統一的最小寬度，撐起兩字區域 */
-    box-sizing: border-box;
-    padding: 6px 12px; 
-    border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.3); 
+    min-width: 68px; box-sizing: border-box; padding: 7px 12px; 
+    border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.25); 
     font-family: 'Noto Serif TC', serif; font-size: 0.6rem; 
-    border-radius: 20px; transition: all 0.4s ease; 
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
+    border-radius: 1px; transition: all 0.5s ease; 
+    display: flex; align-items: center; justify-content: center; text-align: center;
 }
-
-/* 針對不同字數設定專屬字距，並用 padding-left 抵銷 letter-spacing 造成的視覺偏移，達成完美置中 */
 .stamp[data-len="2"] { letter-spacing: 0.4em; padding-left: calc(12px + 0.4em); } 
 .stamp[data-len="3"] { letter-spacing: 0.15em; padding-left: calc(12px + 0.15em); }
 .stamp[data-len="4"] { letter-spacing: 0.02em; padding-left: calc(12px + 0.02em); }
 
-/* Timeline 日誌樣式 */
-.journal-list { width: 100%; display: flex; flex-direction: column; gap: 40px; text-align: left; }
-.journal-card { width: 100%; border-left: 1px solid #333; padding-left: 20px; position: relative; }
-.j-index { position: absolute; left: -15px; top: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.6rem; color: var(--active-color); background: var(--black); padding: 2px; }
-.j-district { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; font-weight: 500; color: var(--white); margin: 5px 0 20px; display: block; }
-.j-row-info { margin-bottom: 15px; font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 300; }
-.j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.1em; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
-.state-message { color:#888; padding:40px 0; font-weight:300; font-size: 0.9rem; line-height: 1.8; text-align: center; width: 100%; }
+/* ================= Timeline 日誌樣式 ================= */
+.journal-list { width: 100%; display: flex; flex-direction: column; gap: 45px; text-align: left; }
+.journal-card { width: 100%; border-left: 1px solid #222; padding-left: 25px; position: relative; }
+.j-index { position: absolute; left: -16px; top: 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.65rem; color: var(--active-color); background: var(--black); padding: 4px 0; }
+.j-district { font-family: 'Noto Serif TC', serif; font-size: 1.6rem; font-weight: 500; color: var(--white); margin: 8px 0 25px; display: block; letter-spacing: 0.1em;}
+.j-row-info { margin-bottom: 18px; font-size: 0.9rem; color: #bbb; line-height: 1.8; font-weight: 300; letter-spacing: 0.05em;}
+.j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.15em; margin-bottom: 6px; text-transform: uppercase; font-weight: 500; }
+.state-message { color:#777; padding:50px 0; font-weight:300; font-size: 0.95rem; line-height: 2; text-align: center; width: 100%; letter-spacing: 0.05em; }
 
-.about-section { margin-bottom: 60px; }
-.about-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; letter-spacing: 0.1em; }
-.about-text { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; line-height: 2.2; color: #bbb; font-weight: 300; text-align: justify; letter-spacing: 0.05em; margin-bottom: 20px; }
-.about-text strong { color: #fff; font-weight: 500; }
+/* ================= 關於我們 ================= */
+.about-section { margin-bottom: 65px; }
+.about-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; margin-bottom: 25px; border-bottom: 1px solid #1f1f1f; padding-bottom: 12px; letter-spacing: 0.1em; font-style: italic;}
+.about-text { font-family: 'Noto Serif TC', serif; font-size: 0.95rem; line-height: 2.2; color: #aaa; font-weight: 300; text-align: justify; letter-spacing: 0.06em; margin-bottom: 25px; }
+.about-text strong { color: #fff; font-weight: 400; }
+.changelog-item { display: flex; flex-direction: column; margin-bottom: 30px; border-left: 1px solid #222; padding-left: 18px; }
+.cl-version { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--active-color); letter-spacing: 0.1em; margin-bottom: 6px; }
+.cl-date { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; color: #666; margin-bottom: 10px; letter-spacing: 0.1em; }
+.cl-desc { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #ccc; line-height: 1.8; font-weight: 300; letter-spacing: 0.05em;}
 
-.changelog-item { display: flex; flex-direction: column; margin-bottom: 25px; border-left: 1px solid #333; padding-left: 15px; }
-.cl-version { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 600; color: var(--active-color); letter-spacing: 0.1em; margin-bottom: 5px; }
-.cl-date { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; color: #666; margin-bottom: 8px; letter-spacing: 0.1em; }
-.cl-desc { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #ddd; line-height: 1.6; font-weight: 300; }
-
-/* ================= IG 限動海報：極緻底片終極排版 ================= */
-.ig-poster { 
-    position: fixed; left: -9999px; top: 0; width: 540px; height: 960px; 
-    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #020202 100%); 
-    display: flex; flex-direction: column; justify-content: center; align-items: center; 
-    padding: 25px; box-sizing: border-box; z-index: -1; 
-}
-
-.poster-noise-layer { 
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.12"/%3E%3C/svg%3E'); 
-    z-index: 0; pointer-events: none; 
-}
-
-.poster-frame { 
-    position: relative; width: 100%; height: 100%; 
-    border: 1px solid rgba(255,255,255,0.1); 
-    padding: 45px 35px; box-sizing: border-box; 
-    display: flex; flex-direction: column; justify-content: space-between; 
-    z-index: 1; 
-}
-
-.poster-header { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.25em; color: rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 15px; text-transform: uppercase; }
+/* IG 海報 (隱藏在背景生成) */
+.ig-poster { position: fixed; left: -9999px; top: 0; width: 540px; height: 960px; background: radial-gradient(circle at 50% 50%, #151515 0%, #050505 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px; box-sizing: border-box; z-index: -1; }
+.poster-noise-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.12"/%3E%3C/svg%3E'); z-index: 0; pointer-events: none; }
+.poster-frame { position: relative; width: 100%; height: 100%; border: 1px solid rgba(255,255,255,0.08); padding: 45px 35px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; z-index: 1; }
+.poster-header { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.25em; color: rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; text-transform: uppercase; }
 .poster-vol { font-family: 'Montserrat'; font-weight: 600; color: var(--active-color); }
 .poster-brand { font-weight: 800; color: #fff; letter-spacing: 0.2em; }
-
 .poster-body { flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; margin-top: 10px; }
-
 .poster-top-section { display: flex; flex-direction: column; align-items: center; width: 100%; }
-
-.poster-combo-box { display: flex; align-items: center; justify-content: center; gap: 15px; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); padding: 12px 0; margin-bottom: 30px; width: 85%; }
+.poster-combo-box { display: flex; align-items: center; justify-content: center; gap: 15px; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 12px 0; margin-bottom: 30px; width: 85%; }
 .poster-combo-card { font-family: 'Noto Serif TC', serif; font-size: 16px; color: var(--active-color); font-weight: 500; letter-spacing: 0.2em; }
 .poster-combo-cross { font-family: 'Montserrat'; font-size: 12px; color: #555; }
-
 .poster-loc { font-family: 'Noto Serif TC', serif; font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 35px; color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); text-align: center; }
-.poster-divider { width: 40px; height: 2px; background: var(--active-color); margin-bottom: 45px; }
-
+.poster-divider { width: 40px; height: 1px; background: var(--active-color); margin-bottom: 45px; }
 .poster-mission { width: 100%; text-align: left; }
 .pm-item { margin-bottom: 30px; display: flex; flex-direction: column; }
-
-.pm-title { 
-    display: flex; align-items: center; width: 100%; text-align: left; 
-    font-family: 'Noto Serif TC', serif; font-size: 11px; letter-spacing: 0.15em; 
-    color: var(--active-color); background: transparent; padding: 0; margin-bottom: 10px; 
-    font-weight: 500;
-}
+.pm-title { display: flex; align-items: center; width: 100%; text-align: left; font-family: 'Noto Serif TC', serif; font-size: 11px; letter-spacing: 0.15em; color: var(--active-color); background: transparent; padding: 0; margin-bottom: 10px; font-weight: 500;}
 .pm-num { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; margin-right: 8px; }
-.pm-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.15); margin-left: 10px; }
+.pm-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); margin-left: 10px; }
 .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 1.8; color: #e6e6e6; font-weight: 300; padding-left: 20px; }
-
 .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
 .poster-hashtag { color: #fff; font-weight: 600; }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }

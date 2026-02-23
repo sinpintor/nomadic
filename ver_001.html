@@ -4,29 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Route19: 城市靈感指南</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;1,800&family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,800&family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         :root { --black: #0a0a0a; --white: #ffffff; --grey: #888888; --active-color: #FFD700; }
         body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         
-        /* 全站共用噪點 */
         .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.05"/%3E%3C/svg%3E'); }
         
-        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; gap: 25px; padding: 30px 10px; box-sizing: border-box; z-index: 1000; background: linear-gradient(to bottom, var(--black) 50%, transparent); }
-        .nav-link { font-size: 0.55rem; letter-spacing: 0.25em; color: var(--grey); text-decoration: none; text-transform: uppercase; cursor: pointer; transition: 0.3s; opacity: 0.6; padding: 5px 0; }
+        nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; gap: 20px; padding: 25px 10px; box-sizing: border-box; z-index: 1000; background: linear-gradient(to bottom, var(--black) 60%, transparent); }
+        .nav-link { font-size: 0.55rem; letter-spacing: 0.2em; color: var(--grey); text-decoration: none; text-transform: uppercase; cursor: pointer; transition: 0.3s; opacity: 0.6; padding: 5px 0; }
         .nav-link.active { color: var(--white); border-bottom: 1.5px solid var(--white); opacity: 1; }
 
-        .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 100px 25px 120px; box-sizing: border-box; }
+        .page { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 90px 25px 120px; box-sizing: border-box; }
         .page.active { display: flex; animation: fadeIn 0.8s ease forwards; }
         .content-wrapper { width: 100%; max-width: 400px; display: flex; flex-direction: column; }
 
-        .page-title-box { text-align: center; width: 100%; margin-bottom: 40px; }
+        .page-title-box { text-align: center; width: 100%; margin-bottom: 35px; }
         .vogue-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; font-weight: 800; color: var(--active-color); letter-spacing: 0.15em; margin-bottom: 15px; }
-        .page-desc { font-size: 0.75rem; color: #888; line-height: 1.8; text-align: left; font-weight: 300; letter-spacing: 0.05em; border-left: 1px solid #333; padding-left: 15px; }
+        .page-desc { font-size: 0.75rem; color: #888; line-height: 1.8; text-align: left; font-weight: 300; letter-spacing: 0.05em; border-left: 1px solid #333; padding-left: 15px; margin-bottom: 20px; }
         
+        /* 頻道切換 UI */
+        .channel-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: 1px solid #222; padding: 10px 15px; margin-bottom: 30px; font-size: 0.65rem; color: #aaa; letter-spacing: 0.1em; }
+        .channel-name { font-family: 'Montserrat'; font-weight: 600; color: var(--white); margin-left: 5px; }
+        .btn-switch-channel { background: none; border: 1px solid #444; color: #ccc; font-size: 0.5rem; padding: 4px 8px; cursor: pointer; transition: 0.3s; }
+        .btn-switch-channel:hover { border-color: var(--active-color); color: var(--active-color); }
+
         .temp-selector { display: flex; gap: 8px; margin-bottom: 30px; width: 100%; }
-        .temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 12px 10px; font-size: 0.42rem; letter-spacing: 0.05em; cursor: pointer; flex: 1; border-radius: 2px; }
+        .temp-btn { background: transparent; border: 1px solid #222; color: var(--grey); padding: 12px 10px; font-size: 0.42rem; letter-spacing: 0.05em; cursor: pointer; flex: 1; border-radius: 2px; transition: 0.3s; }
         .temp-btn.active { border-color: var(--active-color); color: var(--active-color); background: rgba(255, 255, 255, 0.03); }
 
         .display-stage { width: 100%; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 50px 0; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -45,6 +50,7 @@
         .m-header strong { color: var(--active-color); font-weight: 600; margin-right: 10px; font-family: 'Montserrat'; }
         .m-content { font-family: 'Noto Serif TC', serif; font-size: 1rem; line-height: 1.8; color: #ddd; font-weight: 300; }
 
+        /* 相冊與特輯 */
         .light-grid { display: grid; grid-template-columns: repeat(16, 1fr); gap: 6px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 45px; width: 100%; box-sizing: border-box; }
         .dot { width: 6px; height: 6px; background: #1a1a1a; border-radius: 50%; transition: 0.5s; }
         .dot.active { transform: scale(1.4); filter: brightness(1.2); }
@@ -56,25 +62,34 @@
         .j-row-info { margin-bottom: 15px; font-size: 0.85rem; color: #aaa; line-height: 1.6; font-weight: 300; }
         .j-row-info strong { font-family: 'Montserrat', sans-serif; font-size: 0.45rem; display: block; letter-spacing: 0.1em; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
 
-        /* ================= IG 限動海報：高對比底片風 ================= */
+        /* ================= 品牌紀事 (About) 專屬樣式 ================= */
+        .about-section { margin-bottom: 60px; }
+        .about-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; letter-spacing: 0.1em; }
+        .about-text { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; line-height: 2.2; color: #bbb; font-weight: 300; text-align: justify; letter-spacing: 0.05em; margin-bottom: 20px; }
+        .about-text strong { color: #fff; font-weight: 500; }
+        
+        .changelog-item { display: flex; flex-direction: column; margin-bottom: 25px; border-left: 1px solid #333; padding-left: 15px; }
+        .cl-version { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 600; color: var(--active-color); letter-spacing: 0.1em; margin-bottom: 5px; }
+        .cl-date { font-family: 'Montserrat', sans-serif; font-size: 0.5rem; color: #666; margin-bottom: 8px; letter-spacing: 0.1em; }
+        .cl-desc { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; color: #ddd; line-height: 1.6; font-weight: 300; }
+
+        /* ================= IG 限動海報：高對比底片排版 ================= */
         .ig-poster { 
             position: fixed; left: -9999px; top: 0; width: 540px; height: 960px; 
-            background: radial-gradient(circle at 50% 50%, #222222 0%, #050505 100%); /* 底片暗角效果 */
+            background: radial-gradient(circle at 50% 50%, #1e1e1e 0%, #030303 100%); 
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
             padding: 25px; box-sizing: border-box; z-index: -1; 
         }
         
-        /* 強烈底片噪點層 (放在最底層避免讓字變模糊) */
         .poster-noise-layer { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.18"/%3E%3C/svg%3E'); 
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)" opacity="0.2"/%3E%3C/svg%3E'); 
             z-index: 0; pointer-events: none; 
         }
         
-        /* 拍立得/底片相框內層 */
         .poster-frame { 
             position: relative; width: 100%; height: 100%; 
-            border: 1px solid rgba(255,255,255,0.15); 
+            border: 1px solid rgba(255,255,255,0.1); 
             padding: 45px 35px; box-sizing: border-box; 
             display: flex; flex-direction: column; justify-content: space-between; 
             z-index: 1; 
@@ -85,20 +100,24 @@
         
         .poster-body { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 10px; }
         
-        .poster-combo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--active-color); letter-spacing: 0.15em; margin-bottom: 12px; font-style: italic; }
+        /* 牌卡組合：雜誌感交叉排版 */
+        .poster-combo-box { display: flex; align-items: center; gap: 15px; border-top: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15); padding: 12px 0; margin-bottom: 30px; width: fit-content; }
+        .poster-combo-card { font-family: 'Noto Serif TC', serif; font-size: 16px; color: var(--active-color); font-weight: 500; letter-spacing: 0.2em; }
+        .poster-combo-cross { font-family: 'Montserrat'; font-size: 12px; color: #555; }
+
         /* 座標字體極度清晰 */
-        .poster-loc { font-family: 'Noto Serif TC', serif; font-size: 54px; font-weight: 700; line-height: 1.15; margin-bottom: 35px; color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .poster-divider { width: 50px; height: 2px; background: var(--active-color); margin-bottom: 40px; }
+        .poster-loc { font-family: 'Noto Serif TC', serif; font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 40px; color: #ffffff; text-shadow: 0 2px 6px rgba(0,0,0,0.9); }
         
-        .pm-item { margin-bottom: 35px; }
-        /* 標題改為亮色標籤風格，增加層次與清晰度 */
+        .pm-item { margin-bottom: 35px; display: flex; flex-direction: column; }
+        /* 等寬、置中對齊的高亮標籤 */
         .pm-title { 
-            display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.25em; 
-            color: #000; background: var(--active-color); padding: 4px 10px; margin-bottom: 12px; 
-            font-weight: 800; text-transform: uppercase; border-radius: 2px;
+            display: inline-block; width: 75px; text-align: center; 
+            font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.15em; 
+            color: #000; background: var(--active-color); padding: 4px 0; margin-bottom: 12px; 
+            font-weight: 700; text-transform: uppercase; border-radius: 2px;
         }
         /* 內文極致清晰的高對比白字 */
-        .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 18px; line-height: 1.7; color: #f4f4f4; font-weight: 400; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+        .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 18px; line-height: 1.7; color: #fafafa; font-weight: 400; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
         
         .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
         .poster-hashtag { color: #fff; font-weight: 600; }
@@ -111,8 +130,9 @@
     
     <nav>
         <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">今日靈感</div>
-        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">記憶相冊</div>
-        <div class="nav-link" id="nav-editorial" onclick="showPage('editorial')">城市特輯</div>
+        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">相冊</div>
+        <div class="nav-link" id="nav-editorial" onclick="showPage('editorial')">城市</div>
+        <div class="nav-link" id="nav-about" onclick="showPage('about')">紀事</div>
     </nav>
 
     <div id="poster-template" class="ig-poster">
@@ -123,9 +143,13 @@
                 <span class="poster-brand">Route19</span>
             </div>
             <div class="poster-body">
-                <div class="poster-combo" id="poster-combo"></div>
+                <div class="poster-combo-box">
+                    <span class="poster-combo-card" id="poster-card-1"></span>
+                    <span class="poster-combo-cross">✕</span>
+                    <span class="poster-combo-card" id="poster-card-2"></span>
+                </div>
                 <div class="poster-loc" id="poster-loc"></div>
-                <div class="poster-divider"></div>
+                
                 <div class="poster-mission">
                     <div class="pm-item">
                         <span class="pm-title">Location</span>
@@ -154,6 +178,12 @@
                 <h1 class="vogue-title">Route19</h1>
                 <p class="page-desc">將隨機的靈感指引，變成一場輕旅行。在台灣的某個角落，遇見屬於你的美好瞬間。</p>
             </div>
+            
+            <div class="channel-bar">
+                <span>目前航線頻段: <span id="current-channel-display" class="channel-name">Public</span></span>
+                <button class="btn-switch-channel" onclick="changeChannel()">切換頻段</button>
+            </div>
+
             <div class="temp-selector">
                 <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">15°C↓ 微涼</button>
                 <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">15-25°C 舒適</button>
@@ -176,7 +206,6 @@
                 <button class="btn-vogue btn-primary" onclick="manualSave()">收藏這個瞬間</button>
                 <button class="btn-vogue" style="border-color: var(--active-color); color: var(--active-color);" onclick="generateIGStory()">下載 IG 限動海報</button>
             </div>
-            <button onclick="resetSystem()" style="margin-top:80px; background:none; border:none; color:#333; font-size:0.4rem; letter-spacing:0.2em; cursor:pointer; width:100%;">清除所有紀錄</button>
         </div>
     </div>
 
@@ -201,8 +230,47 @@
         </div>
     </div>
 
+    <div id="about" class="page">
+        <div class="content-wrapper">
+            <div class="page-title-box">
+                <h1 class="vogue-title" style="color:#fff">About Route19</h1>
+                <p class="page-desc">The intersection of synchronicity and photography.</p>
+            </div>
+            
+            <div class="about-section">
+                <h2 class="about-title">Founder's Note</h2>
+                <div class="about-text">
+                    Route19 不只是一個座標生成器，它是對日常的一場浪漫叛逃。Wade & Cloudy 試圖在神祕學的雷諾曼符號與攝影紀實之間，尋找台灣街角的共時性 (Synchronicity)。
+                </div>
+                <div class="about-text">
+                    我們相信，當你帶著特定的<strong>「濾鏡」</strong>與<strong>「意圖」</strong>走入城市，即便是最尋常的巷弄，也會為你展開截然不同的風景。抽一張牌，換上一套衣服，帶上你的相機。在第十九號航線上，沒有迷路，只有不期而遇。
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2 class="about-title">Changelog</h2>
+                <div class="changelog-item">
+                    <span class="cl-version">v2.0.0</span>
+                    <span class="cl-date">2026.02.23</span>
+                    <span class="cl-desc">導入多重航線頻段，支援私人與共享日誌切換。IG 聯覺海報排版重構，全面引入高對比底片噪點與等寬標籤設計。</span>
+                </div>
+                <div class="changelog-item">
+                    <span class="cl-version">v1.1.0</span>
+                    <span class="cl-date">2026.02</span>
+                    <span class="cl-desc">視覺風格轉向溫和白話文，並實裝 html2canvas 海報一鍵封存機能。</span>
+                </div>
+                <div class="changelog-item">
+                    <span class="cl-version">v1.0.0</span>
+                    <span class="cl-date">2026.02</span>
+                    <span class="cl-desc">第十九號航線正式啟航。建立 36 張雷諾曼牌義與台灣座標演算邏輯。</span>
+                </div>
+            </div>
+            <button onclick="resetSystem()" style="margin-top:20px; background:none; border:1px solid #333; padding: 15px; color:#555; font-size:0.5rem; letter-spacing:0.2em; cursor:pointer; width:100%; transition: 0.3s;">清除當前頻段紀錄</button>
+        </div>
+    </div>
+
     <script>
-        // 台灣縣市資料庫
+        // 台灣縣市資料庫與牌卡資料 (維持不變)
         const taiwanData = ["台北市 中正區","台北市 大同區","台北市 中山區","台北市 松山區","台北市 大安區","台北市 萬華區","台北市 信義區","台北市 士林區","台北市 北投區","台北市 內湖區","台北市 南港區","台北市 文山區","新北市 板橋區","新北市 三重區","新北市 中和區","新北市 永和區","新北市 新莊區","新北市 新店區","新北市 樹林區","新北市 鶯歌區","新北市 三峽區","新北市 淡水區","新北市 汐止區","新北市 瑞芳區","新北市 土城區","新北市 蘆洲區","新北市 五股區","新北市 泰山區","新北市 林口區","新北市 深坑區","新北市 石碇區","新北市 坪林區","新北市 三芝區","新北市 石門區","新北市 八里區","新北市 平溪區","新北市 雙溪區","新北市 貢寮區","新北市 金山區","新北市 萬里區","新北市 烏來區","基隆市 仁愛區","基隆市 信義區","基隆市 中正區","基隆市 中山區","基隆市 安樂區","基隆市 暖暖區","基隆市 七堵區","桃園市 桃園區","桃園市 中壢區","桃園市 大溪區","桃園市 楊梅區","桃園市 蘆竹區","桃園市 大園區","桃園市 龜山區","桃園市 八德區","桃園市 龍潭區","桃園市 平鎮區","桃園市 新屋區","桃園市 觀音區","桃園市 復興區","新竹縣 竹北市","新竹縣 竹東鎮","新竹縣 新埔鎮","新竹縣 關西鎮","新竹縣 湖口鄉","新竹縣 新豐鄉","新竹縣 芎林鄉","新竹縣 橫山鄉","新竹縣 北埔鄉","新竹縣 寶山鄉","新竹縣 峨眉鄉","新竹縣 尖石鄉","新竹縣 五峰鄉","新竹市 東區","新竹市 北區","新竹市 香山區","苗栗縣 苗栗市","苗栗縣 頭份市","苗栗縣 竹南鎮","苗栗縣 後龍鎮","苗栗縣 通霄鎮","苗栗縣 苑裡鎮","苗栗縣 卓蘭鎮","苗栗縣 造橋鄉","苗栗縣 西湖鄉","苗栗縣 頭屋鄉","苗栗縣 公館鄉","苗栗縣 銅鑼鄉","苗栗縣 三義鄉","苗栗縣 大湖鄉","苗栗縣 獅潭鄉","苗栗縣 三灣鄉","苗栗縣 南庄鄉","苗栗縣 泰安鄉","台中市 中區","台中市 東區","台中市 南區","台中市 西區","台中市 北區","台中市 北屯區","台中市 西屯區","台中市 南屯區","台中市 太平區","台中市 大里區","台中市 霧峰區","台中市 烏日區","台中市 豐原區","台中市 后里區","台中市 石岡區","台中市 東勢區","台中市 和平區","台中市 新社區","台中市 潭子區","台中市 大雅區","台中市 神岡區","台中市 大肚區","台中市 沙鹿區","台中市 龍井區","台中市 梧棲區","台中市 清水區","台中市 大甲區","台中市 外埔區","台中市 大安區","彰化縣 彰化市","彰化縣 鹿港鎮","彰化縣 和美鎮","彰化縣 線西鄉","彰化縣 伸港鄉","彰化縣 福興鄉","彰化縣 秀水鄉","彰化縣 花壇鄉","彰化縣 芬園鄉","彰化縣 員林市","彰化縣 溪湖鎮","彰化縣 田中鎮","彰化縣 大村鄉","彰化縣 埔鹽鄉","彰化縣 埔心鄉","彰化縣 永靖鄉","彰化縣 社頭鄉","彰化縣 二水鄉","彰化縣 北斗鎮","彰化縣 二林鎮","彰化縣 田尾鄉","彰化縣 埤頭鄉","彰化縣 芳苑鄉","彰化縣 大城鄉","彰化縣 竹塘鄉","彰化縣 溪州鄉","南投縣 南投市","南投縣 埔里鎮","南投縣 草屯鎮","南投縣 竹山鎮","南投縣 集集鎮","南投縣 名間鄉","南投縣 鹿谷鄉","南投縣 中寮鄉","南投縣 魚池鄉","南投縣 國姓鄉","南投縣 水里鄉","南投縣 信義鄉","南投縣 仁愛鄉","雲林縣 斗六市","雲林縣 斗南鎮","雲林縣 虎尾鎮","雲林縣 西螺鎮","雲林縣 土庫鎮","雲林縣 北港鎮","雲林縣 古坑鄉","雲林縣 大埤鄉","雲林縣 莿桐鄉","雲林縣 林內鄉","雲林縣 二崙鄉","雲林縣 崙背鄉","雲林縣 麥寮鄉","雲林縣 東勢鄉","雲林縣 褒忠鄉","雲林縣 台西鄉","雲林縣 元長鄉","雲林縣 四湖鄉","雲林縣 口湖鄉","雲林縣 水林鄉","嘉義縣 太保市","嘉義縣 朴子市","嘉義縣 布袋鎮","嘉義縣 大林鎮","嘉義縣 民雄鄉","嘉義縣 溪口鄉","嘉義縣 新港鄉","嘉義縣 六腳鄉","嘉義縣 東石鄉","嘉義縣 義竹鄉","嘉義縣 鹿草鄉","嘉義縣 水上鄉","嘉義縣 中埔鄉","嘉義縣 竹崎鄉","嘉義縣 梅山鄉","嘉義縣 番路鄉","嘉義縣 大埔鄉","嘉義縣 阿里山鄉","嘉義市 東區","嘉義市 西區","台南市 中西區","台南市 東區","台南市 南區","台南市 北區","台南市 安平區","台南市 安南區","台南市 永康區","台南市 歸仁區","台南市 新化區","台南市 左鎮區","台南市 玉井區","台南市 楠西區","台南市 南化區","台南市 仁德區","台南市 關廟區","台南市 龍崎區","台南市 官田區","台南市 麻豆區","台南市 佳里區","台南市 西港區","台南市 七股區","台南市 將軍區","台南市 學甲區","台南市 北門區","台南市 新營區","台南市 後壁區","台南市 白河區","台南市 東山區","台南市 六甲區","台南市 下營區","台南市 柳營區","台南市 鹽水區","台南市 善化區","台南市 大內區","台南市 山上區","台南市 新市區","台南市 安定區","高雄市 楠梓區","高雄市 左營區","高雄市 鼓山區","高雄市 三民區","高雄市 苓雅區","高雄市 新興區","高雄市 前金區","高雄市 鹽埕區","高雄市 前鎮區","高雄市 旗津區","高雄市 小港區","高雄市 鳳山區","高雄市 大寮區","高雄市 鳥松區","高雄市 林園區","高雄市 仁武區","高雄市 大樹區","高雄市 大社區","高雄市 岡山區","高雄市 路竹區","高雄市 阿蓮區","高雄市 田寮區","高雄市 燕巢區","高雄市 橋頭區","高雄市 梓官區","高雄市 彌陀區","高雄市 永安區","高雄市 湖內區","高雄市 旗山區","高雄市 美濃區","高雄市 六龜區","高雄市 內門區","高雄市 杉林區","高雄市 甲仙區","高雄市 桃源區","高雄市 那瑪夏區","高雄市 茂林區","屏東縣 屏東市","屏東縣 三地門鄉","屏東縣 霧臺鄉","屏東縣 瑪家鄉","屏東縣 九如鄉","屏東縣 里港鄉","屏東縣 高樹鄉","屏東縣 鹽埔鄉","屏東縣 長治鄉","屏東縣 麟洛鄉","屏東縣 竹田鄉","屏東縣 內埔鄉","屏東縣 萬丹鄉","屏東縣 潮州鎮","屏東縣 泰武鄉","屏東縣 來義鄉","屏東縣 萬巒鄉","屏東縣 崁頂鄉","屏東縣 新埤鄉","屏東縣 南州鄉","屏東縣 林邊鄉","屏東縣 東港鎮","屏東縣 琉球鄉","屏東縣 佳冬鄉","屏東縣 新園鄉","屏東縣 枋寮鄉","屏東縣 枋山鄉","屏東縣 春日鄉","屏東縣 獅子鄉","屏東縣 車城鄉","屏東縣 牡丹鄉","屏東縣 恆春鎮","屏東縣 滿州鄉","宜蘭縣 宜蘭市","宜蘭縣 頭城鎮","宜蘭縣 礁溪鄉","宜蘭縣 壯圍鄉","宜蘭縣 員山鄉","宜蘭縣 羅東鎮","宜蘭縣 三星鄉","宜蘭縣 大同鄉","宜蘭縣 五結鄉","宜蘭縣 冬山鄉","宜蘭縣 蘇澳鎮","宜蘭縣 南澳鄉","花蓮縣 花蓮市","花蓮縣 鳳林鎮","花蓮縣 玉里鎮","花蓮縣 新城鄉","花蓮縣 吉安鄉","花蓮縣 壽豐鄉","花蓮縣 光復鄉","花蓮縣 豐濱鄉","花蓮縣 瑞穗鄉","花蓮縣 富里鄉","花蓮縣 秀林鄉","花蓮縣 萬榮鄉","花蓮縣 卓溪鄉","台東縣 台東市","台東縣 成功鎮","台東縣 關山鎮","台東縣 卑名鄉","台東縣 鹿野鄉","台東縣 池上鄉","台東縣 東河鄉","台東縣 長濱鄉","台東縣 太麻里鄉","台東縣 大武鄉","台東縣 綠島鄉","台東縣 蘭嶼鄉","台東縣 延平鄉","台東縣 海端鄉","台東縣 金峰鄉","台東縣 達仁鄉","澎湖縣 馬公市","澎湖縣 湖西鄉","澎湖縣 白沙鄉","澎湖縣 西嶼鄉","澎湖縣 望安鄉","澎湖縣 七美鄉","金門縣 金城鎮","金門縣 金湖鎮","金門縣 金沙鎮","金門縣 金寧鄉","金門縣 烈嶼鄉","金門縣 烏坵鄉","連江縣 南竿鄉","連江縣 北竿鄉","連江縣 莒光鄉","連江縣 東引鄉"];
         const subjects = {
             1: { n: "太陽", loc: "陽光充足的開闊空地或廣場", color: "#FFD700" },
@@ -249,11 +317,18 @@
             "HOT": ["滑順的絲緞單品與一點金屬首飾", "涼爽的綢緞裝束與細帶涼鞋", "透氣的亞麻套裝搭配簡單頸鍊", "設計感十足的純白棉質單品", "輕盈的鏤空上衣與舒適的棉麻寬褲", "充滿夏日感的印花單品與草編包", "微露背的設計感背心與丹寧", "通風舒適的連身裝與極簡涼鞋", "有點寬鬆的白襯衫與輕薄短裙", "帶點波西米亞風的罩衫與金屬配飾", "亮色系的平口或細肩帶單品", "輕薄的針織背心與亞麻長裙", "美式復古運動風搭配高腰長裙", "雪紡單品搭配貼身的羅紋背心", "全白亞麻襯衫與亮眼內搭", "一字領上衣與簡單的直筒短褲", "帶點透視感的微涼針織與高腰短裙", "充滿度假感的短袖襯衫與闊腿褲", "短版合身背心與輕柔的絲質長褲", "清爽的洋裝搭配簡單的配件"]
         };
 
-        const KEY = 'route19_vogue_v2026_final_stable';
+        // 頻道系統：讓前端模擬多使用者的資料庫隔離
+        let currentChannel = localStorage.getItem('route19_current_channel') || 'Public';
+        let storageKey = `route19_data_${currentChannel}`;
+        
         let currentTemp = 'MILD';
         let currentRecord = null;
 
-        window.onload = () => { initLights(); renderAll(); };
+        window.onload = () => { 
+            document.getElementById('current-channel-display').innerText = currentChannel;
+            initLights(); 
+            renderAll(); 
+        };
 
         function showPage(pId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -261,6 +336,19 @@
             document.getElementById(pId).classList.add('active');
             document.getElementById(`nav-${pId}`).classList.add('active');
             renderAll();
+        }
+
+        // 切換資料頻道
+        function changeChannel() {
+            const newChannel = prompt("請輸入航線頻段代碼 (例如你的名字或團隊名稱) :", currentChannel);
+            if(newChannel && newChannel.trim() !== "") {
+                currentChannel = newChannel.trim();
+                localStorage.setItem('route19_current_channel', currentChannel);
+                storageKey = `route19_data_${currentChannel}`;
+                document.getElementById('current-channel-display').innerText = currentChannel;
+                renderAll();
+                alert(`已成功切換至頻段：${currentChannel}。未來的 GAS API 串接可以利用這個代碼調用不同的 Google Sheet 分頁。`);
+            }
         }
 
         function setTemp(t) {
@@ -281,7 +369,7 @@
         }
 
         function renderAll() {
-            const masterJournal = JSON.parse(localStorage.getItem(KEY)) || [];
+            const masterJournal = JSON.parse(localStorage.getItem(storageKey)) || [];
             
             document.querySelectorAll('.dot').forEach(d => { d.classList.remove('active'); d.style.background = '#1a1a1a'; d.style.boxShadow = 'none'; });
             masterJournal.forEach(j => {
@@ -291,7 +379,7 @@
             });
 
             const listEl = document.getElementById('journal-list');
-            listEl.innerHTML = masterJournal.length === 0 ? '<div style="color:#444; padding:40px 0; font-weight:300;">你的地圖尚無餘溫，請先抽取今日靈感。</div>' :
+            listEl.innerHTML = masterJournal.length === 0 ? `<div style="color:#444; padding:40px 0; font-weight:300;">[ ${currentChannel} ] 頻段尚無記憶，請先抽取。</div>` :
                 [...masterJournal].reverse().map((log, i, arr) => `
                     <div class="journal-card">
                         <div class="j-index">#${String(arr.length - i).padStart(3, '0')}</div>
@@ -311,7 +399,7 @@
                 grouped[city].push(log);
             });
 
-            editEl.innerHTML = Object.keys(grouped).length === 0 ? '<div style="color:#444; padding:40px 0; font-weight:300;">特輯準備中，出發去拍幾張照吧。</div>' :
+            editEl.innerHTML = Object.keys(grouped).length === 0 ? `<div style="color:#444; padding:40px 0; font-weight:300;">[ ${currentChannel} ] 專屬特輯準備中。</div>` :
                 Object.keys(grouped).map(city => {
                     const logs = grouped[city];
                     const paletteItems = logs.map(l => `<div style="height:100%; flex:1; background:${l.color}"></div>`).join('');
@@ -356,9 +444,7 @@
                     
                     const id1 = Math.floor(Math.random() * 36) + 1;
                     let id2 = Math.floor(Math.random() * 36) + 1;
-                    while (id2 === id1) {
-                        id2 = Math.floor(Math.random() * 36) + 1;
-                    }
+                    while (id2 === id1) { id2 = Math.floor(Math.random() * 36) + 1; }
                     
                     const s1 = subjects[id1];
                     const s2 = subjects[id2];
@@ -377,17 +463,18 @@
                     document.body.style.setProperty('--active-color', s1.color);
                     panel.style.display = 'block';
                     
-                    currentRecord = { name: finalLoc, combo: `${s1.n.split(' ')[0]} ＋ ${s2.n.split(' ')[0]}`, m_action: m_a, m_food: m_f, m_style: m_s, color: s1.color, date: new Date().toLocaleDateString() };
+                    // 將分開的牌卡資訊存入 record 中，方便海報排版使用
+                    currentRecord = { name: finalLoc, combo: `${s1.n.split(' ')[0]} ✕ ${s2.n.split(' ')[0]}`, card1: s1.n.split(' ')[0], card2: s2.n.split(' ')[0], m_action: m_a, m_food: m_f, m_style: m_s, color: s1.color, date: new Date().toLocaleDateString() };
                 }
             }, 60);
         }
 
         function manualSave() {
             if (!currentRecord) return;
-            const data = JSON.parse(localStorage.getItem(KEY)) || [];
+            const data = JSON.parse(localStorage.getItem(storageKey)) || [];
             data.push(currentRecord);
-            localStorage.setItem(KEY, JSON.stringify(data));
-            alert("已成功收藏這個瞬間。");
+            localStorage.setItem(storageKey, JSON.stringify(data));
+            alert(`已成功將此瞬間收藏至 [ ${currentChannel} ] 頻段。`);
             renderAll();
         }
 
@@ -397,7 +484,10 @@
                 return;
             }
 
-            document.getElementById('poster-combo').innerText = currentRecord.combo;
+            // 分別填入兩張牌卡，實現高級雜誌感排版
+            document.getElementById('poster-card-1').innerText = currentRecord.card1;
+            document.getElementById('poster-card-2').innerText = currentRecord.card2;
+            
             document.getElementById('poster-loc').innerText = currentRecord.name;
             document.getElementById('poster-action').innerText = currentRecord.m_action;
             document.getElementById('poster-food').innerText = currentRecord.m_food;
@@ -410,12 +500,11 @@
             const posterTemplate = document.getElementById('poster-template');
             posterTemplate.style.setProperty('--active-color', currentRecord.color);
 
-            // 確保排版與字體完全載入後再轉換
             setTimeout(() => {
                 html2canvas(posterTemplate, {
-                    scale: 2, // 提高畫質
+                    scale: 2,
                     useCORS: true,
-                    backgroundColor: "#050505" // 深黑底色
+                    backgroundColor: "#030303"
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `Route19_${currentRecord.name.replace(' ', '_')}.png`;
@@ -426,8 +515,8 @@
         }
 
         function resetSystem() {
-            if(confirm("確定要清除所有的旅行記憶嗎？")) {
-                localStorage.removeItem(KEY);
+            if(confirm(`確定要清除 [ ${currentChannel} ] 頻段所有的旅行記憶嗎？此動作無法復原。`)) {
+                localStorage.removeItem(storageKey);
                 location.reload();
             }
         }

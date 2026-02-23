@@ -171,6 +171,7 @@ function changeChannel() {
         currentChannel = newChannel.trim();
         localStorage.setItem('route19_current_channel', currentChannel);
         document.getElementById('current-channel-display').innerText = currentChannel;
+        triggerGlitch(); // 轉台時閃爍
         loadCloudData();
     }
 }
@@ -301,6 +302,7 @@ function setTemp(t) {
 
 // 加入 manualLoc 參數，接收手動選擇的地點
 function drawFate(manualLoc = null) {
+    triggerGlitch(); // 抽牌前先閃爍
     const locEl = document.getElementById('loc-result');
     const comboEl = document.getElementById('combo-display');
     const panel = document.getElementById('mission-panel');
@@ -417,4 +419,11 @@ function generateIGStory() {
             link.click();
         });
     }, 150);
+}
+
+function triggerGlitch() {
+    const glitch = document.getElementById('static-glitch');
+    glitch.classList.remove('glitch-active');
+    void glitch.offsetWidth; // 強制重新渲染
+    glitch.classList.add('glitch-active');
 }

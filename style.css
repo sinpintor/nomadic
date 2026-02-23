@@ -1,8 +1,8 @@
 :root { 
-    --black: #0c0c0c; /* 稍微帶一點點灰度的黑，不那麼刺眼 */
-    --white: #F8F8F6; /* 燕麥白，讓文字有紙本的柔和感 */
+    --black: #0c0c0c; 
+    --white: #F8F8F6; 
     --grey: #8a8a8a; 
-    --active-color: #F1C40F; /* 調整為稍微沉穩一點的暖金色 */
+    --active-color: #F1C40F; 
 }
 body, html { margin: 0; padding: 0; background: var(--black); color: var(--white); font-family: 'Montserrat', 'Noto Serif TC', serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
@@ -115,6 +115,7 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
 .pm-title::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); margin-left: 10px; }
 .pm-desc { font-family: 'Noto Serif TC', serif; font-size: 17px; line-height: 1.8; color: #e6e6e6; font-weight: 300; padding-left: 20px; }
 .poster-footer { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); }
+.poster-ig { color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.1em; } /* 新增的 IG 帳號樣式 */
 .poster-hashtag { color: #fff; font-weight: 600; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }

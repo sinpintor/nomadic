@@ -112,41 +112,16 @@ nav {
 .stamp[data-len="3"] { font-size: 0.7rem; }
 .stamp[data-len="4"] { font-size: 0.6rem; }
 
-/* ================= 公路日記樣式 (新版) ================= */
-.journal-list { display: flex; flex-direction: column; gap: 40px; } /* 拉開卡片間距 */
-.journal-card { 
-    border-bottom: 1px solid #222; padding-bottom: 40px; margin-bottom: 10px; 
-}
-.j-header {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 20px;
-}
+/* 日記列表排版 (分層設計) */
+.journal-list { display: flex; flex-direction: column; gap: 40px; }
+.journal-card { border-bottom: 1px solid #222; padding-bottom: 40px; margin-bottom: 10px; }
+.j-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
 .j-index { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #444; }
 .j-meta { font-size: 0.65rem; letter-spacing: 0.1em; color: #666; text-transform: uppercase; }
-
-.j-district { 
-    font-size: 1.8rem; font-weight: 700; display: block; margin-bottom: 30px; 
-    color: var(--white); letter-spacing: 0.1em; 
-}
-
-/* 分層佈局：標題一行，內容一行 */
+.j-district { font-size: 1.8rem; font-weight: 700; display: block; margin-bottom: 30px; color: var(--white); letter-spacing: 0.1em; }
 .j-item { margin-bottom: 25px; }
-.j-label {
-    display: block; 
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem; 
-    color: var(--active-color); 
-    letter-spacing: 0.2em; 
-    text-transform: uppercase;
-    margin-bottom: 8px; /* 標題與內容的距離 */
-}
-.j-text {
-    display: block;
-    font-size: 0.95rem; 
-    color: #ccc; 
-    line-height: 1.7; 
-    font-weight: 300;
-}
+.j-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--active-color); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+.j-text { display: block; font-size: 0.95rem; color: #ccc; line-height: 1.7; font-weight: 300; }
 
 .about-section { margin-bottom: 50px; }
 .about-title { font-family: 'Playfair Display', serif; margin-bottom: 20px; letter-spacing: 0.1em; }
@@ -154,7 +129,6 @@ nav {
 
 .state-message { text-align: center; color: #666; font-size: 0.8rem; padding: 40px 0; letter-spacing: 0.1em; }
 
-/* IG 海報 */
 .ig-poster {
     position: fixed; left: -9999px; width: 1080px; height: 1920px; background: #050505; color: white; padding: 120px 80px;
     display: flex; flex-direction: column; justify-content: space-between; font-family: 'Montserrat', 'Noto Serif TC', serif;
@@ -184,9 +158,27 @@ nav {
 .glitch-active { animation: static-flash 0.4s ease-out; }
 @keyframes static-flash { 0% { opacity: 0; } 10% { opacity: 0.15; background: #fff; } 20% { opacity: 0; } 30% { opacity: 0.1; background: #ccc; } 50% { opacity: 0.05; } 100% { opacity: 0; } }
 
+/* RWD 手機版優化 */
 @media (max-width: 768px) {
     .vogue-title { font-size: 2.5rem; }
     .loc-display { font-size: 1.8rem; }
     .channel-bar { font-size: 0.65rem; padding: 8px 15px; width: 100%; white-space: nowrap; }
     .channel-name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; display: inline-block; vertical-align: bottom; }
+    
+    /* 這裡將按鈕改為垂直排列 */
+    .temp-selector {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .temp-btn {
+        width: 100%;
+        max-width: 260px; /* 限制寬度，維持美感 */
+        text-align: center;
+        border-color: #444;
+    }
+    .temp-btn.active {
+        border-color: var(--white);
+        background: rgba(255,255,255,0.05);
+    }
 }

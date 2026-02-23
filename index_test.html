@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Route19: 漫遊靈感指南</title>
+    <title>Route19: 漫遊指南</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,800&family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -12,10 +12,10 @@
     <div class="noise"></div>
     
     <nav>
-        <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">今日靈感</div>
-        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">藏品</div>
-        <div class="nav-link" id="nav-timeline" onclick="showPage('timeline')">日誌</div>
-        <div class="nav-link" id="nav-about" onclick="showPage('about')">紀事</div>
+        <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">出發提案</div>
+        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">漫遊護照</div>
+        <div class="nav-link" id="nav-timeline" onclick="showPage('timeline')">公路日記</div>
+        <div class="nav-link" id="nav-about" onclick="showPage('about')">關於我們</div>
     </nav>
 
     <div id="poster-template" class="ig-poster">
@@ -38,15 +38,15 @@
                 
                 <div class="poster-mission">
                     <div class="pm-item">
-                        <span class="pm-title"><span class="pm-num">01</span> 地點靈感</span>
+                        <span class="pm-title"><span class="pm-num">01</span> 漫遊視角</span>
                         <div class="pm-desc" id="poster-action"></div>
                     </div>
                     <div class="pm-item">
-                        <span class="pm-title"><span class="pm-num">02</span> 味蕾提案</span>
+                        <span class="pm-title"><span class="pm-num">02</span> 沿途風味</span>
                         <div class="pm-desc" id="poster-food"></div>
                     </div>
                     <div class="pm-item">
-                        <span class="pm-title"><span class="pm-num">03</span> 穿搭建議</span>
+                        <span class="pm-title"><span class="pm-num">03</span> 編輯私服</span>
                         <div class="pm-desc" id="poster-style"></div>
                     </div>
                 </div>
@@ -62,18 +62,18 @@
         <div class="content-wrapper">
             <div class="page-title-box">
                 <h1 class="vogue-title">Route19</h1>
-                <p class="page-desc">將隨機的靈感指引，變成一場輕旅行。無論是喧囂的城市或靜謐的曠野，在台灣的某個角落，遇見屬於你的美好瞬間。</p>
+                <p class="page-desc">將每一次不期而遇，變成一場輕旅行。無論是喧囂的城市或靜謐的曠野，在台灣的某個角落，遇見專屬於你的風景。</p>
             </div>
             
             <div class="channel-bar">
-                <span>當前旅行電台頻段: <span id="current-channel-display" class="channel-name">Wade&Cloudy</span></span>
-                <button class="btn-switch-channel" onclick="changeChannel()">切換頻段</button>
+                <span>正在收聽的公路頻道：<span id="current-channel-display" class="channel-name">Wade&Cloudy</span></span>
+                <button class="btn-switch-channel" onclick="changeChannel()">調頻</button>
             </div>
 
             <div class="temp-selector">
-                <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">15°C↓ 微涼</button>
-                <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">15-25°C 舒適</button>
-                <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">25°C↑ 溫暖</button>
+                <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">裹上大衣的微涼</button>
+                <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">微風剛好的舒適</button>
+                <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">擁抱陽光的日子</button>
             </div>
             <div class="display-stage">
                 <div id="loc-result" class="loc-display" style="color: #666; font-size: 1.2rem; font-weight: 300;">準備好出發了嗎？</div>
@@ -82,29 +82,29 @@
                     <span id="tag-2" class="tag-pill"></span>
                 </div>
             </div>
-            <button class="btn-vogue" onclick="drawFate()">抽取今日靈感</button>
+            <button class="btn-vogue" onclick="drawFate()">給我一個出發的理由</button>
             
             <div id="mission-panel" class="mission-panel">
-                <div class="mission-item"><span class="m-header"><strong>01</strong> 地點靈感</span><div class="m-content" id="m-action"></div></div>
-                <div class="mission-item"><span class="m-header"><strong>02</strong> 味蕾提案</span><div class="m-content" id="m-food"></div></div>
-                <div class="mission-item"><span class="m-header"><strong>03</strong> 穿搭建議</span><div class="m-content" id="m-style"></div></div>
+                <div class="mission-item"><span class="m-header"><strong>01</strong> 漫遊視角 Where to look</span><div class="m-content" id="m-action"></div></div>
+                <div class="mission-item"><span class="m-header"><strong>02</strong> 沿途風味 What to taste</span><div class="m-content" id="m-food"></div></div>
+                <div class="mission-item"><span class="m-header"><strong>03</strong> 編輯私服 OOTD</span><div class="m-content" id="m-style"></div></div>
                 
-                <button class="btn-vogue btn-primary" id="btn-save" onclick="manualSave()">收藏這個瞬間</button>
-                <button class="btn-vogue" style="border-color: var(--active-color); color: var(--active-color);" onclick="generateIGStory()">下載 IG 限動海報</button>
+                <button class="btn-vogue btn-primary" id="btn-save" onclick="manualSave()">把這趟旅程收進護照</button>
+                <button class="btn-vogue" style="border-color: var(--active-color); color: var(--active-color);" onclick="generateIGStory()">列印專屬限動海報</button>
             </div>
         </div>
     </div>
 
-<div id="archive" class="page">
+    <div id="archive" class="page">
         <div class="content-wrapper">
             <div class="page-title-box">
-                <h1 class="vogue-title" style="color:#fff">Map Collection</h1>
-                <p class="page-desc">將台灣解構為區塊，收集每一寸土地的溫度。這裡是你專屬的漫遊護照。</p>
+                <h1 class="vogue-title" style="color:#fff">Passport</h1>
+                <p class="page-desc">368 個台灣角落，我們慢慢走。每次不期而遇，都會在這裡留下一枚專屬的印記。</p>
             </div>
             
             <div class="progress-container">
                 <div class="progress-info">
-                    <span class="progress-text">探索進度 <span id="progress-text-count">0 / 368</span></span>
+                    <span class="progress-text">已點亮的風景 <span id="progress-text-count">0 / 368</span></span>
                     <span class="progress-percent" id="progress-percent">0%</span>
                 </div>
                 <div class="progress-bar-bg">
@@ -115,16 +115,12 @@
             <div id="stamp-container" style="width: 100%;"></div>
         </div>
     </div>
-            
-            <div id="stamp-container" style="width: 100%;"></div>
-            </div>
-    </div>
 
     <div id="timeline" class="page">
         <div class="content-wrapper">
             <div class="page-title-box">
-                <h1 class="vogue-title" style="color:#fff">Timeline</h1>
-                <p class="page-desc">依時間排序，每一趟不期而遇的靈感紀錄。</p>
+                <h1 class="vogue-title" style="color:#fff">Journal</h1>
+                <p class="page-desc">依時間排序，翻閱每一趟在公路上的記憶切片。</p>
             </div>
             <div id="journal-list" class="journal-list"></div>
         </div>
@@ -133,12 +129,12 @@
     <div id="about" class="page">
         <div class="content-wrapper">
             <div class="page-title-box">
-                <h1 class="vogue-title" style="color:#fff">About Route19</h1>
+                <h1 class="vogue-title" style="color:#fff">About</h1>
                 <p class="page-desc">The intersection of synchronicity and photography.</p>
             </div>
             
             <div class="about-section">
-                <h2 class="about-title">Founder's Note</h2>
+                <h2 class="about-title">Editor's Note</h2>
                 <div class="about-text">
                     Route19 不只是一個地點生成器，它是對日常的一場浪漫叛逃。我們試圖在神祕學的雷諾曼符號與攝影紀實之間，尋找台灣各個角落的共時性 (Synchronicity)。
                 </div>
@@ -150,14 +146,14 @@
             <div class="about-section">
                 <h2 class="about-title">Changelog</h2>
                 <div class="changelog-item">
-                    <span class="cl-version">v3.6.0</span>
+                    <span class="cl-version">v4.0.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">前端架構重構，導入關注點分離 (HTML/CSS/JS) 以利版本控制。移除特輯區塊，專注於護照收集與時間線。</span>
+                    <span class="cl-desc">美學與語彙全面升級。導入時尚雜誌編輯口吻、細膩的材質色彩穿搭提案，以及帶有溫度的視覺留白排版。</span>
                 </div>
                 <div class="changelog-item">
-                    <span class="cl-version">v3.5.0</span>
+                    <span class="cl-version">v3.6.0</span>
                     <span class="cl-date">2026.02.23</span>
-                    <span class="cl-desc">地標章收集冊終極進化。導入「縣市分類」護照排版，並將時間線日誌獨立為專屬頁面。</span>
+                    <span class="cl-desc">前端架構重構，導入關注點分離 (HTML/CSS/JS) 以利版本控制。</span>
                 </div>
             </div>
         </div>

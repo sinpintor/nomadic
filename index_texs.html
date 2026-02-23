@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Route19: 漫遊靈感指南</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,800&family=Noto+Serif+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <nav>
+        <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">今日靈感</div>
+        <div class="nav-link" id="nav-archive" onclick="showPage('archive')">藏品</div>
+        <div class="nav-link" id="nav-timeline" onclick="showPage('timeline')">日誌</div>
+        <div class="nav-link" id="nav-about" onclick="showPage('about')">紀事</div>
+    </nav>
+
+    <div id="poster-template" class="ig-poster">
+        <div class="poster-noise-layer"></div>
+        <div class="poster-frame">
+            <div class="poster-header">
+                <span class="poster-vol" id="poster-vol">#001</span>
+                <span class="poster-brand">Route19</span>
+            </div>
+            <div class="poster-body">
+                <div class="poster-top-section">
+                    <div class="poster-combo-box">
+                        <span class="poster-combo-card" id="poster-card-1"></span>
+                        <span style="color:#555">✕</span>
+                        <span class="poster-combo-card" id="poster-card-2"></span>
+                    </div>
+                    <div class="poster-loc" id="poster-loc"></div>
+                    <div class="poster-divider"></div>
+                </div>
+                <div class="poster-mission">
+                    <div class="pm-item">
+                        <span class="pm-title"><span class="pm-num">01</span> 地點靈感</span>
+                        <div class="pm-desc" id="poster-action"></div>
+                    </div>
+                    <div class="pm-item">
+                        <span class="pm-title"><span class="pm-num">02</span> 味蕾提案</span>
+                        <div class="pm-desc" id="poster-food"></div>
+                    </div>
+                    <div class="pm-item">
+                        <span class="pm-title"><span class="pm-num">03</span> 穿搭建議</span>
+                        <div class="pm-desc" id="poster-style"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="poster-footer">
+                <span id="poster-date"></span>
+                <span style="font-weight:600; color:#fff">#Route19</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="oracle" class="page active">
+        <div class="content-wrapper">
+            <div class="page-title-box">
+                <h1 class="vogue-title">Route19</h1>
+                <p class="page-desc">第十九號航線。將隨機的靈感指引，變成一場輕旅行。無論是城市或山海，在台灣的某個角落，遇見屬於你的美好瞬間。</p>
+            </div>
+            <div class="channel-bar">
+                <span>旅行電台頻段: <span id="current-channel-display" class="channel-name">Wade&Cloudy</span></span>
+                <button class="btn-switch-channel" onclick="changeChannel()">切換</button>
+            </div>
+            <div class="temp-selector">
+                <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">微涼</button>
+                <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">舒適</button>
+                <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">溫暖</button>
+            </div>
+            <div class="display-stage">
+                <div id="loc-result" class="loc-display" style="color:#444; font-weight:300;">準備好出發了嗎？</div>
+                <div id="combo-display" class="tag-row" style="visibility:hidden; margin-top:10px;">
+                    <span id="tag-1" class="tag-pill"></span>
+                    <span id="tag-2" class="tag-pill"></span>
+                </div>
+            </div>
+            <button class="btn-vogue" onclick="drawFate()">抽取靈感</button>
+            <div id="mission-panel" class="mission-panel">
+                <div class="mission-item"><span class="m-header"><strong>01</strong> 地點靈感</span><div class="m-content" id="m-action"></div></div>
+                <div class="mission-item"><span class="m-header"><strong>02</strong> 味蕾提案</span><div class="m-content" id="m-food"></div></div>
+                <div class="mission-item"><span class="m-header"><strong>03</strong> 穿搭建議</span><div class="m-content" id="m-style"></div></div>
+                <button class="btn-vogue btn-primary" id="btn-save" onclick="manualSave()">收藏這個瞬間</button>
+                <button class="btn-vogue" style="border-color:var(--active-color); color:var(--active-color);" onclick="generateIGStory()">下載 IG 限動海報</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="archive" class="page">
+        <div class="content-wrapper">
+            <div class="page-title-box">
+                <h1 class="vogue-title" style="color:#fff">Collection</h1>
+                <p class="page-desc">地圖上的點點星火，是漫遊過的證言。這裡是你專屬的漫遊護照。</p>
+            </div>
+            <div id="collection-container" style="width:100%;"></div>
+        </div>
+    </div>
+
+    <div id="timeline" class="page">
+        <div class="content-wrapper">
+            <div class="page-title-box">
+                <h1 class="vogue-title" style="color:#fff">Timeline</h1>
+                <p class="page-desc">依時間排序，每一趟不期而遇的靈感紀錄。</p>
+            </div>
+            <div id="journal-list" class="journal-list"></div>
+        </div>
+    </div>
+
+    <div id="about" class="page">
+        <div class="content-wrapper">
+            <div class="page-title-box">
+                <h1 class="vogue-title" style="color:#fff">About</h1>
+            </div>
+            <div class="about-section">
+                <h2 class="about-title">Founder's Note</h2>
+                <div class="about-text">Route19 不只是一個地點生成器，它是對日常的一場浪漫叛逃。我們試圖在神祕學與影像之間，尋找台灣各個角落的共時性。</div>
+            </div>
+            <div class="about-section">
+                <h2 class="about-title">Changelog</h2>
+                <div class="changelog-item">
+                    <span class="cl-version">v3.9.0</span>
+                    <span class="cl-date">2026.02.23</span>
+                    <span class="cl-desc">藏品頁面極致整合：縣市標題合一、徽章牆與特輯列表完美串接、Timeline 日誌獨立分頁。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

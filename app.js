@@ -64,7 +64,7 @@ const outfits = {
         "寬鬆舒適的針織背心疊穿素色襯衫，配上直筒牛仔褲展現微學院風"
     ],
     "MILD": [
-        "低飽和度的灰綠色亞麻西裝套裝，內搭簡單的純白T恤與經典球鞋",
+        "低飽全面度的灰綠色亞麻西裝套裝，內搭簡單的純白T恤與經典球鞋",
         "帶點法式慵懶的波卡圓點真絲襯衫，微微解開兩顆釦子，塞進高腰直筒褲",
         "剪裁俐落的莫蘭迪色西裝外套，搭配輕薄的羅紋背心與微喇叭丹寧褲",
         "柔軟的薄針織罩衫，配上帶有垂墜感的緞面長裙與一對溫潤的珍珠耳環",
@@ -124,10 +124,11 @@ function formatToDateOnly(rawDate) {
 window.onload = () => { 
     document.getElementById('current-channel-display').innerText = currentChannel;
     initLights(); 
-    initManualSelect();
+    initManualSelect(); // 初始化下拉選單
     loadCloudData(); 
 };
 
+// 產生手動選擇地點的下拉選單
 function initManualSelect() {
     const select = document.getElementById('manual-loc-select');
     if(!select) return;
@@ -139,6 +140,7 @@ function initManualSelect() {
     });
 }
 
+// 切換手動選單的顯示與隱藏
 function toggleManualSelect() {
     const select = document.getElementById('manual-loc-select');
     const text = document.querySelector('.manual-select-text');
@@ -297,6 +299,7 @@ function setTemp(t) {
     document.getElementById(`btn-${t}`).classList.add('active');
 }
 
+// 加入 manualLoc 參數，接收手動選擇的地點
 function drawFate(manualLoc = null) {
     const locEl = document.getElementById('loc-result');
     const comboEl = document.getElementById('combo-display');
@@ -311,6 +314,7 @@ function drawFate(manualLoc = null) {
         i++;
         if (i > 25) {
             clearInterval(timer);
+            // 如果有手動選擇就用手動的，沒有就隨機抽
             const finalLoc = manualLoc || taiwanData[Math.floor(Math.random() * taiwanData.length)];
             
             const id1 = Math.floor(Math.random() * 36) + 1;

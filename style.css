@@ -170,6 +170,20 @@ nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: cent
     .ig-poster { transform: scale(0.6); transform-origin: top left; }
 }
 
+/* ================= 手動選擇地點樣式 ================= */
+.manual-select-wrapper { text-align: center; margin-bottom: 25px; width: 100%; }
+.manual-select-text { font-size: 0.6rem; color: #666; letter-spacing: 0.15em; cursor: pointer; transition: 0.4s ease; padding-bottom: 2px; }
+.manual-select-text:hover { color: var(--active-color); }
+.manual-loc-select { 
+    width: 100%; background: rgba(0,0,0,0.5); border: 1px solid #333; color: var(--white); 
+    padding: 12px 15px; font-family: 'Noto Serif TC', serif; font-size: 0.85rem; margin-top: 15px;
+    outline: none; border-radius: 1px; letter-spacing: 0.1em; cursor: pointer;
+    appearance: none; -webkit-appearance: none; /* 隱藏預設箭頭，換成高級感箭頭 */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23888" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat; background-position-x: 95%; background-position-y: center;
+}
+.manual-loc-select option { background: var(--black); color: var(--white); }
+
 @media screen and (max-width: 375px) {
     /* 針對更小的螢幕 (如 iPhone SE, 13 mini) 進一步縮小 */
     nav { gap: 8px; }

@@ -314,7 +314,10 @@ nav {
     }
 
     .vogue-title { font-size: 3.2rem; }
-    .loc-display-large { font-size: 2.5rem; }
+    .loc-display-large { 
+        font-size: 2.2rem; 
+        white-space: nowrap; /* 強制文字與標點符號待在同一行 */
+    }
     .tag-row-editorial { font-size: 1rem; }
     
     .control-panel { flex-direction: column; align-items: center; gap: 25px; text-align: center; }

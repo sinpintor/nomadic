@@ -17,7 +17,8 @@
         </filter>
         <rect width="100%" height="100%" filter="url(#noise)"></rect>
     </svg>
-    <div class="vignette-overlay"></div> <div id="static-glitch" class="glitch-overlay"></div>
+    <div class="vignette-overlay"></div> 
+    <div id="static-glitch" class="glitch-overlay"></div>
     
     <nav>
         <div class="nav-link active" id="nav-oracle" onclick="showPage('oracle')">ISSUES 提案</div>
@@ -78,13 +79,17 @@
             </div>
 
             <div class="control-panel">
-                <div class="channel-wrapper">
-                    <div class="channel-bar">
-                        <span class="channel-label">正在收聽的公路頻道：</span>
-                        <span id="current-channel-display" class="channel-name">FM 19.0 漫遊波段</span>
+                <div class="channel-wrapper" onclick="changeChannel()" title="點擊切換頻道">
+                    <div class="channel-meta">
+                        <span class="meta-en">FREQUENCY</span>
+                        <span class="meta-zh">公路頻道</span>
                     </div>
-                    <button class="btn-text-only" onclick="changeChannel()">[ 調頻 ]</button>
+                    <div class="channel-display">
+                        <span id="current-channel-display" class="channel-name">FM 19.0 漫遊波段</span>
+                        <span class="tune-action">[ 調頻 ]</span>
+                    </div>
                 </div>
+
                 <div class="temp-selector">
                     <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">微涼</button>
                     <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">舒適</button>

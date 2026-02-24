@@ -80,20 +80,20 @@
             <div class="control-panel">
                 <div class="channel-wrapper">
                     <div class="channel-bar">
-                        <span class="channel-label">ON AIR:</span>
+                        <span class="channel-label">正在收聽的公路頻道：</span>
                         <span id="current-channel-display" class="channel-name">FM 19.0 漫遊波段</span>
                     </div>
-                    <button class="btn-text-only" onclick="changeChannel()">[ TUNING ]</button>
+                    <button class="btn-text-only" onclick="changeChannel()">[ 調頻 ]</button>
                 </div>
                 <div class="temp-selector">
-                    <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">Cold.</button>
-                    <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">Mild.</button>
-                    <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">Hot.</button>
+                    <button class="temp-btn" id="btn-COLD" onclick="setTemp('COLD')">微涼</button>
+                    <button class="temp-btn active" id="btn-MILD" onclick="setTemp('MILD')">舒適</button>
+                    <button class="temp-btn" id="btn-HOT" onclick="setTemp('HOT')">溫暖</button>
                 </div>
             </div>
             
             <div class="display-stage-editorial">
-                <div id="loc-result" class="loc-display-large">READY?</div>
+                <div id="loc-result" class="loc-display-large">準備好出發了嗎？</div>
                 <div id="combo-display" class="tag-row-editorial" style="visibility:hidden;">
                     <span id="tag-1"></span><span class="tag-x">✕</span><span id="tag-2"></span>
                 </div>
@@ -101,13 +101,13 @@
             
             <div class="action-area">
                 <button class="btn-vogue-editorial" onclick="drawFate()">
-                    <span class="btn-text">Generate Inspiration</span>
+                    <span class="btn-text">給我一個出發的理由</span>
                     <span class="btn-line"></span>
                 </button>
                 <div class="manual-select-wrapper">
-                    <span class="manual-select-text" onclick="toggleManualSelect()">— Or, define your destination.</span>
+                    <span class="manual-select-text" onclick="toggleManualSelect()">[ 或是，由我指定目的地 ]</span>
                     <select id="manual-loc-select" class="manual-loc-select" style="display:none;" onchange="if(this.value) drawFate(this.value)">
-                        <option value="">Select Location...</option>
+                        <option value="">請選擇你想去的鄉鎮市區...</option>
                     </select>
                 </div>
             </div>
@@ -136,10 +136,10 @@
                 </div>
                 <div class="btn-group-vertical">
                     <button class="btn-vogue-editorial btn-primary-editorial" id="btn-save" onclick="manualSave()">
-                        <span class="btn-text">Archive This Moment</span>
+                        <span class="btn-text">把這趟旅程收進護照</span>
                     </button>
                     <button class="btn-vogue-editorial" onclick="generateIGStory()">
-                        <span class="btn-text">Print Story Poster</span>
+                        <span class="btn-text">列印專屬限動海報</span>
                     </button>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                     <div class="progress-bar-fill-thin" id="progress-bar-fill"></div>
                 </div>
                 <div class="progress-info-editorial">
-                    <span class="progress-text">COLLECTED <span id="progress-text-count" style="color:var(--active-color)">0 / 368</span></span>
+                    <span class="progress-text">已點亮的風景 <span id="progress-text-count" style="color:var(--active-color)">0 / 368</span></span>
                     <span class="progress-percent" id="progress-percent">0%</span>
                 </div>
             </div>
@@ -209,11 +209,11 @@
 
     <div id="poster-modal" class="poster-modal">
         <div class="modal-content">
-             <p>Tap & Hold to Save Image</p>
+             <p>📸 長按圖片即可儲存至手機相簿</p>
              <div class="img-frame-editorial">
                 <img id="generated-poster-img" src="" alt="Route19 Poster">
              </div>
-            <button class="btn-text-only close-btn" onclick="closePosterModal()">[ CLOSE ]</button>
+            <button class="btn-text-only close-btn" onclick="closePosterModal()">[ 關閉海報 ]</button>
         </div>
     </div>
 

@@ -365,24 +365,27 @@ nav {
     
 .mission-item-editorial { 
         flex-direction: column; 
-        gap: 15px; 
-        align-items: flex-start; /* 確保所有元素靠左起頭 */
-        text-align: left; 
+        gap: 10px; 
+        align-items: center; /* 讓外層的數字置中 */
     }
     .m-body { 
-        text-align: left; 
-        width: 100%; /* 確保內容區塊撐滿，讓文字完美靠左 */
+        width: 100%; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; /* 讓內層的英文標題置中 */
     }
     .m-num { 
-        font-size: 3rem; /* 數字維持大氣勢 */
-        margin-bottom: -10px; /* 稍微拉近數字與英文標題的距離，更有排版緊湊感 */
+        font-size: 3rem; 
+        text-align: center;
+        margin-bottom: -5px; 
     }
     .m-header { 
-        margin-bottom: 10px; 
-        text-align: left; 
+        margin-bottom: 15px; 
+        text-align: center; 
     }
     .m-content { 
-        text-align: left; 
+        text-align: left; /* 確保下方的中文任務內容維持靠左對齊 */
+        width: 100%;
     }
 
     .about-columns { flex-direction: column; gap: 25px; }
